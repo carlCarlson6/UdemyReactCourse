@@ -126,3 +126,49 @@ Tarea.prototype.mostrar = function() {
 }
 console.log(tarea1);
 logg(tarea1.mostrar());
+
+// object destructing -> extraer valores de un objeto
+const aprendiendoJS = {
+    version: {
+        nueva: 'ES6+',
+        anterior: 'ES5'
+    },
+    frameworks: ['react', 'vue', 'angular']
+}
+logg(aprendiendoJS);
+// antiguamente
+let version1 = aprendiendoJS.version.nueva;
+let framework1 = aprendiendoJS.frameworks[1];
+logg(version1, framework1);
+// forma nueva, destructuring
+let {version, frameworks} = aprendiendoJS;
+logg(version, frameworks);
+let {nueva} = aprendiendoJS.version;
+logg(nueva);
+
+// object literal enhacenment -> contrario de object destructing
+const banda = 'metallica';
+const genero = 'thrash';
+const canciones = ['master of pupts', 'seek & and destriy', 'enter sandman']
+// forma anterior
+const metallica = {banda: banda, genero:genero, canciones:canciones}
+logg(metallica);
+// forma nueva
+const metallica1 = {banda, genero, canciones}
+logg(metallica1);
+
+// funciones (o metodos) en un objeto
+const person = {
+    nombre: 'carl',
+    profesion: 'programador',
+    edad: 30,
+    mostarInfor: function() {
+        console.log(`${this.nombre}`);
+    },
+    mostrarInformacion() {
+        console.log(`${this.nombre}`);
+    }
+}
+logg(person);
+person.mostarInfor();
+person.mostrarInformacion();

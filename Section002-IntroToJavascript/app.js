@@ -159,7 +159,13 @@ logg(metallica1);
 
 // funciones (o metodos) en un objeto
 const person = {
-    nombre: 'carl',
+    _nombre: 'carl',
+    get nombre() {
+        return this._nombre;
+    },
+    set nombre(value) {
+        this._nombre = value;
+    },
     profesion: 'programador',
     edad: 30,
     mostarInfor: function() {
@@ -172,3 +178,131 @@ const person = {
 logg(person);
 person.mostarInfor();
 person.mostrarInformacion();
+
+function Person(name, lastName) {
+    this.name = name;
+    this.lastName = lastName;
+    this.getFullName = function() {
+        return `${this.name} ${this.lastName}`
+    };
+}
+let p = new Person('a', 'a');
+logg(p.getFullName())
+
+// listas y .map
+const carrito = ['producto1', 'producto2', 'producto3'];
+logg(carrito);
+carrito.forEach(product => {
+    logg(product);
+});
+const nuevoCarrito = carrito.map(producto => {return 'el producto es' + producto; });
+logg(nuevoCarrito);
+nuevoCarrito.forEach(producto => {
+    logg(producto)
+});
+
+// object.keys
+console.log(Object.keys(persona)); // [nombre, profesion, edad], devuelve el nombre de las propiedad del objeto
+
+// spread operator -> ... (tres punto), te permite combinar listas
+let lenguajes = ['js', 'py', 'php'];
+let frmwrks = ['react', 'vue', 'anguluar'];
+// antigua forma
+let combinacion1 = lenguajes.concat(frmwrks);
+logg(combinacion1)
+// con spread operator
+let combinacion2 = [...lenguajes,...frmwrks];
+logg(combinacion2)
+let nuevaLista = [...lenguajes]; // copia la lista, shallow copy en python (?)
+logg(nuevaLista);
+//let [ultimo] = lenguajes.reverse();
+//logg(ultimo);
+//logg(lenguajes);
+// altera la lista original, con el spread operator evitamos este efecto colateral
+let [otroUltimo] = [...lenguajes].reverse();
+logg(otroUltimo);
+logg(lenguajes);
+// otro uso
+function sumar(a,b,c){
+    logg(a+b+c);
+}
+sumar([1,2,3])
+sumar(...[1,2,3])
+
+// metodos en listas, filter find y reduce
+const personas = [
+    {nombre: 'carl', edad: 23, aprendiendo: 'js'},
+    {nombre: 'anna', edad: 25, aprendiendo: 'fotografia'},
+    {nombre: 'antoni', edad: 19, aprendiendo: 'php'},
+    {nombre: 'fran', edad: 21, aprendiendo: 'finanzas'},
+    {nombre: 'antoni', edad: 30, aprendiendo: 'html'},
+]
+logg(personas);
+// filter -> mayores de 20 años, filter devuelve un array
+const mayores = personas.filter(persona => {return persona.edad > 20;});
+logg(mayores);
+// find -> que aprendre antoni y edad, find devuelve la primera coincidencia
+const antoni = personas.find(persona => {return persona.nombre === 'antoni';});
+logg(antoni.aprendiendo, antoni.edad);
+// reduce
+const totalEdad = personas.reduce((edadTotal, persona) => {return edadTotal + persona.edad}, 0);
+logg(totalEdad);
+logg(totalEdad / personas.length);
+
+// promises (o promesas), para llamadas asincronas (a apis por ejemplo)
+const appDescuento = new Promise(
+    (resolve, reject) => {
+        setTimeout( () => {
+            let descuento = true;
+            if(descuento){
+                resolve('descuento aplicado');
+            } else {
+                reject('no se pudo aplicar descuento');
+            }
+        }, 800);
+    }
+);
+appDescuento.then(resultado => {logg(resultado);});
+
+// promises con ajax
+const getUsuarios = cantidad => new Promise(
+    (resolve, reject) => {
+        const api = `https://randomuser.me/api/?results=${cantidad}&nat=us`;
+        // llamada ajax
+        const xhr = new XMLHttpRequest();
+        // abrir conexion
+        xhr.open('GET', api, true);
+        // on load
+        xhr.onload = () => {
+            if(xhr.status===200) {
+                resolve(JSON.parse(xhr.responseText).results);
+            } 
+            else {
+                reject(Error(xhr.statusText));
+            }
+        }
+        // opnciaon on error
+        xhr.onerror = (error) => reject(error);
+        // send
+        xhr.send();
+    }
+);
+users = getUsuarios(20).then(
+    miembros => console.log(miembros),
+    error => console.error(new Error('hubo un error' + error)) 
+);
+
+// clases en js
+class TareaClass {
+    constructor(nombre, prioridad) {
+        this.nombre = nombre;
+        this.prioridad = prioridad;
+    }
+    
+    mostar() {
+        return `la tarea ${this.nombre} tiene una prioridad de ${this.prioridad}`;
+    }
+}
+let tarea4 = new TareaClass('aprender cosas', 'alta');
+logg(tarea4);
+logg(tarea4.mostar());

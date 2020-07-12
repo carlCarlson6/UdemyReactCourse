@@ -1,7 +1,7 @@
 import React, {Fragment, useState} from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Product from './utils/Product';
+import Product from './models/Product';
 import ListProducto from './components/ListProducto';
 
 

@@ -1,11 +1,12 @@
 import React from 'react';
 
-const Producto = ({producto, carrito, agregar}) => {
+const Producto = ({producto, carrito, agregarProducto}) => {
     const {id, name, precio} = producto;
 
     // agregar prodcutop al carrito
     const seleccionarProducto = () => {
-        console.log(`comprando producto id: ${id}`);
+        console.log(`agregando producto id: ${id}`);
+        agregarProducto([...carrito, producto]);
     }
 
     return (
@@ -15,5 +16,5 @@ const Producto = ({producto, carrito, agregar}) => {
         </div>
     );
 }
- 
+
 export default Producto;

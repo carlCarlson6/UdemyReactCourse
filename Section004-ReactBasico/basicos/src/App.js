@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Product from './models/Product';
 import ListProducto from './components/ListProducto';
+import CarritoCompra from './components/CarritoCompra';
 
 
 function App() {
@@ -20,9 +21,10 @@ function App() {
     	<Fragment>
       		<Header key="header" titulo='tienda virtual'/>
 			<h4>listado de productos</h4>
-			<ListProducto key="listado productos" productos={productos} carrito={carrito} agregar={agregarProducto}/>
-      		<Footer key="footer" fecha={fecha}/>
-    	</Fragment>
+			<ListProducto key="listado productos" productos={productos} carrito={carrito} agregarProducto={agregarProducto}/>
+			<CarritoCompra key="carrito" carrito={carrito}/>
+			<Footer key="footer" fecha={fecha}/>
+		</Fragment>
   	);
 }
 

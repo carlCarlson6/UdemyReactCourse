@@ -1,8 +1,8 @@
 import React from 'react';
 import Producto from './Producto'
 
-const ListProducto = ({productos, carrito, agregar}) => {
-    return ( productos.map(producto => (<Producto key={producto.id} producto={producto} carrito={carrito} agregar={agregar}/>) ) );
+const ListProducto = ({productos, carrito, agregarProducto}) => {
+    return ( productos.map(producto => (<Producto key={producto.id} producto={producto} carrito={carrito} agregarProducto={agregarProducto}/>) ) );
 }
  
 export default ListProducto;

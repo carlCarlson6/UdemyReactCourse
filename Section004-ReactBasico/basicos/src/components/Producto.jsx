@@ -1,20 +1,21 @@
 import React from 'react';
 
-const Producto = ({producto, carrito, agregarProducto}) => {
-    const {id, name, precio} = producto;
-
-    // agregar prodcutop al carrito
-    const seleccionarProducto = () => {
-        console.log(`agregando producto id: ${id}`);
-        agregarProducto([...carrito, producto]);
-    }
-
+const Producto = ({componentPlace, producto, carritoService}) => {
     return (
         <div>
-            <p>{name} - {precio}$</p>
-            <button type="button" onClick={seleccionarProducto}>Comprar</button>
+            <p>{producto.name} - {producto.precio}$</p>
+            {createButton(componentPlace, producto, carritoService)}
         </div>
     );
+}
+
+const createButton = (componentPlace, producto, carritoService) => {
+    if(componentPlace === 'listado_productos'){
+        return (<button type="button" onClick={() => carritoService.AddProduct(producto)}>Comprar</button>);
+    }
+    if(componentPlace === 'carrito') {
+        return (<button type="button" onClick={() => carritoService.DeleteProduct(producto)}>Eliminar</button>);
+    }
 }
 
 export default Producto;

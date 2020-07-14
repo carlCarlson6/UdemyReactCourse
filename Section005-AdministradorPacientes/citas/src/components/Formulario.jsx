@@ -1,32 +1,28 @@
 import React, { Fragment, useState } from 'react'
 import CitaModel from '../common/models/CitaModel';
-import FormStateHandler from '../services/FormStateHandler'
+import FormStateHandler from '../services/FormStateHandler';
+import submitForm from '../services/submitForm';
+import PropTypes from 'prop-types';
 
-const Formulario = () => {
+const Formulario = ({appointmentService}) => {
     
     const [cita, actualizarCita] = useState(new CitaModel('', '', '', '', ''))
-    const formStateHandler = new FormStateHandler(actualizarCita);
+    const [error, actualizarError] = useState(false);
 
+    const formStateHandler = new FormStateHandler(actualizarCita);
+    
     const {mascota, propietario, hora, fecha, sintomas} = cita;
 
-    const submitCita = (event) => {
-        event.preventDefault();
-        console.log('enviando formulario')
-
-        // validar datos
-
-        // asignar id
-
-        // crear cita en el state principal
-
-        // reiniciar form
-    }
+    const submit = submitForm(cita, actualizarCita, actualizarError, appointmentService)
 
     return (
         <Fragment>
             <h2>Crear Cita</h2>
+
+            {error ? <p className="alerta-error">Todos los campos son obligatorios</p> : null}
+
             <form
-                onSubmit={submitCita}
+                onSubmit={submit}
             >
                 <label>Nombre Mascota</label>
                 <input 
@@ -83,6 +79,10 @@ const Formulario = () => {
         </Fragment>
     );
 
+}
+
+Formulario.propTypes = {
+    appointmentService: PropTypes.object.isRequired
 }
  
 export default Formulario;

@@ -8,6 +8,7 @@ class FormStateHandler {
         let updatedDate = {...date, [event.target.name]: event.target.value}  
         this.stateUpdater(updatedDate)
     }
+
 }
 
 export default FormStateHandler;

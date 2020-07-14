@@ -5,6 +5,7 @@ class CitaModel {
         this.fecha = fecha;
         this.hora = hora;
         this.sintomas = sintomas;
+        this.id = 'xxxxx'
     }
     
 }

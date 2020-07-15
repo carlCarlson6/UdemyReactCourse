@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import PreguntaPresupuesto from './components/PreguntaPresupuesto';
+import PresupuestoModel from './common/models/PresupuestoModel';
+import FormularioGastos from './components/FormularioGastos';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+	const [presupuesto, setPresupuesto] = useState(new PresupuestoModel(0, 0));
+	const [showPregunta, setShowPregunta] = useState(true);
+	const [gastos, setGastos] = useState([]);
+
+	return(
+		<div className="container">
+			<header>
+				<h1>Gasto Semanal</h1>
+				
+				<div className="contenido-principal contenido">
+					
+					{ showPregunta ? (
+						<PreguntaPresupuesto 
+							presupuestoSetter={setPresupuesto} 
+							setShowPregunta={setShowPregunta}
+						/>
+					
+						) : (
+					
+						<div className="row">
+							<div className="one-half column">
+								<FormularioGastos 
+									gastos={gastos} 
+									gastosSetter={setGastos}
+								/>
+							</div>
+							
+							<div className="one-half column">
+								2
+							</div>
+						</div>)
+					}
+
+				</div>
+
+			</header>
+		</div>
+  	);
 }
 
 export default App;

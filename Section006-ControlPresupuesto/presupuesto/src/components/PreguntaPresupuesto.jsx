@@ -3,6 +3,7 @@ import PreguntaPresupuestoStateHandler from '../services/PreguntaPresupuestoStat
 import PresupuestoSubmitter from '../services/PresupuestoSubmitter';
 import PresupuestoModel from '../common/models/PresupuestoModel';
 import ErrorMessage from './ErrorMessage';
+import PropTypes from 'prop-types';
 
 const PreguntaPresupuesto = ({presupuestoSetter, setShowPregunta}) => {
     
@@ -38,6 +39,9 @@ const PreguntaPresupuesto = ({presupuestoSetter, setShowPregunta}) => {
     );
 }
 
-
+PreguntaPresupuesto.propTypes = {
+    presupuestoSetter: PropTypes.func.isRequired,
+    setShowPregunta: PropTypes.func.isRequired
+}
  
 export default PreguntaPresupuesto;

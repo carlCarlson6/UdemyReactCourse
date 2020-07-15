@@ -3,6 +3,7 @@ import GastoModel from '../common/models/GastoModel';
 import GastoStateHandler from '../services/GastoStateHandler';
 import ErrorMessage from './ErrorMessage';
 import FormularioGastoSubmitter from '../services/FormularioGastoSubmitter';
+import PropTypes from 'prop-types';
 
 const FormularioGastos = ({gastos, gastosSetter}) => {
     
@@ -51,5 +52,11 @@ const FormularioGastos = ({gastos, gastosSetter}) => {
         </form>
     );
 }
- 
+
+FormularioGastos.propTypes = {
+    gastos: PropTypes.array.isRequired,
+    gastosSetter: PropTypes.func.isRequired
+}
+
+
 export default FormularioGastos;

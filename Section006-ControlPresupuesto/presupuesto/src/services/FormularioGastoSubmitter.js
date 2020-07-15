@@ -18,9 +18,9 @@ class FormularioGastoSubmitter {
         this.errorSetter(!submitValidation);
         if(!submitValidation) {return;}
 
-        gasto.id = shortid();
+        let gastoId = shortid.generate();
 
-        this.gastosSetter([...this.gastos, gasto]);
+        this.gastosSetter([...this.gastos, new GastoModel(gasto.concept, gasto.amount, gastoId)]);
         this.gastoSetter(new GastoModel('', 0));
     }
 

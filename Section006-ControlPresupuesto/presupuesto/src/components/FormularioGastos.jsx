@@ -6,7 +6,7 @@ import FormularioGastoSubmitter from '../services/FormularioGastoSubmitter';
 
 const FormularioGastos = ({gastos, gastosSetter}) => {
     
-    const [gasto, setGasto] = useState(new GastoModel('', null));
+    const [gasto, setGasto] = useState(new GastoModel('', 0));
     const [error, setError] = useState(false);
     const gastoStateHandler = new GastoStateHandler(setGasto);
     const formularioGastosSubmitter = new FormularioGastoSubmitter(setError, setGasto, gastos, gastosSetter, gastoStateHandler);

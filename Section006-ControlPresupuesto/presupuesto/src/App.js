@@ -1,13 +1,20 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import PreguntaPresupuesto from './components/PreguntaPresupuesto';
 import PresupuestoModel from './common/models/PresupuestoModel';
 import FormularioGastos from './components/FormularioGastos';
+import ListadoGastos from './components/ListadoGastos';
+import ControlPresupuesto from './components/ControlPresupuesto';
+import PresupuestoStateHandler from './services/PresupuestoStateHandler';
 
 function App() {
 
 	const [presupuesto, setPresupuesto] = useState(new PresupuestoModel(0, 0));
 	const [showPregunta, setShowPregunta] = useState(true);
 	const [gastos, setGastos] = useState([]);
+
+	const presupuestoStateHandler = new PresupuestoStateHandler(presupuesto, setPresupuesto);
+
+	useEffect(()=>{presupuestoStateHandler.AcutalizarPresupuesto(gastos)}, [gastos]);
 
 	return(
 		<div className="container">
@@ -33,7 +40,8 @@ function App() {
 							</div>
 							
 							<div className="one-half column">
-								2
+								<ListadoGastos gastos={gastos}/>
+								<ControlPresupuesto presupuesto={presupuesto}/>
 							</div>
 						</div>)
 					}

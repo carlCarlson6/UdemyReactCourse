@@ -4,31 +4,39 @@ import {CampoDiv} from '../styles/CampoDiv';
 import {CampoLabel} from '../styles/CampoLabel';
 import {CampoSelect} from '../styles/CampoSelect';
 import {CampoInputRadio} from '../styles/CampoInputRadio';
+import {ErrorForm} from '../styles/ErrorForm';
 import {Boton} from '../styles/Boton';
 import FormData from '../common/models/FormData';
-import FormDataService from '../services/FormDataService';
+import FormService from '../services/FormService';
+import getInitialValues from '../common/data/FormInitialValues';
 
 
-const Formulario = () => {
+const Formulario = ({setResumen}) => {
     
-    const marcas = ['americano', 'europeo', 'asiatico'];
-    const años = [2021,2020,2019,2018,2017,2016,2015,2014,2013,2012];
-    const planes = ['basico', 'completo'];
+    const { marcas, años, planes } = getInitialValues();
 
     const [formData, setFormData] = useState(new FormData('','',''));
-    const formDataService = new FormDataService(setFormData);
-    const {marca, year, plan} = formData;
+    const [error, setError] = useState(false);
 
     const textUtils = new TextUtils();
+    const formService = new FormService(setFormData, setError);
 
     return (
-        <form>
+        <form
+            onSubmit={(event)=>{
+                let quotation = formService.Submit(formData, event);
+                setResumen({formData, quotation: quotation})
+            }}
+        >
+
+            {error ? <ErrorForm>Todos los campos son obligatorios</ErrorForm> : null}
+
             <CampoDiv>
                 <CampoLabel>Marca</CampoLabel>
                 <CampoSelect
                     name="marca"
-                    value={marca}
-                    onChange={(event)=>formDataService.Update(formData, event)}
+                    value={formData.marca}
+                    onChange={(event)=>formService.Update(formData, event)}
                 >
                     <option value="">--- Selecione ---</option>
                     {marcas.map(marca=>{return(
@@ -41,8 +49,8 @@ const Formulario = () => {
                 <CampoLabel>Año</CampoLabel>
                 <CampoSelect
                     name="year"
-                    value={year}
-                    onChange={(event)=>formDataService.Update(formData, event)}
+                    value={formData.year}
+                    onChange={(event)=>formService.Update(formData, event)}
                 >
                     <option value="">-- Seleccione --</option>
                     {años.map(año => {return(
@@ -60,14 +68,14 @@ const Formulario = () => {
                             type="radio" 
                             name="plan" 
                             value={planElementList} 
-                            checked={plan === planElementList}
-                            onChange={(event)=>formDataService.Update(formData, event)}
-                        /><a>{textUtils.capitalize(planElementList)}</a>
+                            checked={formData.plan === planElementList}
+                            onChange={(event)=>formService.Update(formData, event)}
+                        /><Fragment>{textUtils.capitalize(planElementList)}</Fragment>
                     </Fragment>
                 );})}
             </CampoDiv>
 
-            <Boton type="button">Cotizar</Boton>
+            <Boton type="submit">Cotizar</Boton>
         </form>
     );
 }

@@ -1,9 +1,23 @@
 import React from 'react';
+import { ContenedorResumen } from '../styles/ContenedorResumen';
+import TextUtils from '../common/utils/TextUtils';
 
-const Resumen = () => {
-    
+const Resumen = ({formData}) => {
+
+    const {marca, year, plan} = formData;
+    if (marca === '' || year === '' || plan === '') return null;
+
+    const textUtils = new TextUtils();
+
     return (
-        <div></div>
+        <ContenedorResumen>
+            <h2>Resumen de cotización</h2>
+            <ul>
+                <li>Marca: {textUtils.capitalize(marca)}</li>
+                <li>Plan: {textUtils.capitalize(plan)}</li>
+                <li>Año del auto: {year}</li>
+            </ul>
+        </ContenedorResumen>    
     );
 }
  

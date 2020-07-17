@@ -3,7 +3,7 @@ import { Mensaje } from '../styles/Mensaje';
 import { TextoCotizacion } from '../styles/TextoCotizacion';
 import { ResultadoCotización } from '../styles/ResultadoCotizacion';
 import {TransitionGroup, CSSTransition} from 'react-transition-group'
-
+import PropTypes from 'prop-types';
 
 const Resultado = ({quotation}) => {
     
@@ -33,5 +33,9 @@ const Resultado = ({quotation}) => {
         renderReturn
     );
 }
- 
+
+Resultado.propTypes = {
+    quotation: PropTypes.number.isRequired
+}
+
 export default Resultado;

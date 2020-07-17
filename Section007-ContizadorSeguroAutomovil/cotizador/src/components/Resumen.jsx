@@ -1,6 +1,7 @@
 import React from 'react';
 import { ContenedorResumen } from '../styles/ContenedorResumen';
 import TextUtils from '../common/utils/TextUtils';
+import PropTypes from 'prop-types';
 
 const Resumen = ({formData}) => {
 
@@ -20,5 +21,9 @@ const Resumen = ({formData}) => {
         </ContenedorResumen>    
     );
 }
- 
+
+Resumen.propTypes = {
+    formData: PropTypes.object.isRequired
+}
+
 export default Resumen;

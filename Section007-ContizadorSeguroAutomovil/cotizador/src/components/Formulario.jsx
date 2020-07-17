@@ -9,7 +9,7 @@ import {Boton} from '../styles/Boton';
 import FormData from '../common/models/FormData';
 import FormService from '../services/FormService';
 import getInitialValues from '../common/data/FormInitialValues';
-
+import PropTypes from 'prop-types';
 
 const Formulario = ({setResumen, setLoading}) => {
     
@@ -83,6 +83,11 @@ const Formulario = ({setResumen, setLoading}) => {
             <Boton type="submit">Cotizar</Boton>
         </form>
     );
+}
+
+Formulario.propTypes = {
+    setResumen: PropTypes.func.isRequired,
+    setLoading: PropTypes.func.isRequired
 }
 
 export default Formulario;

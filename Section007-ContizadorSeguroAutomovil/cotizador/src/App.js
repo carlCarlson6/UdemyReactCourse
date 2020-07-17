@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, Fragment} from 'react';
 import Header from './components/Header';
 import {Contenedor} from './styles/Contenedor';
 import {ContenedorFormulario} from './styles/ContenedorFormulario';
@@ -24,16 +24,27 @@ function App() {
 			<ContenedorFormulario>
 				<Formulario 
 					setResumen={setResumen}
+					setLoading={setLoading}
 				/>
 
-				<Spinner/>
+				<Spinner
+					loading={loading}
+				/>
 
-				<Resumen 
-					formData={resumen.formData}
-				/>
-				<Resultado
-					quotation={resumen.quotation}
-				/>
+				{						
+					!loading ?
+						<Fragment>
+							<Resultado
+								quotation={resumen.quotation}
+							/> 
+							<Resumen 
+								formData={resumen.formData}
+							/>		
+						</Fragment> 
+					:
+						null
+				}
+				
 			</ContenedorFormulario>
 		</Contenedor>
 	);

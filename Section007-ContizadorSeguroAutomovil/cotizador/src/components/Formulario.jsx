@@ -11,9 +11,9 @@ import FormService from '../services/FormService';
 import getInitialValues from '../common/data/FormInitialValues';
 
 
-const Formulario = ({setResumen}) => {
+const Formulario = ({setResumen, setLoading}) => {
     
-    const { marcas, años, planes } = getInitialValues();
+    const {marcas, años, planes} = getInitialValues();
 
     const [formData, setFormData] = useState(new FormData('','',''));
     const [error, setError] = useState(false);
@@ -25,7 +25,12 @@ const Formulario = ({setResumen}) => {
         <form
             onSubmit={(event)=>{
                 let quotation = formService.Submit(formData, event);
-                setResumen({formData, quotation: quotation})
+                
+                setLoading(true);
+                setTimeout(() => {
+                    setLoading(false);
+                    setResumen({formData, quotation: quotation});
+                },3000);
             }}
         >
 
@@ -79,5 +84,5 @@ const Formulario = ({setResumen}) => {
         </form>
     );
 }
- 
+
 export default Formulario;

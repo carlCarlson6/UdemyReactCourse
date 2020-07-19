@@ -1,0 +1,4 @@
+in /src add a file named settings.js with the following lines of code:
+
+export const apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
+export const apikey = "<your_api_key>";

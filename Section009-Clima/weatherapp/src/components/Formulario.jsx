@@ -1,8 +1,8 @@
 import React, {useState, Fragment} from 'react';
 import {countries} from '../common/data/InitialData'
-import FormData from '../common/models/FormData';
 import FormService from '../services/FormService';
 import Error from './Error';
+import PropTypes from 'prop-types';
 
 const Formulario = ({formData, setFormData, setSendRequest, setLoading}) => {
     
@@ -60,5 +60,12 @@ const Formulario = ({formData, setFormData, setSendRequest, setLoading}) => {
         </form>
     );
 }
- 
+
+Formulario.propTypes = {
+    formData: PropTypes.object.isRequired,
+    setFormData: PropTypes.func.isRequired, 
+    setSendRequest: PropTypes.func.isRequired, 
+    setLoading: PropTypes.func.isRequired
+}
+
 export default Formulario;

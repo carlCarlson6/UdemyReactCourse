@@ -1,5 +1,6 @@
 import React from 'react';
 import WeatherUtils from '../common/utils/WeatherUtils';
+import PropTypes from 'prop-types';
 
 const Clima = ({weather}) => {
     
@@ -27,5 +28,9 @@ const Clima = ({weather}) => {
         </div>
     );
 }
- 
+
+Clima.propTypes = {
+    weather: PropTypes.object.isRequired
+}
+
 export default Clima;

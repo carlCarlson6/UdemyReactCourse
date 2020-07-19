@@ -23,10 +23,15 @@ class CryptoService {
         return cryptoCurrencies;        
     }
 
-    async GetCrytoCurrencyQuotation(request) {
-        let url = `${cryptoCurrencyQuotationUrl}fsyms=${request.crypto}&fsyms=${request.currency}`;
-        let response = await this.http.GetResponse(url);
-        console.log('get crypto currency quotation response: ', response)
+    async GetCrytoCurrencyQuotation(quotationRequest) {
+        const {crypto, currency} = quotationRequest;
+        let url = `${cryptoCurrencyQuotationUrl}fsyms=${crypto}&tsyms=${currency}`;
+        console.log('sending request to: ', url);
+        
+        let response = await (await this.http.GetResponse(url)).data.DISPLAY[crypto][currency];
+        console.log('response: ', response);
+        
+        return response;
     }
 }
 

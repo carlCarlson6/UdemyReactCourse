@@ -6,7 +6,7 @@ import useCriptomoneda from '../hooks/useCryptomoneda';
 import FormService from '../services/FormService';
 import FormData from '../common/models/FormData';
 import Error from './Error';
-
+import PropTypes from 'prop-types';
 
 const Formulario = ({setQuotationRequest}) => {
     
@@ -34,5 +34,9 @@ const Formulario = ({setQuotationRequest}) => {
         </form>
     );
 }
- 
+
+Formulario.propTypes = {
+    setQuotationRequest: PropTypes.func.isRequired
+}
+
 export default Formulario;

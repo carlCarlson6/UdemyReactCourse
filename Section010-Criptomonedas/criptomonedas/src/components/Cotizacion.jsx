@@ -2,6 +2,7 @@ import React from 'react';
 import { ResultadoDiv } from '../styles/components/ResultadoDiv';
 import { Precio } from '../styles/components/Precio';
 import { Info } from '../styles/components/Info';
+import PropTypes from 'prop-types';
 
 const Cotizacion = ({quotationResult}) => {
     
@@ -17,5 +18,9 @@ const Cotizacion = ({quotationResult}) => {
         </ResultadoDiv>
     );
 }
- 
+
+Cotizacion.propTypes = {
+    quotationResult: PropTypes.object.isRequired
+}
+
 export default Cotizacion;

@@ -1,5 +1,5 @@
 export const countries = [
-    {value: "US", text: "Estados"},
+    {value: "US", text: "Estados Unidos"},
     {value: "MX", text: "México"},
     {value: "AR", text: "Argentina"},
     {value: "CO", text: "Colombia"},

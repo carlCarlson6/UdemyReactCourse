@@ -1,10 +1,21 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import { Label } from '../styles/components/Label';
 import { Select } from '../styles/components/Select';
+import CryptoService from '../services/CryptoService';
 
 const useCriptomoneda = (label, initialState) => {
 
     const [state, setState] = useState(initialState);
+    const [cryptoCurrencies, setCryptoCurrencies] = useState([]);
+    const cryptoService = new CryptoService();
+
+    useEffect(() => {
+        const getData = async () => {
+            let responseCryptoCurrencies = await cryptoService.GetCrytoCurrencies();
+            setCryptoCurrencies(responseCryptoCurrencies);
+        }
+        getData();
+    },[]);
 
     const SelectCripto = () => (
         <Fragment>
@@ -16,14 +27,14 @@ const useCriptomoneda = (label, initialState) => {
                 value={state}
             >
                 <option key="empty option" value=""> --- Seleccione --- </option>
-                {/*optionList.map(optionElement => (
-                    <option key={optionElement.code} value={optionElement.code}>{optionElement.name}</option>
-                ))*/}
+                {cryptoCurrencies.map(cryptoCurrency => (
+                    <option key={cryptoCurrency.id} value={cryptoCurrency.name}>{cryptoCurrency.fullName}</option>
+                ))}
             </Select>
         </Fragment>
     )
 
-    return [state, setState, SelectCripto];
+    return [state, SelectCripto];
 }
 
 export default useCriptomoneda;

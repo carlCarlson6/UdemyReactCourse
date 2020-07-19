@@ -23,7 +23,7 @@ const useMoneda = (label, initialState, optionList) => {
         </Fragment>
     )
 
-    return [state, setState, SelectMoneda];
+    return [state, SelectMoneda];
 }
 
 export default useMoneda;

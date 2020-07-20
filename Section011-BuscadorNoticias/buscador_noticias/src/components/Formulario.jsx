@@ -1,21 +1,33 @@
 import React from 'react';
 import styles from '../styles/Formulario.module.css'
-import useSelectNews from '../hooks/useSelectNews';
+import useSelect from '../hooks/useSelect';
+import {countries, newsCategories} from '../common/data/InitialData';
+import {initialCountry, initialNewsCategory} from '../common/data/InitialStates';
+import FormService from '../services/FormService';
 
-const Formulario = () => {
+
+const Formulario = ({setNewsRequest}) => {
     
-    const [newsCategory, SelectNews] = useSelectNews();
+    const [newsCategory, SelectNews] = useSelect(initialNewsCategory, newsCategories, 'Seleccione una categoría');
+    const [country, SelectCountries] = useSelect(initialCountry, countries, 'Seleccione un país');
+
+    const formService = new FormService(setNewsRequest);
+    const formData = {newsCategory, country};
 
     return (
         <div className={`${styles.buscador} row`}>
             <div className ="col s12 m8 offset-m2">
-                <form>
+                <form
+                    onSubmit={(event)=>formService.Submit(formData, event)}
+                >
 
                     <h2 className={styles.heading}>
                         Encuentra Noticias por Categoría
                     </h2>
 
                     <SelectNews />
+
+                    <SelectCountries />
 
                     <div className="input-filed col s12">
                         <input

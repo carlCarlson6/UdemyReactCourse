@@ -1,0 +1,4 @@
+add a settings.js a /src with the following lines of code:
+
+export const apiUrl = "";
+export const apiKey = "<yout_api_key>";

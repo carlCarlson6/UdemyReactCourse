@@ -37,7 +37,7 @@ const Noticia = ({_new}) => {
 }
 
 Noticia.titulo = {
-    news: PropTypes.object.isRequired
+    _new: PropTypes.object.isRequired
 }
 
 export default Noticia;

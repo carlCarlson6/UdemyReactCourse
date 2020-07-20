@@ -9,7 +9,8 @@ import styles from './styles/NotFoundNews.module.css'
 function App() {
 
 	const [newsRequest, setNewsRequest] = useState({newsCategory: initialNewsCategory, country: initialCountry});
-	const [news, setNews] = useState([])
+	const [news, setNews] = useState([]);
+	
 	const newsService = new NewsService();
 
 	useEffect(() => {

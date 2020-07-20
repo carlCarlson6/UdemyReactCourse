@@ -3,6 +3,8 @@ import Header from './components/Header';
 import Formulario from './components/Formulario';
 import NewsService from './services/NewsService';
 import {initialCountry, initialNewsCategory} from './common/data/InitialStates'
+import ListadoNoticias from './components/ListadoNoticies';
+import styles from './styles/NotFoundNews.module.css'
 
 function App() {
 
@@ -18,6 +20,10 @@ function App() {
 		getData();
 	}, [newsRequest]);
 
+	let component = news.length !== 0 ? 
+		<ListadoNoticias news={news}/> 
+		: <p className={styles.paragraph}>No se encontro ninguna noticia</p>
+
 	return (
 		<Fragment>
 			<Header 
@@ -28,6 +34,9 @@ function App() {
 				<Formulario 
 					setNewsRequest={setNewsRequest}
 				/>
+				
+				{component}
+				
 			</div>
 		</Fragment>
 	);

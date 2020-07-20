@@ -4,7 +4,7 @@ import useSelect from '../hooks/useSelect';
 import {countries, newsCategories} from '../common/data/InitialData';
 import {initialCountry, initialNewsCategory} from '../common/data/InitialStates';
 import FormService from '../services/FormService';
-
+import PropTypes from 'prop-types';
 
 const Formulario = ({setNewsRequest}) => {
     
@@ -42,6 +42,10 @@ const Formulario = ({setNewsRequest}) => {
             </div>
         </div>
     );
+}
+
+Formulario.propTypes = {
+    setNewsRequest: PropTypes.func.isRequired
 }
  
 export default Formulario;

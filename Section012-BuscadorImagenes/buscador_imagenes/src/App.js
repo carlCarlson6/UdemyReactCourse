@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import Formulario from './components/Formulario';
+import ImageService from './services/ImageService';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+	const [searchRequest, setSearchRequest] = useState('');
+	const [images, setImages] = useState([])
+	
+	const imageService = new ImageService();
+
+	useEffect(() => {
+		if(searchRequest === '') return;
+
+		const getImages = async () => {
+			let getImagesResponse = await imageService.GetImagesAsync(searchRequest);
+			setImages(getImagesResponse);
+		}
+
+		getImages()
+	}, [searchRequest])
+
+
+	return (
+		<div className="container">
+			<div className="jumbotron">
+				<p className="lead text-center">
+					Buscador de Imágenes
+				</p>
+
+				<Formulario
+					setSearchRequest={setSearchRequest}
+				/>
+			
+			</div>
+		</div>
+	);
 }
 
 export default App;

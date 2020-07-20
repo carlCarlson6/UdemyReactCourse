@@ -1,0 +1,4 @@
+add a file src/settings.js with the following code:
+
+export const apiUrl = "https://pixabay.com/api/"
+export const apiKey = "<your_api_key>"

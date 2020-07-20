@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Error from './Error';
+import PropTypes from 'prop-types';
 
 const Formulario = ({setSearchRequest}) => { 
     
@@ -51,5 +52,9 @@ const Formulario = ({setSearchRequest}) => {
         </form>
     );
 }
- 
+
+Formulario.propTypes = {
+    setSearchRequest: PropTypes.func.isRequired
+}
+
 export default Formulario;

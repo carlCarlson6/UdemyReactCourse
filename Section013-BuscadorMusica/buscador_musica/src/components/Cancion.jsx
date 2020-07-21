@@ -1,4 +1,6 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
+import LyricsResponse from '../common/models/LyricsResponse'
 
 const Cancion = ({lyricsObjct}) => {
     
@@ -17,6 +19,10 @@ const Cancion = ({lyricsObjct}) => {
             {component}
         </Fragment>
     );
+}
+
+Cancion.propTypes = {
+    lyricsObjct: PropTypes.objectOf(LyricsResponse).isRequired
 }
  
 export default Cancion;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import FormDataModel from '../common/models/FormDataModel';
 import FormService from '../services/FormService';
+import PropTypes from 'prop-types';
 
 const Formulario = ({setRequest}) => {
 
@@ -72,6 +73,10 @@ const Formulario = ({setRequest}) => {
         </div>
         
     );
+}
+
+Formulario.propTypes = {
+    setRequest: PropTypes.func.isRequired
 }
  
 export default Formulario;

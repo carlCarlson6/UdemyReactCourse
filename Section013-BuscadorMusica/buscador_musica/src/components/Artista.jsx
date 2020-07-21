@@ -1,4 +1,6 @@
 import React, {Fragment} from 'react';
+import PropTypes from 'prop-types';
+import ArtistResponse from '../common/models/ArtistResponse'
 
 const Artista = ({artistObject}) => {
     
@@ -42,5 +44,9 @@ const Artista = ({artistObject}) => {
         </Fragment>
     );
 }
- 
+
+Artista.propTypes = {
+    artistObject: PropTypes.objectOf(ArtistResponse).isRequired
+}
+
 export default Artista;

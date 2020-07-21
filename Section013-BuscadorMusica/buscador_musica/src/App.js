@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Formulario from './components/Formulario';
-import RequestModel from './common/models/RequestModel'
 import LyricsService from './services/LyricsService';
 import ArtistService from './services/ArtistService';
 import Cancion from './components/Cancion';
@@ -27,7 +26,7 @@ function App() {
 		}
 		const getInfo = async () => {
 			if(isEmptyObject(request)){return;}
-			
+
 			await Promise.all([getLyrics(), getArtist()]);
 		}
 		getInfo();

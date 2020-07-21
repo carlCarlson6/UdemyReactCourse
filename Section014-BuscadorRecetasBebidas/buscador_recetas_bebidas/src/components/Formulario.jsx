@@ -1,9 +1,11 @@
-import React from 'react';
-import useSelect from '../useSelect';
+import React, {useContext} from 'react';
+import useSelect from '../hooks/useSelect';
+import { CategoriesContext } from '../context/CategoriesContext';
 
 const Formulario = () => {
 
-    const [categoryState, SelectCategory] = useSelect('', ['a', 'b'], ' -- Seleccione Categoria -- ');
+    const {categories} = useContext(CategoriesContext);
+    const [categoryState, SelectCategory] = useSelect('', categories,' -- Seleccione Categoria -- ');
 
     return (
         <form

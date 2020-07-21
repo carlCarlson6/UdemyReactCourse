@@ -1,4 +1,5 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useContext } from 'react';
+import { CategoriesContext } from '../context/CategoriesContext';
 
 const useSelect = (initialState, options, selectMessage) => {
     

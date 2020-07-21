@@ -22,7 +22,7 @@ const Cancion = ({lyricsObjct}) => {
 }
 
 Cancion.propTypes = {
-    lyricsObjct: PropTypes.objectOf(LyricsResponse).isRequired
+    lyricsObjct: PropTypes.object.isRequired
 }
  
 export default Cancion;

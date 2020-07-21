@@ -16,11 +16,17 @@ class ArtistService extends HttpService {
 
         try {
             let response = await this.GetResponse(url);
+
+            if(response.data.artists === null) {
+                throw new Error("can't find artist")
+            }
+
             artistInfo = response.data.artists[0];
             error = false;
         }
         
-        catch {
+        catch (exception) {
+            console.log(exception);
             artistInfo = null;
             error = true;
         }

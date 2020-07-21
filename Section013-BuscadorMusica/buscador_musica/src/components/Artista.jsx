@@ -5,12 +5,16 @@ import ArtistResponse from '../common/models/ArtistResponse'
 const Artista = ({artistObject}) => {
     
     const {info, error} = artistObject;
-    const {strArtistThumb, strGenre, strBiographyES} = info;
+    
+    
+    let component;
 
-    const component = error ?
-        <p className="alert alert-danger text-center p-2">No se pudo encontrar al artista</p> 
-    :
-        (
+    if(error) {
+        component = (<p className="alert alert-danger text-center p-2">No se pudo encontrar al artista</p> );
+    } else {
+        const {strArtistThumb, strGenre, strBiographyES, strFacebook, strTwitter, strLastFMChart} = info;
+
+        component = (
             <div className="card border-light">
 
                 <div className="card-header bg-primary text-light font-weight-bold">
@@ -23,13 +27,13 @@ const Artista = ({artistObject}) => {
                     <h2 className="card-text">Biografía</h2>
                     <p className="card-text">{strBiographyES}</p>
                     <p className="card-text">
-                        <a href={`https://${info.strFacebook}`} target="_blank" rel="noopener noreferrer">
+                        <a href={`https://${strFacebook}`} target="_blank" rel="noopener noreferrer">
                             <i className="fab fa-facebook"></i>
                         </a>
-                        <a href={`https://${info.strTwitter}`} target="_blank" rel="noopener noreferrer">
+                        <a href={`https://${strTwitter}`} target="_blank" rel="noopener noreferrer">
                             <i className="fab fa-twitter"></i>
                         </a>
-                        <a href={`${info.strLastFMChart}`} target="_blank" rel="noopener noreferrer">
+                        <a href={`${strLastFMChart}`} target="_blank" rel="noopener noreferrer">
                             <i className="fab fa-lastfm"></i>
                         </a>
                     </p>
@@ -37,6 +41,7 @@ const Artista = ({artistObject}) => {
 
             </div>
         );
+    }
 
     return (
         <Fragment>
@@ -46,7 +51,7 @@ const Artista = ({artistObject}) => {
 }
 
 Artista.propTypes = {
-    artistObject: PropTypes.objectOf(ArtistResponse).isRequired
+    artistObject: PropTypes.object.isRequired
 }
 
 export default Artista;

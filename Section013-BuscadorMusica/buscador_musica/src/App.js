@@ -3,6 +3,9 @@ import Formulario from './components/Formulario';
 import RequestModel from './common/models/RequestModel'
 import LyricsService from './services/LyricsService';
 import ArtistService from './services/ArtistService';
+import Cancion from './components/Cancion';
+import isEmptyObject from './common/Utils/IsEmptyObject'
+import Artista from './components/Artista';
 
 function App() {
 	
@@ -14,18 +17,18 @@ function App() {
 	const artistService = new ArtistService(setArtistResponse);
 
 	useEffect(() => {
-		const getLyrics = async () => {
+		const getLyrics = () => {
 			console.log('getting lyrics');
-			await lyricsService.GetLyricsAsync(request.LyricstUrl);
+			lyricsService.GetLyricsAsync(request.LyricstUrl);
 		}
-		const getArtist = async () => {
+		const getArtist = () => {
 			console.log('getting artist info');
-			await artistService.GetArtistInfosAsync(request.ArtistUrl)
+			artistService.GetArtistInfosAsync(request.ArtistUrl)
 		}
 		const getInfo = async () => {
-			if(Object.keys(request).length === 0 ){return;}
-			await getLyrics();
-			await getArtist();
+			if(isEmptyObject(request)){return;}
+			
+			await Promise.all([getLyrics(), getArtist()]);
 		}
 		getInfo();
 	}, [request]);
@@ -41,11 +44,25 @@ function App() {
 				<div className="row">
 
 					<div className="col-md-6">
-						1
+						{
+							!isEmptyObject(artistResponse) ?
+									<Artista 
+										artistObject={artistResponse}
+									/>
+								:
+									null 
+						}
 					</div>
 				
 					<div className="col-md-6">
-						2
+						{
+							!isEmptyObject(lyricsResponse) ?
+									<Cancion 
+										lyricsObjct={lyricsResponse}
+									/>
+								:
+									null 
+						}
 					</div>
 
 				</div>

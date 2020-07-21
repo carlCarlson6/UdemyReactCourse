@@ -12,7 +12,7 @@ class RequestModel extends FormDataModel {
     }
 
     get ArtistUrl(){
-        const url = `${artistApiUrl}/${this.artist}`;
+        const url = `${artistApiUrl}search.php?s=${this.artist}`;
         return url;
     }
 }

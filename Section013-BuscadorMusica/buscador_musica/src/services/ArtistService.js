@@ -16,7 +16,7 @@ class ArtistService extends HttpService {
 
         try {
             let response = await this.GetResponse(url);
-            artistInfo = response.data;
+            artistInfo = response.data.artists[0];
             error = false;
         }
         

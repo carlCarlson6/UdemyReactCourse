@@ -1,6 +1,7 @@
 class FormDataModel{
-    constructor(category){
-        this.category = category
+    constructor(category, ingridient){
+        this.category = category;
+        this.ingridient = ingridient;
     }
 }
 

@@ -1,9 +1,9 @@
 import RequestModel from "../common/models/RequestModel";
 
 class FormService {
-    constructor(setForm, setRequest,setError){
+    constructor(setForm, setError){
         this.setForm = setForm;
-        this.setRequest = setRequest
+        this.setRequest = null;
         this.setError = setError;
     }
 
@@ -26,10 +26,10 @@ class FormService {
         if(!validation) {
             console.log('validation failed'); 
         }
-        else {
-            console.log('validation passed');
-            this.setRequest(new RequestModel(formData.artist, formData.title));
-        }
+        //else {
+        //    console.log('validation passed');
+        //    this.setRequest(new RequestModel(formData.category, formData.ingridient));
+        //}
     }
 
     Validate(formData){

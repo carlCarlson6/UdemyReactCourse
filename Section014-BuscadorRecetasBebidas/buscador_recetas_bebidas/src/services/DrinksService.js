@@ -10,10 +10,9 @@ class DrinksService extends HttpService {
         let response = (await this.GetResponse(url)).data
         console.log('sending response', response);
     
-        let drinks = [];
-        response.drinks.map(drink =>{ drinks.push(drink.strCategory)});
+        const drinks = response.drinks.map(drink => drink.strCategory)
 
-        return drinks
+        return drinks;
     }
 }
 

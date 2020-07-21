@@ -1,5 +1,4 @@
-import React, { useState, Fragment, useContext } from 'react';
-import { CategoriesContext } from '../context/CategoriesContext';
+import React, { useState, Fragment } from 'react';
 
 const useSelect = (initialState, options, selectMessage) => {
     
@@ -14,7 +13,7 @@ const useSelect = (initialState, options, selectMessage) => {
                 value={state}
                 placeholder={selectMessage}
             >
-                <option>{selectMessage}</option>
+                <option key={selectMessage} value="">{selectMessage}</option>
                 {options.map(optionElement => (
                         <option key={optionElement} value={optionElement}>{optionElement}</option>
                     ))}

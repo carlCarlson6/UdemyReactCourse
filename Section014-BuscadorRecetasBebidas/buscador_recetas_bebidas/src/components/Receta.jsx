@@ -3,7 +3,7 @@ import {ModelContext} from '../context/ModelContext';
 
 const Receta = ({drink}) => {
 
-
+    const context = useContext(ModelContext);
 
     return (
         <div className="col-md-4 mb-3">
@@ -21,6 +21,10 @@ const Receta = ({drink}) => {
                     <button
                         type="button"
                         className="btn btn-block btn btn-primary"
+                        onClick={() => {
+                            console.log('selected drink:', drink.name, ' - id:', drink.id)
+                            context.setDrinkId(drink.id)}
+                        }
                     >Ver receta</button>
                 </div>
 

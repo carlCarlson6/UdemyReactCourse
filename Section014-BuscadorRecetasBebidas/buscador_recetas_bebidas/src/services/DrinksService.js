@@ -26,8 +26,16 @@ class DrinksService extends HttpService {
         return drinks;
     }
 
-    async GetDrink() {
+    async GetDrink(id) {
+        let url = `${apiUrl}/lookup.php?i=${id}`; 
+        
+        console.log('sending request', url);
+        let response = (await this.GetResponse(url)).data
+        console.log('sending response', response);
 
+        let drink = response.drinks[0];
+        return drink;
+    
     }
 }
 

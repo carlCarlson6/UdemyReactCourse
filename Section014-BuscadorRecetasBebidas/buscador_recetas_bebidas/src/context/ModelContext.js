@@ -12,7 +12,8 @@ const ModelProvider = (props) => {
     useEffect(()=>{
         const getDrinkInfo = async () => {
             if(!drinkId) return;
-            let drinkInfo = await drinksService.GetDrink(drinkId);
+            let drinkResponse = await drinksService.GetDrink(drinkId);
+            setDrinkInfo(drinkResponse);
         }
         getDrinkInfo();
     },[drinkId])
@@ -20,7 +21,9 @@ const ModelProvider = (props) => {
     return (
         <ModelContext.Provider
             value={{
-                setDrinkId
+                drinkInfo,
+                setDrinkId,     
+                setDrinkInfo         
             }}
         >
             {props.children}

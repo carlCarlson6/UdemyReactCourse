@@ -1,9 +1,8 @@
 import RequestModel from "../common/models/RequestModel";
 
 class FormService {
-    constructor(setForm, setError){
-        this.setForm = setForm;
-        this.setRequest = null;
+    constructor(setRequest, setError){
+        this.setRequest = setRequest;
         this.setError = setError;
     }
 
@@ -22,14 +21,14 @@ class FormService {
         let validation = this.Validate(formData);
         
         this.setError(!validation);
-
+        
         if(!validation) {
             console.log('validation failed'); 
         }
-        //else {
-        //    console.log('validation passed');
-        //    this.setRequest(new RequestModel(formData.category, formData.ingridient));
-        //}
+        else {
+            console.log('validation passed');
+            this.setRequest(new RequestModel(formData.category, formData.ingridient));
+        }
     }
 
     Validate(formData){

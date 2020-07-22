@@ -1,1 +1,1 @@
-export const categoriesUrl = "https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list";
+export const apiUrl = "https://www.thecocktaildb.com/api/json/v1/1"

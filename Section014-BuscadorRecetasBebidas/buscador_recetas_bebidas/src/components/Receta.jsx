@@ -46,11 +46,6 @@ const Receta = ({drink}) => {
                             <h2>{context.drinkInfo.strDrink}</h2>
                             <h3 className="mt-4">Instrucciones:</h3>
                             <p>{context.drinkInfo.strInstructions}</p>
-                            <img 
-                                className="img-fluid my-4" 
-                                src={context.drinkInfo.strDrinkThumb} 
-                                alt={context.drinkInfo.strDrink}/
-                            >
                             <h3>Intredientes y cantidades</h3>
                             <ul>{showIngredients(context.drinkInfo)}</ul>
                         </div>

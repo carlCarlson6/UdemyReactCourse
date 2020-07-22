@@ -3,6 +3,7 @@ import {ModelContext} from '../context/ModelContext';
 import Modal from '@material-ui/core/Modal';
 import ModelServices from '../services/ModelServices';
 import {showIngredients} from '../common/utils/ShowDrinkInfo'
+import PropTypes from 'prop-types';
 
 const Receta = ({drink}) => {
     
@@ -44,10 +45,12 @@ const Receta = ({drink}) => {
                         >
                             <h2>{context.drinkInfo.strDrink}</h2>
                             <h3 className="mt-4">Instrucciones:</h3>
-                            <p>
-                                {context.drinkInfo.strInstructions}
-                            </p>
-                            <img className="img-fluid my-4" src={context.drinkInfo.strDrinkThumb}/>
+                            <p>{context.drinkInfo.strInstructions}</p>
+                            <img 
+                                className="img-fluid my-4" 
+                                src={context.drinkInfo.strDrinkThumb} 
+                                alt={context.drinkInfo.strDrink}/
+                            >
                             <h3>Intredientes y cantidades</h3>
                             <ul>{showIngredients(context.drinkInfo)}</ul>
                         </div>
@@ -58,6 +61,10 @@ const Receta = ({drink}) => {
             </div>
         </div>
     );
+}
+
+Receta.propTypes = {
+    drink: PropTypes.object.isRequired
 }
  
 export default Receta;

@@ -55,5 +55,7 @@ const Formulario = () => {
         </form>
     );
 }
+
+Formulario.propTypes = {}
  
 export default Formulario;

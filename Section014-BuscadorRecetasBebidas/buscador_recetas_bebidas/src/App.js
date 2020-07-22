@@ -12,7 +12,9 @@ function App() {
 			<DrinksProvider>
 				<ModelProvider>
 
-			<Header />
+			<Header 
+				message="Busca recetas de bebidas"
+			/>
 
 			<div className="container mt-5">
 				<div className="row">

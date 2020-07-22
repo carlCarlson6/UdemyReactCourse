@@ -17,5 +17,7 @@ const ListaRecetas = () => {
         </div>
     );
 }
- 
+
+ListaRecetas.propTypes = {}
+
 export default ListaRecetas;

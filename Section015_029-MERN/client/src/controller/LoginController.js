@@ -1,15 +1,17 @@
 import FormService from "../services/FormService";
 import HttpService from "../services/HttpService";
+import updateStateDataByEvent from "../common/utils/UpdateStateDataByEvent";
 
 
 class LoginController {
     constructor(setUserLogin, setError){
-        this.formService = new FormService(setUserLogin, setError);
+        this.setUserLogin = setUserLogin;
+        this.formService = new FormService(setError);
         this.http = new HttpService();
     }
 
     UpdateLoginData(data, event) {
-        this.formService.Update(data, event);
+        updateStateDataByEvent(data, this.setUserLogin, event);
     }
 
     Login(data, event){

@@ -1,15 +1,6 @@
 class FormService {
-    constructor(setForm, setError){
-        this.setForm = setForm
+    constructor(setError){
         this.setError = setError;
-    }
-
-    Update(formData, event) {
-        let name = event.target.name;
-        let value = event.target.value;
-        console.log(`escribiendo ${value} en ${name}`);
-
-        this.setForm({...formData, [name]: value})
     }
 
     Submit(formData, event) {

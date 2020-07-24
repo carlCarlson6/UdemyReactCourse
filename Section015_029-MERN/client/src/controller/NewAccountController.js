@@ -1,16 +1,16 @@
 import FormService from "../services/FormService";
 import HttpService from "../services/HttpService";
-import updateStateDataByEvent from "../common/utils/UpdateStateDataByEvent";
+import StateUpdater from "../common/utils/StateUpdater";
 
 class NewAccountController {
     constructor(setNewUser, setError){
-        this.setNewUser = setNewUser;
         this.formService = new FormService(setError);
         this.http = new HttpService();
+        this.stateUpdater = new StateUpdater(setNewUser);
     }
 
     UpdateNewAccountData(data, event) {
-        updateStateDataByEvent(data, this.setNewUser, event);
+        this.stateUpdater.UpdataObjectStateDataByEvent(data, this.setNewUser, event);
     }
 
     CreateAccount(data, event){
@@ -21,7 +21,7 @@ class NewAccountController {
         if(!passwordValidation) {
             this.formService.setError(!passwordValidation);
             return;
-        };
+        }
     }
 
     ValidatePasswords(password, confirmPassword) {

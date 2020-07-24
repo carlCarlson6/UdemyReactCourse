@@ -2,23 +2,27 @@ import FormService from "../services/FormService";
 import HttpService from "../services/HttpService";
 import StateUpdater from "../common/utils/StateUpdater";
 
-class LoginController {
-    constructor(setUserLogin, setError){
+class TaskController {
+    constructor(setTask, setError){
         this.setUserLogin = setUserLogin;
         this.formService = new FormService(setError);
         this.http = new HttpService();
-        this.stateUpdater = new StateUpdater(setUserLogin);
+        this.stateUpdater = new StateUpdater(setTask);
     }
 
-    UpdateLoginData(data, event) {
+    UpdateTaskData(data, event) {
         this.stateUpdater.UpdataObjectStateDataByEvent(data, this.setUserLogin, event);
     }
 
-    Login(data, event){
+    AddTask(data, event){
         this.formService.Submit(data, event);
     }
 
+    AddTaskId(data) {
+        let id = 'new_id';
+        this.stateUpdater.UpdataObjectStateData(data, 'id', id);
+    }
     
 }
 
-export default LoginController;
+export default TaskController;

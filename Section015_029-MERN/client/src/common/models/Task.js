@@ -1,6 +1,7 @@
 class Task {
-    constructor(name, id='pending_add') {
+    constructor(name, state=false, id='pending_add') {
         this.name = name;
+        this.state = state;
         this.id = id;
     }
 }

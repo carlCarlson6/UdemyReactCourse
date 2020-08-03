@@ -2,11 +2,11 @@ import React, { useReducer } from 'react';
 import taskReducer from './TaskReducer';
 import taskContext from './TaskContext';
 import TaskServices from '../../services/TaskServices';
-import {mockProjectTasks} from '../../common/data/mocks';
+import {mockTasks} from '../../common/data/mocks';
 
 const TaskState = props => {
     const initialState = {
-        tasks: mockProjectTasks,
+        tasks: mockTasks,
         projectTasks: []
     }
 

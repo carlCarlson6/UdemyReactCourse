@@ -6,7 +6,7 @@ import NewAccountController from '../../controller/NewAccountController';
 const NuevaCuenta = () => {
 
     const [newUser, setNewUser] = useState(new NewUser());
-    const [error, setError] = useState(false);
+    const setError = useState(false)[1];
 
     const newAccountController = new NewAccountController(setNewUser, setError);
 

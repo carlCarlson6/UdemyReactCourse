@@ -32,7 +32,7 @@ class ProjectController {
 
     __AddProjectId(data) {
         let id = generateId();
-        return {...data, ['id']:id}
+        return {...data, id}
     }
 
     ShowNewProjectForm() {
@@ -44,6 +44,9 @@ class ProjectController {
         this.taskServices.GetProjectTasks(id);
     } 
     
+    Delete(id) {
+        this.projectServices.DeleteProject(id);
+    }
 }
 
 export default ProjectController;

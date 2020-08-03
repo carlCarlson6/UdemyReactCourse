@@ -1,12 +1,12 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import Tarea from './Tarea';
-import {mockProjectTasks} from '../../common/data/mocks';
 import projectContext from '../../context/projectos/ProjectContext';
 import taskContext from '../../context/tasks/TaskContext';
+import ProjectController from '../../controller/ProjectController';
 
 const ListadoTareas = () => {
     const {project, projectServices} = useContext(projectContext);
-    const {projectTasks} = useContext(taskContext);
+    const {projectTasks, taskServices} = useContext(taskContext);
 
     if(!project) return <h2>Seleccion un proyecto</h2>;
 
@@ -31,7 +31,7 @@ const ListadoTareas = () => {
             <button
                 type="button"
                 className="btn btn-eliminar"
-                onClick={() => projectServices.DeleteProject(project.id)}
+                onClick={() => new ProjectController({projectServices, taskServices}).Delete(project.id)}
             >Eliminar Projecto &times;</button>
 
         </Fragment>

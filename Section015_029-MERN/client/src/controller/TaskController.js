@@ -1,28 +1,47 @@
 import FormService from "../services/FormService";
 import HttpService from "../services/HttpService";
 import StateUpdater from "../common/utils/StateUpdater";
+import {v4 as generateId} from 'uuid';
+import Task from "../common/models/Task";
 
 class TaskController {
-    constructor(setTask, setError){
-        this.setUserLogin = setUserLogin;
-        this.formService = new FormService(setError);
+    constructor(constructorParams){
+        this.formService = new FormService(constructorParams.setError);
         this.http = new HttpService();
-        this.stateUpdater = new StateUpdater(setTask);
+        this.stateUpdater = new StateUpdater(constructorParams.setTask);
+        this.taskServices = constructorParams.taskServices;
     }
 
-    UpdateTaskData(data, event) {
-        this.stateUpdater.UpdataObjectStateDataByEvent(data, this.setUserLogin, event);
+    UpdateNewTaskData(data, event) {
+        this.stateUpdater.UpdateObjectStateDataByEvent(data, event);
     }
 
-    AddTask(data, event){
-        this.formService.Submit(data, event);
+    CreateTask(data, project, event){
+        let formSubmitted = this.formService.Submit(data, event);
+        if(!formSubmitted) return;
+
+        console.log(data, project);
+
+        data = this.__AddTaskId(data, event);
+        data = this.__AddProjectIdToTask(data, project.id)
+        console.log(data);
+        
+        // agregar al state
+        this.taskServices.AddTask(data)
+
+        //reiniciar el form
+        this.stateUpdater.UpdateState(new Task())
+
     }
 
-    AddTaskId(data) {
-        let id = 'new_id';
-        this.stateUpdater.UpdataObjectStateData(data, 'id', id);
+    __AddTaskId(data) {
+        let id = generateId;
+        return {...data, id}
     }
     
+    __AddProjectIdToTask(data, projectId) {
+        return {...data, projectId}
+    }
 }
 
 export default TaskController;

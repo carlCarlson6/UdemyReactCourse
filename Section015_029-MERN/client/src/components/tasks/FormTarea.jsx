@@ -1,20 +1,33 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import projectContext from '../../context/projectos/ProjectContext';
+import taskContext from '../../context/tasks/TaskContext';
+import TaskController from '../../controller/TaskController';
+import Task from '../../common/models/Task';
 
 const FormTarea = () => {
     const {project} = useContext(projectContext);
+    const {taskServices} = useContext(taskContext);
 
-    if(!project) return null;
+    const [task, setTask] = useState(new Task());
+    const [error, setError] = useState(false);
 
+    const taskController = new TaskController({taskServices, setTask, setError});
+
+    if(!project) return null;    
+    
     return (
         <div className="formulario">
-            <form>
+            <form
+                onSubmit={event => taskController.CreateTask(task, project, event)}
+            >
                 <div className="contenedor-input">
                     <input 
                         type="text"
                         className="input-text"
                         placeholder="Nombre de la Tarea..."
                         name="name"
+                        value={task.name}
+                        onChange={event => taskController.UpdateNewTaskData(task, event)}
                     />
                 </div>
             

@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 const Login = () => {
 
     const [userLogin, setUserLogin] = useState(new UserLogin('', ''));
-    const [error, setError] = useState(false);
+    const setError = useState(false)[1];
 
     const loginController = new LoginController(setUserLogin, setError);
 

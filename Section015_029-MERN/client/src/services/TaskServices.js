@@ -1,4 +1,4 @@
-import { GET_PROJECT_TASKS, ADD_TASK } from "../types";
+import { GET_PROJECT_TASKS, ADD_TASK, DELETE_TASK } from "../types";
 
 class TaskServices {
     constructor(dispatch) {
@@ -6,17 +6,15 @@ class TaskServices {
     }
 
     GetProjectTasks(projectId) {
-        this.dispatch({
-            type: GET_PROJECT_TASKS,
-            payload: projectId
-        })
+        this.dispatch({ type: GET_PROJECT_TASKS, payload: projectId })
     }
 
     AddTask(task) {
-        this.dispatch({
-            type: ADD_TASK,
-            payload: task
-        })
+        this.dispatch({ type: ADD_TASK, payload: task })
+    }
+
+    DeleteTask(id) {
+        this.dispatch({ type: DELETE_TASK, payload: id })
     }
 }
 

@@ -37,6 +37,12 @@ class TaskController {
     __AddProjectIdToTask(data, projectId) {
         return {...data, projectId}
     }
+
+    Delete(id, projectId) {
+        this.taskServices.DeleteTask(id);
+        this.taskServices.GetProjectTasks(projectId);
+        
+    }
 }
 
 export default TaskController;

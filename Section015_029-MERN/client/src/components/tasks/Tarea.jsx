@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import taskContext from '../../context/tasks/TaskContext';
+import projectContext from '../../context/projectos/ProjectContext';
+import TaskController from '../../controller/TaskController';
 
 const Tarea = ({task}) => {
+    const {project} = useContext(projectContext);
+    const {taskServices} = useContext(taskContext)
+
     return (
         <li className="tarea sombra">
             <p>{task.name}</p>
@@ -30,6 +36,7 @@ const Tarea = ({task}) => {
                 <button
                     type="button"
                     className="btn btn-eliminar"
+                    onClick={() => new TaskController({taskServices}).Delete(task.id, project.id)}
                 >Eliminar</button>
             </div>
 

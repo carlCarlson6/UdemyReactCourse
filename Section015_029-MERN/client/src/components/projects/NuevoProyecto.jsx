@@ -5,14 +5,12 @@ import projectContext from '../../context/projectos/ProjectContext';
 
 const NuevoProyecto = () => {
 
-    const projectsContext = useContext(projectContext);
-    const {newProjectForm} = projectsContext;
+    const {newProjectForm, showNewProjectForm} = useContext(projectContext);
 
     const [newProject, setNewProject] = useState(new Project(''));
     const [error, setError] = useState(false);
 
-    const projectController = new ProjectController(setNewProject, setError);
-
+    const projectController = new ProjectController(setNewProject, setError, showNewProjectForm);
 
     const createNewProjectFormJsx = (
         <form
@@ -40,6 +38,7 @@ const NuevoProyecto = () => {
             <button
                 type="button"
                 className="btn btn-block btn-primario"
+                onClick={() => projectController.ShowNewProjectForm()}
             >Nuevo proyecto</button>
 
             {newProjectForm ? createNewProjectFormJsx : null}

@@ -3,10 +3,11 @@ import HttpService from "../services/HttpService";
 import StateUpdater from "../common/utils/StateUpdater";
 
 class ProjectController {
-    constructor(setNewProject, setError) {
+    constructor(setNewProject, setError, showNewProjectForm) {
         this.formService = new FormService(setError);
         this.http = new HttpService();
         this.stateUpdater = new StateUpdater(setNewProject);
+        this.showNewProjectForm = showNewProjectForm;
     }
 
     UpdateNewProjectData(data, event) {
@@ -17,17 +18,20 @@ class ProjectController {
         let formSubmitted = this.formService.Submit(data, event);
         if(!formSubmitted) return;
 
-        this.AddProjectId(data, event);
+        this.__AddProjectId(data, event);
 
         // agregar al state
 
         //reiniciar el form
-        
     }
 
-    AddProjectId(data) {
+    __AddProjectId(data) {
         let id = 'new_id';
         this.stateUpdater.UpdataObjectStateData(data, 'id', id);
+    }
+
+    ShowNewProjectForm() {
+        this.showNewProjectForm();
     }
     
 }

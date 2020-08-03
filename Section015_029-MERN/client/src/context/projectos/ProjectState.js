@@ -7,7 +7,8 @@ import ProjectServices from '../../services/ProjectServices';
 const ProjectState = props => {   
     const initalState = {
         projects: [],
-        newProjectForm: false
+        newProjectForm: false,
+        project: null
     }
 
     // dispatch para ejecutar las acciones
@@ -16,6 +17,7 @@ const ProjectState = props => {
     return (
         <projectContext.Provider
             value={{
+                project: state.project,
                 newProjectForm: state.newProjectForm,
                 projects: state.projects,
                 projectServices: new ProjectServices(dispatch)

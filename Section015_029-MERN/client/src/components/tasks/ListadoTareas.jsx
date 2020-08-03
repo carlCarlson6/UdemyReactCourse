@@ -1,10 +1,12 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import Tarea from './Tarea';
 import {mockProjectTasks} from '../../common/data/mocks';
 import projectContext from '../../context/projectos/ProjectContext';
+import taskContext from '../../context/tasks/TaskContext';
 
 const ListadoTareas = () => {
     const {project, projectServices} = useContext(projectContext);
+    const {projectTasks} = useContext(taskContext);
 
     if(!project) return <h2>Seleccion un proyecto</h2>;
 
@@ -13,15 +15,15 @@ const ListadoTareas = () => {
             <h2>Proyecto: {project.name}</h2>
 
             <ul className="listado-tareas">
-                {mockProjectTasks.length === 0 
+                {projectTasks.length === 0 
                     ? 
                         (<li className="tarea"><p>No hay tareas</p></li>)
                     : 
-                        mockProjectTasks.map(task => (
-                          <Tarea
-                          key={task.id}
-                              task={task}
-                              />
+                        projectTasks.map(task => (
+                            <Tarea
+                                key={task.id}
+                                task={task}
+                            />
                     ))
                 }
             </ul>

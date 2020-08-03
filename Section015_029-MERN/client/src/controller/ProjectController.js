@@ -5,11 +5,12 @@ import {v4 as generateId} from 'uuid'
 import Project from "../common/models/Project";
 
 class ProjectController {
-    constructor(setNewProject, setError, projectServices) {
-        this.formService = new FormService(setError);
+    constructor(constructorParams) {
+        this.formService = new FormService(constructorParams.setError);
         this.http = new HttpService();
-        this.stateUpdater = new StateUpdater(setNewProject);
-        this.projectServices = projectServices;
+        this.stateUpdater = new StateUpdater(constructorParams.setNewProject);
+        this.projectServices = constructorParams.projectServices;
+        this.taskServices = constructorParams.taskServices
     }
 
     UpdateNewProjectData(data, event) {
@@ -37,6 +38,11 @@ class ProjectController {
     ShowNewProjectForm() {
         this.projectServices.ShowNewProjectForm();
     }
+
+    SetProject(id) {
+        this.projectServices.SetProject(id);
+        this.taskServices.GetProjectTasks(id);
+    } 
     
 }
 

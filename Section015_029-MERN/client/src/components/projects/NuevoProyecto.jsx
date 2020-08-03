@@ -9,7 +9,7 @@ const NuevoProyecto = () => {
     const [newProject, setNewProject] = useState(new Project());
     const [error, setError] = useState(false);
 
-    const projectController = new ProjectController(setNewProject, setError, projectServices);
+    const projectController = new ProjectController({setNewProject, setError, projectServices});
 
     const createNewProjectFormJsx = (
         <form

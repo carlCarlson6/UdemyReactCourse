@@ -1,13 +1,39 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
 import ProjectController from '../../controller/ProjectController';
 import Project from '../../common/models/Project';
+import projectContext from '../../context/projectos/ProjectContext';
 
 const NuevoProyecto = () => {
+
+    const projectsContext = useContext(projectContext);
+    const {newProjectForm} = projectsContext;
 
     const [newProject, setNewProject] = useState(new Project(''));
     const [error, setError] = useState(false);
 
     const projectController = new ProjectController(setNewProject, setError);
+
+
+    const createNewProjectFormJsx = (
+        <form
+            className="formulario-nuevo-proyecto"
+            onSubmit={event => projectController.Create(newProject, event)}
+        >
+            <input
+                type="text"
+                className="input-text"
+                placeholder="Nombre Proyecto"
+                vale={newProject.name}
+                onChange={event => projectController.UpdateNewProjectData(newProject, event)}
+                name="name"
+            />
+            <input
+                type="submit"
+                className="btn btn-primario btn-block"
+                value="Agregar Proyecto"
+            />
+        </form>
+    )
 
     return (
         <Fragment>
@@ -16,26 +42,7 @@ const NuevoProyecto = () => {
                 className="btn btn-block btn-primario"
             >Nuevo proyecto</button>
 
-            <form
-                className="formulario-nuevo-proyecto"
-                onSubmit={event => projectController.Create(newProject, event)}
-            >
-                <input
-                    type="text"
-                    className="input-text"
-                    placeholder="Nombre Proyecto"
-                    vale={newProject.name}
-                    onChange={event => projectController.UpdateNewProjectData(newProject, event)}
-                    name="name"
-                />
-
-                <input
-                    type="submit"
-                    className="btn btn-primario btn-block"
-                    value="Agregar Proyecto"
-                />
-
-            </form>
+            {newProjectForm ? createNewProjectFormJsx : null}
 
         </Fragment>
         

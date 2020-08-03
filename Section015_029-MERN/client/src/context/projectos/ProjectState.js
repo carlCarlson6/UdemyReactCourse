@@ -4,7 +4,7 @@ import projectReducer from './ProjectReducer';
 
 const ProjectState = props => {
     const initalState = {
-        form: false
+        newProjectForm: false
     }
 
     // dispatch para ejecutar las acciones
@@ -16,7 +16,7 @@ const ProjectState = props => {
     return (
         <projectContext.Provider
             value={{
-                form: state.form
+                newProjectForm: state.newProjectForm
             }}
         >
             {props.children}

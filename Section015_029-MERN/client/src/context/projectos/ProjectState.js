@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import projectContext from './ProjectContext';
 import projectReducer from './ProjectReducer';
-import { FORM_PROJECT, GET_PROJECT, ADD_PROJECT } from '../../types';
+import { FORM_PROJECT, GET_PROJECT, ADD_PROJECT, FORM_VALIDATION } from '../../types';
 import { mockProjects } from '../../common/data/mocks';
 
 

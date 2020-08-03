@@ -32,6 +32,7 @@ const NuevoProyecto = () => {
             />
         </form>
     )
+    const messageErrorJsx = <p className="mensaje error">El nombre del projecto es obligatorio</p>
 
     return (
         <Fragment>
@@ -42,7 +43,7 @@ const NuevoProyecto = () => {
             >Nuevo proyecto</button>
 
             {newProjectForm ? createNewProjectFormJsx : null}
-
+            {error ? messageErrorJsx : null}
         </Fragment>
         
     );

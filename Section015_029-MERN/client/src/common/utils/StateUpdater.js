@@ -3,15 +3,15 @@ class StateUpdater {
         this.stateSetter = stateSetter;
     }
 
-    UpdataObjectStateData(data, name, value) {
+    UpdateObjectStateData(data, name, value) {
         this.stateSetter({...data, [name]: value})
     }
 
-    UpdataObjectStateDataByEvent(data, event) {
+    UpdateObjectStateDataByEvent(data, event) {
         let name = event.target.name;
         let value = event.target.value;
         
-        this.UpdataObjectStateData(data, name, value)
+        this.UpdateObjectStateData(data, name, value)
     }
 
     UpdateState(newState) {

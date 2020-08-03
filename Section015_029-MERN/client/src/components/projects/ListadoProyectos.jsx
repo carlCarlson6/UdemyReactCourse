@@ -4,9 +4,9 @@ import projectContext from '../../context/projectos/ProjectContext';
 
 const ListadoProyectos = () => {
 
-    const {projects, getProjects} = useContext(projectContext);
+    const {projects, projectServices} = useContext(projectContext);
     
-    useEffect(() => getProjects(), [])
+    useEffect(() => projectServices.GetProjects(), [])
 
     if(projects.length === 0) return null;
 

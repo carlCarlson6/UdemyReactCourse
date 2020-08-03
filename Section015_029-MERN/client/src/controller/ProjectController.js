@@ -5,12 +5,11 @@ import {v4 as generateId} from 'uuid'
 import Project from "../common/models/Project";
 
 class ProjectController {
-    constructor(setNewProject, setError, showNewProjectForm, projectAdder) {
+    constructor(setNewProject, setError, projectServices) {
         this.formService = new FormService(setError);
         this.http = new HttpService();
         this.stateUpdater = new StateUpdater(setNewProject);
-        this.showNewProjectForm = showNewProjectForm;
-        this.projectAdder = projectAdder
+        this.projectServices = projectServices;
     }
 
     UpdateNewProjectData(data, event) {
@@ -25,7 +24,7 @@ class ProjectController {
         data = this.__AddProjectId(data, event);
         
         // agregar al state
-        this.projectAdder(data)
+        this.projectServices.AddProject(data)
 
         //reiniciar el form
         this.stateUpdater.UpdateState(new Project())
@@ -38,7 +37,8 @@ class ProjectController {
     }
 
     ShowNewProjectForm() {
-        this.showNewProjectForm();
+        //this.showNewProjectForm();
+        this.projectServices.ShowNewProjectForm();
     }
     
 }

@@ -5,18 +5,15 @@ class FormService {
 
     Submit(formData, event) {
         event.preventDefault();
-        console.log('submitting', formData);
 
         let validation = this.Validate(formData);
         
         this.setError(!validation);
         
         if(validation) {
-            console.log('validation passed');
             return true;
         }
         else {
-            console.log('validation failed');
             return false;
         }
     }

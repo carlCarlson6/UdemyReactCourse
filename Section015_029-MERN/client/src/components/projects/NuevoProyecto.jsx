@@ -5,12 +5,12 @@ import projectContext from '../../context/projectos/ProjectContext';
 
 const NuevoProyecto = () => {
 
-    const {newProjectForm, showNewProjectForm} = useContext(projectContext);
+    const {newProjectForm, showNewProjectForm, addProject} = useContext(projectContext);
 
-    const [newProject, setNewProject] = useState(new Project(''));
+    const [newProject, setNewProject] = useState(new Project());
     const [error, setError] = useState(false);
 
-    const projectController = new ProjectController(setNewProject, setError, showNewProjectForm);
+    const projectController = new ProjectController(setNewProject, setError, showNewProjectForm, addProject);
 
     const createNewProjectFormJsx = (
         <form

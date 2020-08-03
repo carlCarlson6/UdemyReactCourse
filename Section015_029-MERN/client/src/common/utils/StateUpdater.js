@@ -13,6 +13,10 @@ class StateUpdater {
         
         this.UpdataObjectStateData(data, name, value)
     }
+
+    UpdateState(newState) {
+        this.stateSetter(newState);
+    }
 }
 
 export default StateUpdater;

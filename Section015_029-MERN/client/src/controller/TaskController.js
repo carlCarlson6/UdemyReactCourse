@@ -41,7 +41,6 @@ class TaskController {
     Delete(id, projectId) {
         this.taskServices.DeleteTask(id);
         this.taskServices.GetProjectTasks(projectId);
-        
     }
 }
 

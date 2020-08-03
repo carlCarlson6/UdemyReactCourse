@@ -31,8 +31,8 @@ const ListadoTareas = () => {
             <button
                 type="button"
                 className="btn btn-eliminar"
-                onClick={() => new ProjectController({projectServices, taskServices}).Delete(project.id)}
-            >Eliminar Projecto &times;</button>
+                onClick={() => new ProjectController({projectServices, taskServices}).Delete(project.id, projectTasks)}
+            >Eliminar Proyecto &times;</button>
 
         </Fragment>
     );

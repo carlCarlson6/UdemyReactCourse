@@ -8,7 +8,7 @@ const FormTarea = () => {
     const {project} = useContext(projectContext);
     const {taskServices} = useContext(taskContext);
 
-    const [task, setTask] = useState(new Task());
+    const [task, setTask] = useState(new Task('', ''));
     const [error, setError] = useState(false);
 
     const taskController = new TaskController({taskServices, setTask, setError});

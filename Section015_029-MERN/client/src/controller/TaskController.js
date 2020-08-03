@@ -20,8 +20,6 @@ class TaskController {
         let formSubmitted = this.formService.Submit(data, event);
         if(!formSubmitted) return;
 
-        console.log(data, project);
-
         data = this.__AddTaskId(data, event);
         data = this.__AddProjectIdToTask(data, project.id)
         console.log(data);
@@ -35,7 +33,7 @@ class TaskController {
     }
 
     __AddTaskId(data) {
-        let id = generateId;
+        let id = generateId();
         return {...data, id}
     }
     

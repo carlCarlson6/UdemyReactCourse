@@ -6,7 +6,6 @@ class TaskServices {
     }
 
     GetProjectTasks(projectId) {
-        console.log("GetProjectTasks(projectId)", projectId)
         this.dispatch({
             type: GET_PROJECT_TASKS,
             payload: projectId

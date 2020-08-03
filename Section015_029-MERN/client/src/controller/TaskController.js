@@ -16,7 +16,7 @@ class TaskController {
         this.stateUpdater.UpdateObjectStateDataByEvent(data, event);
     }
 
-    CreateTask(data, project, event){
+    CreateTask(data, project, event) {
         data = this.__AddTaskId(data, event);
         data = this.__AddProjectIdToTask(data, project.id)
         
@@ -40,6 +40,16 @@ class TaskController {
 
     Delete(id, projectId) {
         this.taskServices.DeleteTask(id);
+        this.taskServices.GetProjectTasks(projectId);
+    }
+
+    MarkComplete(task, projectId) {
+        this.taskServices.CompleteTask(task);
+        this.taskServices.GetProjectTasks(projectId);
+    }
+
+    MarkIncomplete(task, projectId) {
+        this.taskServices.IncompleteTask(task);
         this.taskServices.GetProjectTasks(projectId);
     }
 }

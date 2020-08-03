@@ -17,6 +17,8 @@ const FormTarea = () => {
 
     if(!project) return null;    
     
+    console.log(project)
+
     return (
         <div className="formulario">
             <form

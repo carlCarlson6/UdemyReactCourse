@@ -1,4 +1,4 @@
-import { GET_PROJECT_TASKS, ADD_TASK, DELETE_TASK } from "../types";
+import { GET_PROJECT_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK } from "../types";
 
 class TaskServices {
     constructor(dispatch) {
@@ -15,6 +15,20 @@ class TaskServices {
 
     DeleteTask(id) {
         this.dispatch({ type: DELETE_TASK, payload: id })
+    }
+
+    CompleteTask(task) {
+        const newTask = {...task, state: true}
+        this.dispatch({type: UPDATE_TASK, payload: newTask})
+    }
+
+    IncompleteTask(task) {
+        const newTask = {...task, state: false}
+        this.dispatch({type: UPDATE_TASK, payload: newTask})
+    }
+
+    EditTask() {
+
     }
 }
 

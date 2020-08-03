@@ -1,4 +1,4 @@
-import { FORM_PROJECT } from "../../types";
+import { FORM_PROJECT, GET_PROJECT } from "../../types";
 
 const projectReducer = (state, action) => {
     switch(action.type) {
@@ -9,6 +9,12 @@ const projectReducer = (state, action) => {
                 newProjectForm: true
             }
         
+        case GET_PROJECT:
+            return {
+                ...state,
+                projects: action.payload
+            }
+
         default:
             return state;
     }

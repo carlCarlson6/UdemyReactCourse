@@ -1,20 +1,19 @@
 import React, { Fragment } from 'react';
-import Task from '../../common/models/Task';
 import Tarea from './Tarea';
+import {mockProjectTasks} from '../../common/data/mocks';
 
 const ListadoTareas = () => {
-    
-    const projectTasks = [new Task("tarea 1", true), new Task("tarea 2"), new Task("tarea 3"), new Task("tarea 4", true)]
 
     return (
         <Fragment>
             <h2>Proyecto: proyecto 1</h2>
 
             <ul className="listado-tareas">
-                {projectTasks.length === 0 
+                {mockProjectTasks.length === 0 
                     ? (<li className="tarea"><p>No hay tareas</p></li>)
-                    : projectTasks.map(task => (
+                    : mockProjectTasks.map(task => (
                         <Tarea
+                            key={task.id}
                             task={task}
                         />
                     ))

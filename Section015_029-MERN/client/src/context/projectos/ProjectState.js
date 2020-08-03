@@ -1,11 +1,14 @@
 import React, { useReducer } from 'react';
 import projectContext from './ProjectContext';
 import projectReducer from './ProjectReducer';
-import { FORM_PROJECT } from '../../types';
+import { FORM_PROJECT, GET_PROJECT } from '../../types';
+import { mockProjects } from '../../common/data/mocks';
 
 
-const ProjectState = props => {
+const ProjectState = props => {   
+
     const initalState = {
+        projects: [],
         newProjectForm: false
     }
 
@@ -19,11 +22,20 @@ const ProjectState = props => {
         })
     }
 
+    const getProjects = () => {
+        dispatch({
+            type: GET_PROJECT,
+            payload: mockProjects
+        })
+    }
+
     return (
         <projectContext.Provider
             value={{
                 newProjectForm: state.newProjectForm,
-                showNewProjectForm: showNewProjectForm
+                projects: state.projects,
+                showNewProjectForm: showNewProjectForm,
+                getProjects: getProjects
             }}
         >
             {props.children}

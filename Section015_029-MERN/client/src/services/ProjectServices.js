@@ -3,7 +3,7 @@ import { mockProjects } from '../common/data/mocks';
 
 class ProjectServices {
     constructor(dispatch){
-        this.dispatch = dispatch
+        this.dispatch = dispatch;
     }
 
     ShowNewProjectForm() {

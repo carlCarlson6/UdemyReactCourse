@@ -22,7 +22,11 @@ class FormService {
         let validation = true;
         
         Object.keys(formData).forEach(key => {
-            if(formData[key].trim() === ''){validation=validation*false;}
+            if(typeof formData[key] === 'string' || formData[key] instanceof String){
+                if(formData[key].trim() === ''){ 
+                    validation=validation*false; 
+                }
+            }
         })
         
         return validation;

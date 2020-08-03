@@ -1,4 +1,4 @@
-import { FORM_PROJECT, GET_PROJECTS, ADD_PROJECT, SET_PROJECT } from "../types"
+import { FORM_PROJECT, GET_PROJECTS, ADD_PROJECT, SET_PROJECT, DELETE_PROJECT } from "../types"
 import { mockProjects } from '../common/data/mocks';
 
 class ProjectServices {
@@ -20,6 +20,10 @@ class ProjectServices {
 
     SetProject(id) {
         this.dispatch({ type: SET_PROJECT, payload: id});
+    }
+
+    DeleteProject(id) {
+        this.dispatch({ type: DELETE_PROJECT, payload: id});
     }
 }
 

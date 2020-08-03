@@ -4,7 +4,7 @@ import {mockProjectTasks} from '../../common/data/mocks';
 import projectContext from '../../context/projectos/ProjectContext';
 
 const ListadoTareas = () => {
-    const {project} = useContext(projectContext);
+    const {project, projectServices} = useContext(projectContext);
 
     if(!project) return <h2>Seleccion un proyecto</h2>;
 
@@ -14,12 +14,14 @@ const ListadoTareas = () => {
 
             <ul className="listado-tareas">
                 {mockProjectTasks.length === 0 
-                    ? (<li className="tarea"><p>No hay tareas</p></li>)
-                    : mockProjectTasks.map(task => (
-                        <Tarea
-                            key={task.id}
-                            task={task}
-                        />
+                    ? 
+                        (<li className="tarea"><p>No hay tareas</p></li>)
+                    : 
+                        mockProjectTasks.map(task => (
+                          <Tarea
+                          key={task.id}
+                              task={task}
+                              />
                     ))
                 }
             </ul>
@@ -27,6 +29,7 @@ const ListadoTareas = () => {
             <button
                 type="button"
                 className="btn btn-eliminar"
+                onClick={() => projectServices.DeleteProject(project.id)}
             >Eliminar Projecto &times;</button>
 
         </Fragment>

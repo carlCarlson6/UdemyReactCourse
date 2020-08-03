@@ -8,7 +8,7 @@ const ListadoProyectos = () => {
     
     useEffect(() => projectServices.GetProjects(), [])
 
-    if(projects.length === 0) return null;
+    if(projects.length === 0) return <p>No hay proyectos</p>;
 
     return (
 

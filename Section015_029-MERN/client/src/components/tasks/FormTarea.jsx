@@ -13,6 +13,8 @@ const FormTarea = () => {
 
     const taskController = new TaskController({taskServices, setTask, setError});
 
+    const errorMessageJsx = <p className="mensaje error">El nombre de la tarea es obligatorio</p>
+
     if(!project) return null;    
     
     return (
@@ -39,6 +41,7 @@ const FormTarea = () => {
                     />
                 </div>
             </form>
+            {error ? errorMessageJsx : null}
         </div>
     );
 }

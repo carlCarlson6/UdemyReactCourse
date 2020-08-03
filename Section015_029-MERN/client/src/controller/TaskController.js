@@ -17,19 +17,16 @@ class TaskController {
     }
 
     CreateTask(data, project, event){
-        let formSubmitted = this.formService.Submit(data, event);
-        if(!formSubmitted) return;
-
         data = this.__AddTaskId(data, event);
         data = this.__AddProjectIdToTask(data, project.id)
-        console.log(data);
         
-        // agregar al state
-        this.taskServices.AddTask(data)
+        let formSubmitted = this.formService.Submit(data, event);        
+        if(!formSubmitted) return;
 
-        //reiniciar el form
-        this.stateUpdater.UpdateState(new Task())
+        this.taskServices.AddTask(data);
+        this.stateUpdater.UpdateState(new Task('', ''));
 
+        this.taskServices.GetProjectTasks(project.id);
     }
 
     __AddTaskId(data) {

@@ -18,7 +18,6 @@ class ProjectController {
 
     Create(data, event) {
         let formSubmitted = this.formService.Submit(data, event);
-        console.log(formSubmitted);
         if(!formSubmitted) return;
 
         data = this.__AddProjectId(data, event);
@@ -32,12 +31,10 @@ class ProjectController {
 
     __AddProjectId(data) {
         let id = generateId();
-        this.stateUpdater.UpdateObjectStateData(data, 'id', id);
         return {...data, ['id']:id}
     }
 
     ShowNewProjectForm() {
-        //this.showNewProjectForm();
         this.projectServices.ShowNewProjectForm();
     }
     

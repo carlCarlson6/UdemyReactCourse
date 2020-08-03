@@ -1,12 +1,16 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import Tarea from './Tarea';
 import {mockProjectTasks} from '../../common/data/mocks';
+import projectContext from '../../context/projectos/ProjectContext';
 
 const ListadoTareas = () => {
+    const {project} = useContext(projectContext);
+
+    if(!project) return <h2>Seleccion un proyecto</h2>;
 
     return (
         <Fragment>
-            <h2>Proyecto: proyecto 1</h2>
+            <h2>Proyecto: {project.name}</h2>
 
             <ul className="listado-tareas">
                 {mockProjectTasks.length === 0 

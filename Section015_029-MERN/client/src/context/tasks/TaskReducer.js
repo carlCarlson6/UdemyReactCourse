@@ -6,7 +6,7 @@ const taskReducer = (state, action) => {
             return {...state, projectTasks: [...state.tasks.filter(task => task.projectId === action.payload)]}
 
         case ADD_TASK:
-            return {...state, tasks: [...state.tasks, action.payload]}
+            return {tasks: [...state.tasks, action.payload], ...state}
 
         case DELETE_TASK:
             return { ...state, tasks: state.tasks.filter(task => task.id !== action.payload)};

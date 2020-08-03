@@ -39,14 +39,15 @@ class ProjectController {
         this.projectServices.ShowNewProjectForm();
     }
 
-    SetProject(id) {
-        this.projectServices.SetProject(id);
-        this.taskServices.GetProjectTasks(id);
+    SetProject(projectId) {
+        this.projectServices.SetProject(projectId);
+        this.taskServices.GetProjectTasks(projectId);
     } 
     
-    Delete(id, tasks) {
-        this.projectServices.DeleteProject(id);
+    Delete(projectId, tasks) {
+        this.projectServices.DeleteProject(projectId);
         tasks.forEach(task => this.taskServices.DeleteTask(task.id))
+        this.taskServices.GetProjectTasks(projectId);
     }
 }
 

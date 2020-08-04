@@ -6,7 +6,7 @@ import {mockTasks} from '../../common/data/mocks';
 
 const TaskState = props => {
     const initialState = {
-        task: null,
+        selectedTask: null,
         tasks: mockTasks,
         projectTasks: []
     }
@@ -16,7 +16,7 @@ const TaskState = props => {
     return (
         <taskContext.Provider
             value={{
-                task: state.task,
+                selectedTask: state.selectedTask,
                 tasks: state.tasks,
                 projectTasks: state.projectTasks,
                 taskServices: new TaskServices(dispatch)

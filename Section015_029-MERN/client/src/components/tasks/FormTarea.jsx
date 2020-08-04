@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import projectContext from '../../context/projectos/ProjectContext';
 import taskContext from '../../context/tasks/TaskContext';
 import TaskController from '../../controller/TaskController';
@@ -6,21 +6,24 @@ import Task from '../../common/models/Task';
 
 const FormTarea = () => {
     const {project} = useContext(projectContext);
-    const {taskServices} = useContext(taskContext);
+    const {selectedTask, taskServices} = useContext(taskContext);
 
-    const [task, setTask] = useState(new Task('', ''));
+    const [newTask, setNewTask] = useState(new Task('', ''));
     const [error, setError] = useState(false);
 
-    const taskController = new TaskController({taskServices, setTask, setError});
+    const taskController = new TaskController({taskServices, setTask: setNewTask, setError});
 
-    const errorMessageJsx = <p className="mensaje error">El nombre de la tarea es obligatorio</p>
+    useEffect(() => selectedTask? setNewTask(selectedTask) : setNewTask(new Task('','')), [selectedTask]);
 
-    if(!project) return null;    
-    
+    if(!project) return null;
     return (
         <div className="formulario">
             <form
-                onSubmit={event => taskController.CreateTask(task, project, event)}
+                onSubmit={event => {
+                    selectedTask ? 
+                        taskController.EditTask(newTask, project, event) : 
+                        taskController.CreateTask(newTask, project, event)
+                }}
             >
                 <div className="contenedor-input">
                     <input 
@@ -28,8 +31,8 @@ const FormTarea = () => {
                         className="input-text"
                         placeholder="Nombre de la Tarea..."
                         name="name"
-                        value={task.name}
-                        onChange={event => taskController.UpdateNewTaskData(task, event)}
+                        value={newTask.name}
+                        onChange={event => taskController.UpdateNewTaskData(newTask, event)}
                     />
                 </div>
             
@@ -37,11 +40,11 @@ const FormTarea = () => {
                     <input 
                         type="submit"
                         className="btn btn-primario btn-submit btn-block"
-                        value="Agregar Tarea"
+                        value={selectedTask? 'Editar Tarea' : 'Agregar Tarea'}
                     />
                 </div>
             </form>
-            {error ? errorMessageJsx : null}
+            {error ? <p className="mensaje error">El nombre de la tarea es obligatorio</p> : null}
         </div>
     );
 }

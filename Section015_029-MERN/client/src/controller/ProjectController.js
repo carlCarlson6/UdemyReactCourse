@@ -42,6 +42,7 @@ class ProjectController {
     SetProject(projectId) {
         this.projectServices.SetProject(projectId);
         this.taskServices.GetProjectTasks(projectId);
+        this.taskServices.SetTask(null);
     } 
     
     Delete(projectId, tasks) {

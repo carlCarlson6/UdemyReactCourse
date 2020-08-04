@@ -25,7 +25,6 @@ class TaskController {
 
         this.taskServices.AddTask(data);
         this.stateUpdater.UpdateState(new Task(''));
-
         this.taskServices.GetProjectTasks(project.id);
     }
 
@@ -57,6 +56,17 @@ class TaskController {
 
     SelectTask(task) {
         this.taskServices.SetTask(task);
+    }
+
+    EditTask(data, project, event) {
+        console.log('editing the task', data);
+        let formSubmitted = this.formService.Submit(data, event);        
+        if(!formSubmitted) return;
+
+        this.taskServices.UpdateTask(data);
+        this.stateUpdater.UpdateState(new Task(''));
+        this.taskServices.GetProjectTasks(project.id);
+        this.SelectTask(null);
     }
 }
 

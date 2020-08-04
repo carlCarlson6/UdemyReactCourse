@@ -14,11 +14,11 @@ const taskReducer = (state, action) => {
 
         case UPDATE_TASK:
             let updatedTask = action.payload;
-            let newTasks = state.tasks.map(task => task.id == updatedTask.id ? updatedTask : task)
+            let newTasks = state.tasks.map(task => task.id === updatedTask.id ? updatedTask : task)
             return {...state, tasks: newTasks}
 
         case SET_TASK:
-            return {...state, task: action.payload}
+            return {...state, selectedTask: action.payload}
 
         default: return state;
     }

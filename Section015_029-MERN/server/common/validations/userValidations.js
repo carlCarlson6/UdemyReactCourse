@@ -1,14 +1,14 @@
 const {check} = require('express-validator');
 
-createUserValidation = [
+createUser = [
     check('name', 'The name is mandatory').not().isEmpty(),
     check('email', 'Add a valid email').isEmail(),
     check('password', 'Password must be up to 6 characters').isLength({min: 6})
 ]
 
-loginValidation = [
+login = [
     check('email', 'Add a valid email').isEmail(),
     check('password', 'Password must be up to 6 characters').isLength({min: 6})
 ]
 
-module.exports = {createUserValidation, loginValidation}
+module.exports = {createUser, login}

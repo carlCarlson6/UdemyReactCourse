@@ -1,8 +1,8 @@
 const express = require('express');
-const UserController = require('../controllers/UserController');
-const requestValidations = require('../../common/requestValidations');
+const ProjectController = require('../controllers/ProjectController');
+const userValidations = require('../../common/validations/userValidations');
 
-const userController = new UserController();
+const projectController = new ProjectController();
 const router = express.Router();
 
 router.post(

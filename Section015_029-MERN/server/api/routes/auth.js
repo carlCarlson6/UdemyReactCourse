@@ -1,5 +1,5 @@
 const express = require('express');
-const requestValidations = require('../../common/requestValidations');
+const userValidations = require('../../common/validations/userValidations');
 const UserController = require('../controllers/UserController');
 
 const userController = new UserController();
@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post(
     '/',
-    requestValidations.loginValidation,
+    userValidations.login,
     (req, res) => userController.Login(req, res)
 );
 

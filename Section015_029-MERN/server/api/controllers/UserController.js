@@ -1,5 +1,5 @@
 const UserServices = require("../../services/UserServices");
-const userResponses = require('../../common/userResponses');
+const userResponses = require('../../common/res/userResponses');
 const {validationResult} = require('express-validator')
 const jwt = require('jsonwebtoken');
 

@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 const userCreated = (response, responseObject) => response.status(201).json({
     ...responseObject, 
     message: 'User created correctly'

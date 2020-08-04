@@ -1,7 +1,6 @@
 const ProjectServices = require("../../services/ProjectServices");
 const projectResponses = require('../../common/projectResponses');
 const {validationResult} = require('express-validator')
-const jwt = require('jsonwebtoken');
 
 class ProjectController {
     constructor() {
@@ -18,4 +17,4 @@ class ProjectController {
 
 }
 
-module.exports = UserController
+module.exports = ProjectController

@@ -18,7 +18,7 @@ class UserController {
                 return userResponses.userAlreadyExists(response);
 
             const user = await this.userService.AddUser(request.body);    
-            const token = this.SignJwtAndResponse(user, response);
+            const token = this.CreateAndSignJwt(user, response);
         } 
         
         catch (error) {
@@ -38,7 +38,8 @@ class UserController {
             if(!(await this.userService.CheckPassword(request.body)))
                 return userResponses.passwordDoesNotMatch(response);
         
-            response.status(200).json({message: 'login ok'})
+            let user = await this.userService.SearchUser({email: request.body.email});
+            this.CreateAndSignJwt(user, response);
         }
 
         catch (error) {
@@ -46,13 +47,13 @@ class UserController {
         }
     }
 
-    SignJwtAndResponse(user, response) {
+    CreateAndSignJwt(user, response) {
         let responseToken;
         const payload = {user: {id: user.id}};
         jwt.sign(payload,  process.env.SECRETWORD, {expiresIn:3600}, 
             (error, token) => {
                 if(error) throw error;
-                userResponses.userCreated(response, {token});
+                response.json({token});
             }
         );
         return responseToken;

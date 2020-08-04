@@ -19,7 +19,7 @@ const ListadoProyectos = () => {
                 <CSSTransition
                     key={project.id}
                     classNames="proyecto"
-                    key={project.id}
+                    timeout={200}
                 >
                     <Proyecto project={project}/>
                 </CSSTransition>    

@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { Fragment, useContext } from 'react';
 import Tarea from './Tarea';
 import projectContext from '../../context/projectos/ProjectContext';
 import taskContext from '../../context/tasks/TaskContext';

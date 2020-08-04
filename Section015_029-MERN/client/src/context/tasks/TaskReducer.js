@@ -8,10 +8,10 @@ const taskReducer = (state, action) => {
 
         case ADD_TASK:
             console.log('ADD_TASK', action.payload)
-            return {tasks: [...state.tasks, action.payload], ...state}
+            return {...state, tasks: [action.payload, ...state.tasks]}
 
         case DELETE_TASK:
-            return { ...state, tasks: state.tasks.filter(task => task.id !== action.payload)};
+            return {...state, tasks: state.tasks.filter(task => task.id !== action.payload)};
 
         case UPDATE_TASK:
             let newTask = action.payload;

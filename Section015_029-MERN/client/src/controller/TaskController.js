@@ -17,14 +17,14 @@ class TaskController {
     }
 
     CreateTask(data, project, event) {
-        data = this.__AddTaskId(data, event);
+        data = this.__AddTaskId(data);
         data = this.__AddProjectIdToTask(data, project.id)
         
         let formSubmitted = this.formService.Submit(data, event);        
         if(!formSubmitted) return;
 
         this.taskServices.AddTask(data);
-        this.stateUpdater.UpdateState(new Task('', ''));
+        this.stateUpdater.UpdateState(new Task(''));
 
         this.taskServices.GetProjectTasks(project.id);
     }

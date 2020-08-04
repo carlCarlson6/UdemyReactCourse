@@ -53,7 +53,7 @@ class UserController {
         jwt.sign(payload,  process.env.SECRETWORD, {expiresIn:3600}, 
             (error, token) => {
                 if(error) throw error;
-                response.json({token});
+                response.status(200).json({token});
             }
         );
         return responseToken;

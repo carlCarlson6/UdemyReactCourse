@@ -2,7 +2,6 @@ const User = require('../db/models/User');
 const PasswordUtils = require('../common/utils/PasswordUtils');
 
 class UserServices {
-
     constructor() {
         this.passwordUtils = new PasswordUtils()
     }

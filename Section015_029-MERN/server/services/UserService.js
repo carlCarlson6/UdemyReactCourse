@@ -7,6 +7,7 @@ class UserService {
         let user = new User(userRequest);
         user.password = await hasPassword(user.password);
         await user.save();
+        return user;
     }
 
     async CheckIfUserExists(searchObject) {

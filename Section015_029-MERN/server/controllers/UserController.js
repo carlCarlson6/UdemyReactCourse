@@ -18,8 +18,7 @@ class UserController {
                 return userResponses.userAlreadyExists(response);
 
             const user = await this.userService.AddUser(request.body);    
-            this.CreateAndSignJwt(user, response);
-            //userResponses.userCreated(response);
+            this.SignJwtAndResponse(user, response);
         } 
         
         catch (error) {
@@ -27,14 +26,14 @@ class UserController {
         }
     }
 
-    CreateAndSignJwt(user, response) {
+    SignJwtAndResponse(user, response) {
         const payload = {user: {id: user.id}};
-        jwt.sign(payload,  process.env.SECRETWORD, {
-            expiresIn: 3600 //1hre
-        }, (error, token) => {
-            if(error) throw error;
-            response.json({token});
-        });
+        jwt.sign(payload,  process.env.SECRETWORD, {expiresIn:3600}, 
+            (error, token) => {
+                if(error) throw error;
+                userResponses.userCreated(response, {token});
+            }
+        );
     }
 }
 

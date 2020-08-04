@@ -1,5 +1,5 @@
 const UserServices = require("../../services/UserServices");
-const userResponses = require('../../common/res/userResponses');
+const {errorResponse, userResponses} = require('../../common/res');
 const {validationResult} = require('express-validator')
 const jwt = require('jsonwebtoken');
 
@@ -14,15 +14,15 @@ class UserController {
             if(!errors.isEmpty()) 
                 throw errors.errors.map(error => error.msg).join(' | ');
 
-            if(await this.userService.CheckIfUserExists({email: request.body.email})) 
+            if(await this.userServices.CheckIfUserExists({email: request.body.email})) 
                 return userResponses.userAlreadyExists(response);
 
-            const user = await this.userService.AddUser(request.body);    
+            const user = await this.userServices.AddUser(request.body);    
             const token = this.CreateAndSignJwt(user, response);
         } 
         
         catch (error) {
-            userResponses.errorResponse(response, error);
+            errorResponse(response, 'Error while creating the user', error);
         }
     }
 
@@ -32,18 +32,18 @@ class UserController {
             if(!errors.isEmpty()) 
                 throw errors.errors.map(error => error.msg).join(' | ');
 
-            if(!(await this.userService.CheckIfUserExists({email: request.body.email}))) 
+            if(!(await this.userServices.CheckIfUserExists({email: request.body.email}))) 
                 return userResponses.userDoesNotExists(response);
             
-            if(!(await this.userService.CheckPassword(request.body)))
+            if(!(await this.userServices.CheckPassword(request.body)))
                 return userResponses.passwordDoesNotMatch(response);
         
-            let user = await this.userService.SearchUser({email: request.body.email});
+            let user = await this.userServices.SearchUser({email: request.body.email});
             this.CreateAndSignJwt(user, response);
         }
 
         catch (error) {
-            userResponses.errorResponse(response, error);
+            errorResponse(response, 'Error while login the user', error);
         }
     }
 

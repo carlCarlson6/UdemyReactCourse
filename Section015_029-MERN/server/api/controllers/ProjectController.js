@@ -1,5 +1,5 @@
 const ProjectServices = require("../../services/ProjectServices");
-const projectResponses = require('../../common/projectResponses');
+const {projectResponses, errorResponse} = require('../../common/res');
 const {validationResult} = require('express-validator')
 
 class ProjectController {
@@ -8,12 +8,18 @@ class ProjectController {
     }
 
     async Create(request, response) {
+        try {
 
+        }
+
+        catch(error) {
+            errorResponse(response, 'Error while creating a project', error);
+        }
     }
 
-    async Delete(request, response) {
+    async List(request, response) { }
 
-    }
+    async Delete(request, response) { }
 
 }
 

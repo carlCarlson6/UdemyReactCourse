@@ -1,11 +1,11 @@
-const UserService = require("../../services/UserService");
+const UserServices = require("../../services/UserServices");
 const userResponses = require('../../common/userResponses');
 const {validationResult} = require('express-validator')
 const jwt = require('jsonwebtoken');
 
 class UserController {
     constructor() {
-        this.userService = new UserService();
+        this.userServices = new UserServices();
     }
 
     async Create(request, response) {

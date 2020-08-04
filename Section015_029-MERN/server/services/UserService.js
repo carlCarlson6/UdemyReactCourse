@@ -1,11 +1,15 @@
-const User = require('../models/User');
-const hasPassword = require('../common/utils/hashPassword');
+const User = require('../db/models/User');
+const passwordUtils = require('../common/utils/passwordUtils');
 
 class UserService {
 
+    constructor() {
+        this.passwordUtils = passwordUtils
+    }
+
     async AddUser(userRequest) {
         let user = new User(userRequest);
-        user.password = await hasPassword(user.password);
+        user.password = await this.passwordUtils.hashPassword(user.password);
         await user.save();
         return user;
     }
@@ -18,8 +22,15 @@ class UserService {
         }
     }
 
+    async CheckPassword(user) {
+        const bdPassword = (await this.SearchUser({email: user.email})).password;
+        const match = await this.passwordUtils.matchPasswrod(user.password, bdPassword);
+        return match;
+    }
+
     async SearchUser(searchObject) {
-        return await User.findOne(searchObject); 
+        const user = await User.findOne(searchObject);
+        return user;
     }
 }
 

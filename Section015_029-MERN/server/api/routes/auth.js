@@ -1,14 +1,14 @@
 const express = require('express');
+const requestValidations = require('../../common/requestValidations');
 const UserController = require('../controllers/UserController');
-const requestValidations = require('../common/requestValidations');
 
 const userController = new UserController();
 const router = express.Router();
 
 router.post(
-    '/', 
-    requestValidations.createUserValidation,
-    (req, res) => userController.Create(req, res)
+    '/',
+    requestValidations.loginValidation,
+    (req, res) => userController.Login(req, res)
 );
 
 module.exports = router;

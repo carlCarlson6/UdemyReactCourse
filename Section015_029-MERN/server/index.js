@@ -1,6 +1,5 @@
 const express = require('express');
-const connectToDB = require('./config/Database');
-const userRoutes = require('./routes/users');
+const connectToDB = require('./db/config/Database');
 
 const app = express();
 
@@ -10,6 +9,7 @@ app.use(express.json({extended:true}));
 
 const PORT = process.env.PORT || 4000;
 
-app.use('/api/users', userRoutes);
+app.use('/api/users', require('./api/routes/users'));
+app.use('/api/auth', require('./api/routes/auth'));
 
 app.listen(PORT, () => console.log('the server is runing'))

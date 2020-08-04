@@ -6,4 +6,9 @@ createUserValidation = [
     check('password', 'Password must be up to 6 characters').isLength({min: 6})
 ]
 
-module.exports = {createUserValidation}
+loginValidation = [
+    check('email', 'Add a valid email').isEmail(),
+    check('password', 'Password must be up to 6 characters').isLength({min: 6})
+]
+
+module.exports = {createUserValidation, loginValidation}

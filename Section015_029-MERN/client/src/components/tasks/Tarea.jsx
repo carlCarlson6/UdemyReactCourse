@@ -35,12 +35,13 @@ const Tarea = ({task}) => {
                 <button
                     type="button"
                     className="btn btn-primario"
+                    onClick={() => taskController.SelectTask(task)}
                 >Editar</button>
 
                 <button
                     type="button"
                     className="btn btn-eliminar"
-                    onClick={() =>taskController.Delete(task.id, project.id)}
+                    onClick={() => taskController.Delete(task.id, project.id)}
                 >Eliminar</button>
             </div>
 

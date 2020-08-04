@@ -1,4 +1,4 @@
-import { GET_PROJECT_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK } from '../../types';
+import { GET_PROJECT_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK, SET_TASK } from '../../types';
 
 const taskReducer = (state, action) => {
     switch(action.type) {
@@ -16,6 +16,9 @@ const taskReducer = (state, action) => {
             let updatedTask = action.payload;
             let newTasks = state.tasks.map(task => task.id == updatedTask.id ? updatedTask : task)
             return {...state, tasks: newTasks}
+
+        case SET_TASK:
+            return {...state, task: action.payload}
 
         default: return state;
     }

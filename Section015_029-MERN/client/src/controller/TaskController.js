@@ -44,13 +44,19 @@ class TaskController {
     }
 
     MarkComplete(task, projectId) {
-        this.taskServices.CompleteTask(task);
+        task.state = true;
+        this.taskServices.UpdateTask(task);
         this.taskServices.GetProjectTasks(projectId);
     }
 
     MarkIncomplete(task, projectId) {
-        this.taskServices.IncompleteTask(task);
+        task.state = false;
+        this.taskServices.UpdateTask(task);
         this.taskServices.GetProjectTasks(projectId);
+    }
+
+    SelectTask(task) {
+        this.taskServices.SetTask(task);
     }
 }
 

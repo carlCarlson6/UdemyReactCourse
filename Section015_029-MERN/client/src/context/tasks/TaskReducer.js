@@ -7,18 +7,15 @@ const taskReducer = (state, action) => {
             return {...state, projectTasks: newProjectTasks}
 
         case ADD_TASK:
-            console.log('ADD_TASK', action.payload)
             return {...state, tasks: [action.payload, ...state.tasks]}
 
         case DELETE_TASK:
             return {...state, tasks: state.tasks.filter(task => task.id !== action.payload)};
 
         case UPDATE_TASK:
-            let newTask = action.payload;
-            const newTaskIndex = state.tasks.findIndex(task => task.id === newTask.id);
-            let newTasks = [...state.tasks];
-            newTasks[newTaskIndex] = newTask;
-            return {...state, tasks: newTasks};
+            let updatedTask = action.payload;
+            let newTasks = state.tasks.map(task => task.id == updatedTask.id ? updatedTask : task)
+            return {...state, tasks: newTasks}
 
         default: return state;
     }

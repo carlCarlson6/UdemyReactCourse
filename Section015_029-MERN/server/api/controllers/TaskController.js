@@ -31,6 +31,17 @@ class TaskController {
 
     async List(request, response) {
         try {
+            validateRequest(request);
+
+            const project = await this.projectServices.FindProjectById(request.body.projectId)   
+            if(!project)
+                return projectResponses.projectNotFound(response);
+
+            if(!this.projectServices.ValidateUserProjectOwnership(request.user.id, project.creator))
+                return projectResponses.projectNotOwned(response);
+
+            const tasks = await this.taskServices.FindTasksByProject(request.body.projectId);
+            taskResponses.tasksFound(response, tasks);
 
         } catch (error) {
             errorResponse(response, 'Error while creating the task', error);

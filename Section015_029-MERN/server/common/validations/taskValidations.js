@@ -5,7 +5,8 @@ const mandatoryProjectId = check('projectId', 'The project id is mandatory').not
 const mandatoryState = check('state', 'Task name is mandatory').not().isEmpty();
 
 createTask = [mandatoryName, mandatoryProjectId]
+listTasks = [mandatoryProjectId]
 updateTaskName = [mandatoryName]
 updateTaskState = [mandatoryState]
 
-module.exports = {createTask, updateTaskName, updateTaskState}
+module.exports = {createTask, listTasks, updateTaskName, updateTaskState}

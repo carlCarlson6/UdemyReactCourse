@@ -10,7 +10,7 @@ const TaskSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
-    project: {
+    projectId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Project'
     },

@@ -6,6 +6,11 @@ class TaskServices {
         await task.save();
         return task;
     }
+
+    async FindTasksByProject(projectId) {
+        const tasks = await Task.find({projectId}).sort({createdAt: -1});
+        return tasks;
+    }
 }
 
 module.exports = TaskServices;

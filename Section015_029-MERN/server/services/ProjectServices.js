@@ -9,7 +9,7 @@ class ProjectServices {
     }
 
     async GetUserProjects(userId) {
-        const projects = await Project.find({creator: userId}).sort({createdAt: -1})
+        const projects = await Project.find({creator: userId}).sort({createdAt: -1});
         return projects
     }
 

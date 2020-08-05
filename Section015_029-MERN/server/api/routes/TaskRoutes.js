@@ -20,7 +20,6 @@ router.get('/',
 
 router.put('/:id',
     (req, res, next) => authMiddleware.ValidateLogin(req, res, next),
-    //taskValidations.createTask,
     (req, res) => taskController.Update(req, res)
 );
 

@@ -3,7 +3,7 @@ const taskCreated = (response, responseObject) => response.status(201).json({
     message: 'Task created'
 });
 
-const tasksFound = (response, projects) => response.status(200).json(projects);
+const tasksFound = (response, tasks) => response.status(200).json(tasks);
 
 const noTaskFound = (response) => response.status(404).json({
     message: 'Task not found'

@@ -1,5 +1,7 @@
 const userResponses = require('./userResponses');
 const projectResponses = require('./projectResponses');
+const authResponses = require('./authResponses');
+
 
 const errorResponse = (response, message, error) => response.status(500).json({
     message, 
@@ -9,5 +11,6 @@ const errorResponse = (response, message, error) => response.status(500).json({
 module.exports = {
     userResponses,
     projectResponses,
+    authResponses,
     errorResponse
 }

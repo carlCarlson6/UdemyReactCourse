@@ -1,6 +1,6 @@
 const ProjectServices = require("../../services/ProjectServices");
 const {projectResponses, errorResponse} = require('../../common/res');
-const {validationResult} = require('express-validator')
+const {validationResult} = require('express-validator');
 
 class ProjectController {
     constructor() {
@@ -9,9 +9,10 @@ class ProjectController {
 
     async Create(request, response) {
         try {
-            console.log('desde controller', request);
-            const {_id, name, createdAt} = await this.projectServices.AddProject(request.body);
-            projectResponses.projectCreated(response, {project: {_id, name, createdAt}});
+            console.log(request.user);
+            const projectToSave = {...request.body, creator: request.user.id}
+            const projectSaved = await this.projectServices.AddProject(projectToSave);
+            projectResponses.projectCreated(response, {project: projectSaved});
         }
 
         catch(error) {

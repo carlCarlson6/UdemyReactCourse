@@ -1,7 +1,8 @@
 const {check} = require('express-validator');
 
-createProject = [
-    check('name', 'Project name is mandatory').not().isEmpty()
-]
+const mandatoryName = check('name', 'Project name is mandatory').not().isEmpty();
 
-module.exports = {createProject}
+createProject = [mandatoryName]
+updateProject = [mandatoryName]
+
+module.exports = {createProject, updateProject}

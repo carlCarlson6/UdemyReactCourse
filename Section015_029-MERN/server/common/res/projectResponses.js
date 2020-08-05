@@ -5,7 +5,7 @@ const projectCreated = (response, responseObject) => response.status(201).json({
 
 const projectsFound = (response, projects) => response.status(200).json(projects);
 
-const noProjectFound = (response) => response.status(404).json({
+const projectNotFound = (response) => response.status(404).json({
     message: 'Project not found'
 });
 
@@ -25,7 +25,7 @@ const projectDeleted = (response) => response.status(200).json({
 module.exports = {
     projectCreated,
     projectsFound,
-    noProjectFound,
+    projectNotFound,
     projectNotOwned,
     projectUpdated,
     projectDeleted

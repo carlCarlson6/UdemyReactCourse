@@ -46,7 +46,7 @@ class UserController {
     CreateSignJwtAndResponse(user, responseCode, response) {
         let responseToken;
         const payload = {user: {id: user.id}};
-        jwt.sign(payload,  process.env.SECRETWORD, {expiresIn:3600}, 
+        jwt.sign(payload,  process.env.SECRETWORD, {expiresIn:7200}, 
             (error, token) => {
                 if(error) throw error;
                 response.status(responseCode).json({token});

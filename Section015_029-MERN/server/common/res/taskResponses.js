@@ -5,7 +5,7 @@ const taskCreated = (response, responseObject) => response.status(201).json({
 
 const tasksFound = (response, tasks) => response.status(200).json(tasks);
 
-const noTaskFound = (response) => response.status(404).json({
+const taskNotFound = (response) => response.status(404).json({
     message: 'Task not found'
 });
 
@@ -25,7 +25,7 @@ const taskDeleted = (response) => response.status(200).json({
 module.exports = {
     taskCreated,
     tasksFound,
-    noTaskFound,
+    taskNotFound,
     taskNotOwned,
     taskUpdated,
     taskDeleted

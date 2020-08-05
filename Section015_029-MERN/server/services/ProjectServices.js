@@ -18,7 +18,7 @@ class ProjectServices {
         return project;
     }
 
-    async ValidateUserProjectOwnership(userId, projectCreator) {
+    ValidateUserProjectOwnership(userId, projectCreator) {
         const ownership = userId === projectCreator.toString()
         return ownership;
     }

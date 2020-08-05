@@ -5,6 +5,7 @@ const { validateRequest } = require("../../common/validations");
 class ProjectController {
     constructor() {
         this.projectServices = new ProjectServices();
+        this.serviceHelper = new ServiceHelper(this.projectServices, null);
     }
 
     async Create(request, response) {
@@ -39,11 +40,8 @@ class ProjectController {
         try {
             validateRequest(request);
             
-            let project = await this.projectServices.FindProjectById(request.params.id);
-            if(!project) return projectResponses.noProjectFound(response);
-
-            if(!this.projectServices.ValidateUserProjectOwnership(request.user.id, project.creator))
-                return projectResponses.projectNotOwned(response);
+            if(!(await this.serviceHelper.FindProjectAndOwnership(request, response)))
+                return;
 
             project = await this.projectServices.UpdateProject(request.params.id, {name: request.body.name})
             projectResponses.projectUpdated(response, {project})
@@ -58,11 +56,8 @@ class ProjectController {
         try {
             validateRequest(request);
             
-            let project = await this.projectServices.FindProjectById(request.params.id);
-            if(!project) return projectResponses.noProjectFound(response);
-
-            if(!this.projectServices.ValidateUserProjectOwnership(request.user.id, project.creator))
-                return projectResponses.projectNotOwned(response);
+            if(!(await this.serviceHelper.FindProjectAndOwnership(request, response)))
+                return;
 
             await this.projectServices.DeleteProject(request.params.id);
             projectResponses.projectDeleted(response);

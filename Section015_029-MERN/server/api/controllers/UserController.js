@@ -1,6 +1,6 @@
 const UserServices = require("../../services/UserServices");
 const {errorResponse, userResponses} = require('../../common/res');
-const {validationResult} = require('express-validator')
+const { validateRequest } = require("../../common/validations");
 const jwt = require('jsonwebtoken');
 
 class UserController {
@@ -10,9 +10,7 @@ class UserController {
 
     async Create(request, response) {
         try {
-            const errors = validationResult(request);
-            if(!errors.isEmpty()) 
-                throw errors.errors.map(error => error.msg).join(' | ');
+            validateRequest(request);
 
             if(await this.userServices.CheckIfUserExists({email: request.body.email})) 
                 return userResponses.userAlreadyExists(response);
@@ -28,9 +26,7 @@ class UserController {
 
     async Login(request, response) {
         try {
-            const errors = validationResult(request);
-            if(!errors.isEmpty()) 
-                throw errors.errors.map(error => error.msg).join(' | ');
+            validateRequest(request);
 
             if(!(await this.userServices.CheckIfUserExists({email: request.body.email}))) 
                 return userResponses.userDoesNotExists(response);

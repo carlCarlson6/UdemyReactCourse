@@ -9,8 +9,9 @@ app.use(express.json({extended:true}));
 
 const PORT = process.env.PORT || 4000;
 
-app.use('/api/users', require('./api/routes/usersRoutes'));
-app.use('/api/auth', require('./api/routes/authRoutes'));
-app.use('/api/projects', require('./api/routes/projectsRoutes'));
+app.use('/api/users', require('./api/routes/UsersRoutes'));
+app.use('/api/auth', require('./api/routes/AuthRoutes'));
+app.use('/api/projects', require('./api/routes/ProjectsRoutes'));
+app.use('/api/tasks', require('./api/routes/TaskRoutes'));
 
 app.listen(PORT, () => console.log('the server is runing'))

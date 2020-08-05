@@ -1,7 +1,7 @@
 const {validationResult} = require('express-validator');
 const projectValidations = require('./projectValidations');
 const userValidations = require('./userValidations');
-
+const taskValidations = require('./taskValidations')
 
 const validateRequest = (request) => {
     const errors = validationResult(request);
@@ -12,5 +12,6 @@ const validateRequest = (request) => {
 module.exports = {
     validateRequest,
     projectValidations,
-    userValidations
+    userValidations,
+    taskValidations
 }

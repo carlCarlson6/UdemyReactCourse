@@ -1,5 +1,6 @@
 const userResponses = require('./userResponses');
 const projectResponses = require('./projectResponses');
+const taskResponses = require('./taskResponses');
 const authResponses = require('./authResponses');
 
 
@@ -12,5 +13,6 @@ module.exports = {
     userResponses,
     projectResponses,
     authResponses,
+    taskResponses,
     errorResponse
 }

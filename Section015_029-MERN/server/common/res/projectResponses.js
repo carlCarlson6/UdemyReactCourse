@@ -1,6 +1,6 @@
 const projectCreated = (response, responseObject) => response.status(201).json({
     ...responseObject, 
-    message: 'Project correctly'
+    message: 'Project created'
 });
 
 const projectsFound = (response, projects) => response.status(200).json(projects);

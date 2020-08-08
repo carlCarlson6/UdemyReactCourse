@@ -7,7 +7,7 @@ const ListadoProyectos = () => {
 
     const {projects, projectServices} = useContext(projectContext);
     
-    useEffect(() => projectServices.GetProjects(), [])
+    useEffect(() => {projectServices.GetProjects()}, [])
 
     if(projects.length === 0) return <p>No hay proyectos</p>;
 
@@ -17,7 +17,7 @@ const ListadoProyectos = () => {
             <TransitionGroup>
             {projects.map(project => (
                 <CSSTransition
-                    key={project.id}
+                    key={project._id}
                     classNames="proyecto"
                     timeout={200}
                 >

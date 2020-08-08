@@ -12,8 +12,8 @@ const Proyecto = ({project}) => {
             <button
                 type="button"
                 className="btn btn-blank"
-                key={project.id}
-                onClick={() => new ProjectController({projectServices, taskServices}).SetProject(project.id)}
+                key={project._id}
+                onClick={() => new ProjectController({projectServices, taskServices}).SetProject(project._id)}
             >{project.name}</button>
         </li>
     );

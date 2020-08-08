@@ -1,7 +1,7 @@
 class Project {
-    constructor(name='', id='pending_add') {
+    constructor(name='', _id='pending_add') {
         this.name = name; 
-        this.id = id;
+        this._id = _id;
     }
 }
 

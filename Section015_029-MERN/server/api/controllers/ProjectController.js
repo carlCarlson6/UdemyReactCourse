@@ -27,7 +27,7 @@ class ProjectController {
     async List(request, response) { 
         try {
             const projects = await this.projectServices.GetUserProjects(request.user.id);
-            const projectsResponse = projects.map(project => {return {id: project._id, name: project.name}})
+            const projectsResponse = projects.map(project => {return {_id: project._id, name: project.name}})
 
             projectResponses.projectsFound(response, projectsResponse);
         }

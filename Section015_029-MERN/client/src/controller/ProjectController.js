@@ -19,19 +19,11 @@ class ProjectController {
         let formSubmitted = this.formService.Submit(data, event);
         if(!formSubmitted) return;
 
-        data = this.__AddProjectId(data, event);
-        
-        // agregar al state
-        this.projectServices.AddProject(data)
+        this.projectServices.AddProject(data.name)
 
-        //reiniciar el form
         this.stateUpdater.UpdateState(new Project())
     }
 
-    __AddProjectId(data) {
-        let id = generateId();
-        return {...data, id}
-    }
 
     ShowNewProjectForm() {
         this.projectServices.ShowNewProjectForm();

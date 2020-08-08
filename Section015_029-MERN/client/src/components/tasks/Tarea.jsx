@@ -19,14 +19,14 @@ const Tarea = ({task}) => {
                         (<button
                             type="button"
                             className="completo"
-                            onClick={() => taskController.MarkIncomplete(task, project.id)}
+                            onClick={() => taskController.MarkIncomplete(task, project._id)}
                         >Completo</button>)
                     :
                 
                         (<button
                             type="button"
                             className="incompleto"
-                            onClick={() => taskController.MarkComplete(task, project.id)}
+                            onClick={() => taskController.MarkComplete(task, project._id)}
                         >Incompleto</button>)
                 }
             </div>
@@ -41,7 +41,7 @@ const Tarea = ({task}) => {
                 <button
                     type="button"
                     className="btn btn-eliminar"
-                    onClick={() => taskController.Delete(task.id, project.id)}
+                    onClick={() => taskController.Delete(task._id, project._id)}
                 >Eliminar</button>
             </div>
 

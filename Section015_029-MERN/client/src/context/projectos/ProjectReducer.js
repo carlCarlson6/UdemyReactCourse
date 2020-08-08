@@ -13,10 +13,10 @@ const projectReducer = (state, action) => {
             return { ...state, projects: [action.payload, ...state.projects], newProjectForm: false }
 
         case SET_PROJECT:
-            return { ...state, project: state.projects.filter(project => project.id === action.payload)[0] }
+            return { ...state, project: state.projects.filter(project => project._id === action.payload)[0] }
 
         case DELETE_PROJECT:
-            return { ...state, projects: state.projects.filter(project => project.id !== action.payload), project: null }
+            return { ...state, projects: state.projects.filter(project => project._id !== action.payload), project: null }
 
         default: return state;
     }

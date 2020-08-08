@@ -16,14 +16,14 @@ class TaskController {
 
     CreateTask(data, project, event) {
         data = this.__AddTaskId(data);
-        data = this.__AddProjectIdToTask(data, project.id)
+        data = this.__AddProjectIdToTask(data, project._id)
         
         let formSubmitted = this.formService.Submit(data, event);        
         if(!formSubmitted) return;
 
         this.taskServices.AddTask(data);
         this.stateUpdater.UpdateState(new Task(''));
-        this.taskServices.GetProjectTasks(project.id);
+        this.taskServices.GetProjectTasks(project._id);
     }
 
     __AddTaskId(data) {
@@ -57,13 +57,12 @@ class TaskController {
     }
 
     EditTask(data, project, event) {
-        console.log('editing the task', data);
         let formSubmitted = this.formService.Submit(data, event);        
         if(!formSubmitted) return;
 
         this.taskServices.UpdateTask(data);
         this.stateUpdater.UpdateState(new Task(''));
-        this.taskServices.GetProjectTasks(project.id);
+        this.taskServices.GetProjectTasks(project._id);
         this.SelectTask(null);
     }
 }

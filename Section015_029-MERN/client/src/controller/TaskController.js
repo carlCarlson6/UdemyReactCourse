@@ -33,29 +33,29 @@ class TaskController {
         this.taskServices.GetProjectTasks(projectId);
     }
 
-    MarkComplete(task, projectId) {
+    async MarkComplete(task, projectId) {
         task.state = true;
-        this.taskServices.UpdateTask(task);
-        this.taskServices.GetProjectTasks(projectId);
+        await this.taskServices.UpdateTask(task);
+        await this.taskServices.GetProjectTasks(projectId);
     }
 
-    MarkIncomplete(task, projectId) {
+    async MarkIncomplete(task, projectId) {
         task.state = false;
-        this.taskServices.UpdateTask(task);
-        this.taskServices.GetProjectTasks(projectId);
+        await this.taskServices.UpdateTask(task);
+        await this.taskServices.GetProjectTasks(projectId);
     }
 
     SelectTask(task) {
         this.taskServices.SetTask(task);
     }
 
-    EditTask(data, project, event) {
+    async EditTask(data, project, event) {
         let formSubmitted = this.formService.Submit(data, event);        
         if(!formSubmitted) return;
 
-        this.taskServices.UpdateTask(data);
+        await this.taskServices.UpdateTask(data);
         this.stateUpdater.UpdateState(new Task(''));
-        this.taskServices.GetProjectTasks(project._id);
+        await this.taskServices.GetProjectTasks(project._id);
         this.SelectTask(null);
     }
 }

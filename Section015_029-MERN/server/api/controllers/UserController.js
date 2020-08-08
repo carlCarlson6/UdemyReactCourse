@@ -39,7 +39,7 @@ class UserController {
         }
 
         catch (error) {
-            errorResponse(response, 'Error while login the user', error);
+            errorResponse(response, `Hubo un error: ${error.toString()}`, error);
         }
     }
 
@@ -49,7 +49,7 @@ class UserController {
             return userResponses.userFound(response, user);
         }
         catch (error) {
-            errorResponse(response, 'Hubo un error', error);
+            errorResponse(response, `Hubo un error: ${error.toString()}`);
         }
     }
 

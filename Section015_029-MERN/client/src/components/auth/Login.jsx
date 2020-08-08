@@ -14,7 +14,7 @@ const Login = (props) => {
 
     useEffect(() => {
         if(authenticated) props.history.push('/proyectos');
-        if(message) loginController.ShowAlert(message)
+        if(message) loginController.ShowAlert(message);
     }, [message, authenticated, props.history]);
 
     return (

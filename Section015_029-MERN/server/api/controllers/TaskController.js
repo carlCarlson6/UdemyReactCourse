@@ -24,7 +24,7 @@ class TaskController {
         } 
 
         catch (error) {
-            errorResponse(response, 'Error while creating the task', error);
+            errorResponse(response, `Error while creating the task: ${error.toString()}`);
         }
     }
 
@@ -40,7 +40,7 @@ class TaskController {
         } 
         
         catch (error) {
-            errorResponse(response, 'Error while creating the task', error);
+            errorResponse(response, `Error while creating the task: ${error.toString()}`);
         }
     }
     
@@ -57,7 +57,7 @@ class TaskController {
         } 
         
         catch (error) {
-            errorResponse(response, 'Error while creating the task', error);
+            errorResponse(response, `Error while updating the task: ${error.toString()}`);
         }
     }
 
@@ -74,7 +74,7 @@ class TaskController {
         }
         
         catch (error) {
-            errorResponse(response, 'Error while creating the task', error);
+            errorResponse(response, `Error while deleting the task: ${error.toString()}`, error);
         }
     }
 }

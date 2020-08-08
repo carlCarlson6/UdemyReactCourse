@@ -20,7 +20,7 @@ class ProjectController {
         }
 
         catch(error) {
-            errorResponse(response, 'Error while creating a project', error);
+            errorResponse(response, `Error while creating a project: ${error.toString()}`, error);
         }
     }
 
@@ -33,7 +33,7 @@ class ProjectController {
         }
 
         catch(error) {
-            errorResponse(response, 'Error while listing a project', error);
+            errorResponse(response, `Error while listing a project: ${error.toString()}`, error);
         }
     }
 
@@ -49,7 +49,7 @@ class ProjectController {
         }
 
         catch(error) {
-            errorResponse(response, 'Error while updating a project', error);
+            errorResponse(response, `Error while updating a project: ${error.toString()}`, error);
         }
     }
 
@@ -65,7 +65,7 @@ class ProjectController {
         }
 
         catch(error) {
-            errorResponse(response, 'Error while updating a project', error);
+            errorResponse(response, `Error while updating a project: ${error.toString()}`, error);
         }
     }
 

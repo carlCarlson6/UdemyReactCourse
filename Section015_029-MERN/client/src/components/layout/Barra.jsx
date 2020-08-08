@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Barra = () => {
+const Barra = ({user}) => {
 
     return (
         <header className="app-header">

@@ -1,6 +1,6 @@
 import {OK_LOGIN, KO_LOGIN, GET_USER, OK_SIGNUP, KO_SIGNUP, CLOSE_SESSION} from '../types';
 import httpClient from '../config/HttpClient';
-import authToken from '../config/AuthToken'
+import setAuthTokenHeader from '../config/AuthTokenHeader'
 
 class AuthServices {
     constructor(dispatch) {
@@ -9,33 +9,31 @@ class AuthServices {
     }
 
     async CreateUser(data) {
-        try {
-            const response = await this.httpClient.post('api/users', data);
-            this.dispatch({type: OK_SIGNUP, payload: response.data});
-            this.GetAuthenticatedUser();
-        } catch(error) {
-            const alert = {message: error.response.data.message, category:'alerta-error'}
-            this.dispatch({type: KO_SIGNUP, payload: alert})
-        }
+        await this.GetTokenAndAuthenticatedUser(data, 'api/users', OK_SIGNUP, KO_SIGNUP);
     }
 
     async LoginUser(data) {
+        await this.GetTokenAndAuthenticatedUser(data, 'api/auth', OK_LOGIN, KO_LOGIN);
+    }
+
+    async GetTokenAndAuthenticatedUser(data, route, dispatchActionOK, dispatchActionKO) {
         try {
-            const response = await this.httpClient.post('api/auth', data);
-            console.log(response.data)
-            this.dispatch({type: OK_LOGIN, payload: response.data});
+            this.GetToken(route, data, dispatchActionOK)
             this.GetAuthenticatedUser();
         } catch(error) {
             const alert = {message: error.response.data.message, category:'alerta-error'}
-            this.dispatch({type: KO_LOGIN, payload: alert})
+            this.dispatch({type: dispatchActionKO, payload: alert})
         }
+    }
+
+    async GetToken(route, data, dispatchActionOK) {
+        const response = await this.httpClient.post(route, data);
+        this.dispatch({type: dispatchActionOK, payload: response.data});    
     }
 
     async GetAuthenticatedUser() {
         const token = localStorage.getItem('token');
-        if(token) {
-            authToken(token);
-        }
+        if(token) setAuthTokenHeader(token)
 
         try {
             const response = await this.httpClient.get('/api/auth');

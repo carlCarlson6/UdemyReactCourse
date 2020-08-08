@@ -7,6 +7,12 @@ import ProjectState from './context/projectos/ProjectState';
 import TaskState from './context/tasks/TaskState';
 import AlertState from './context/alerts/AlertState';
 import AuthState from './context/auth/AuthState';
+import setAuthTokenHeader from './config/AuthTokenHeader';
+
+const token = localStorage.getItem('token');
+if(token) {
+    setAuthTokenHeader(token);
+}
 
 const App = () => {
     return (

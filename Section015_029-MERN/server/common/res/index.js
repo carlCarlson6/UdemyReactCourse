@@ -5,8 +5,7 @@ const authResponses = require('./authResponses');
 
 
 const errorResponse = (response, message, error) => response.status(500).json({
-    message, 
-    error: error.toString()
+    message
 });
 
 module.exports = {

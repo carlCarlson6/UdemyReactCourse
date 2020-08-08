@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import NewUser from '../../common/models/NewUser';
 import {Link} from 'react-router-dom';
 import NewAccountController from '../../controller/NewAccountController';
+import AlertContext from '../../context/alerts/AlertContext';
 
 const NuevaCuenta = () => {
 
-    const [newUser, setNewUser] = useState(new NewUser());
-    const setError = useState(false)[1];
+    const [newUser, setNewUser] = useState(new NewUser('','','',''));
+    const {alert, alertServices} = useContext(AlertContext);
 
-    const newAccountController = new NewAccountController(setNewUser, setError);
+    const newAccountController = new NewAccountController({setNewUser, alertServices});
+
+    useEffect(() => newAccountController.HideError(2500), [newUser])
 
     return (
         <div className="form-usuario">
+            { alert ? (<div className={`alerta ${alert.category}`}>{alert.message}</div>) : null }
             <div className="contenedor-form sombra-dark">
                 <h1>Obtener una cuenta</h1>
 

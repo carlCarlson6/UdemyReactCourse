@@ -1,12 +1,10 @@
 import FormService from "../services/FormService";
-import HttpService from "../services/HttpService";
 import StateUpdater from "../common/utils/StateUpdater";
 
 class LoginController {
     constructor(setUserLogin, setError){
         this.setUserLogin = setUserLogin;
         this.formService = new FormService(setError);
-        this.http = new HttpService();
         this.stateUpdater = new StateUpdater(setUserLogin);
     }
 

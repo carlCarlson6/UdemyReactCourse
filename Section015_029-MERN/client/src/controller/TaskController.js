@@ -1,5 +1,4 @@
 import FormService from "../services/FormService";
-import HttpService from "../services/HttpService";
 import StateUpdater from "../common/utils/StateUpdater";
 import {v4 as generateId} from 'uuid';
 import Task from "../common/models/Task";
@@ -7,7 +6,6 @@ import Task from "../common/models/Task";
 class TaskController {
     constructor(constructorParams){
         this.formService = new FormService(constructorParams.setError);
-        this.http = new HttpService();
         this.stateUpdater = new StateUpdater(constructorParams.setTask);
         this.taskServices = constructorParams.taskServices;
     }

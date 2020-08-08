@@ -1,21 +1,25 @@
 import FormService from "../services/FormService";
-import HttpService from "../services/HttpService";
 import StateUpdater from "../common/utils/StateUpdater";
 
 class NewAccountController {
-    constructor(setNewUser, setError){
-        this.formService = new FormService(setError);
-        this.http = new HttpService();
-        this.stateUpdater = new StateUpdater(setNewUser);
+    constructor(constructorParams){
+        this.formService = new FormService(constructorParams.setError);
+        this.stateUpdater = new StateUpdater(constructorParams.setNewUser);
+        this.alertServices = constructorParams.alertServices;
     }
 
     UpdateNewAccountData(data, event) {
-        this.stateUpdater.UpdataObjectStateDataByEvent(data, this.setNewUser, event);
+        this.stateUpdater.UpdateObjectStateDataByEvent(data, event);
     }
 
     CreateAccount(data, event){
-        let submit = this.formService.Submit(data, event);
-        if(!submit) return;
+        event.preventDefault();
+        let formValidation = this.formService.Validate(data);
+
+        if(!formValidation) {
+            this.alertServices.Show('Todos los campos son obligatorios', 'alerta-error');
+            return;
+        };
 
         let passwordValidation = this.ValidatePasswords(data.password, data.confirmPassword)
         if(!passwordValidation) {
@@ -30,6 +34,10 @@ class NewAccountController {
         
         let validation = validationSamePassword * validationPassword6Chars;
         return validation
+    }
+
+    HideError(time) {
+        setTimeout(() => this.alertServices.Hide(), 5000)
     }
 
 }

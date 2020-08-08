@@ -1,5 +1,4 @@
 import FormService from "../services/FormService";
-import HttpService from "../services/HttpService";
 import StateUpdater from "../common/utils/StateUpdater";
 import {v4 as generateId} from 'uuid'
 import Project from "../common/models/Project";
@@ -7,7 +6,6 @@ import Project from "../common/models/Project";
 class ProjectController {
     constructor(constructorParams) {
         this.formService = new FormService(constructorParams.setError);
-        this.http = new HttpService();
         this.stateUpdater = new StateUpdater(constructorParams.setNewProject);
         this.projectServices = constructorParams.projectServices;
         this.taskServices = constructorParams.taskServices

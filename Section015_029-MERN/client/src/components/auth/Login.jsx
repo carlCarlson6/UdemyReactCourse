@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import LoginController from '../../controller/LoginController';
 import UserLogin from '../../common/models/UserLogin';
 import {Link} from 'react-router-dom';
+import AlertContext from '../../context/alerts/AlertContext';
+import AuthContext from '../../context/auth/AuthContext';
 
-const Login = () => {
+const Login = (props) => {
 
     const [userLogin, setUserLogin] = useState(new UserLogin('', ''));
-    const setError = useState(false)[1];
+    const {alert, alertServices} = useContext(AlertContext);
+    const {message, authenticated, authServices} = useContext(AuthContext);
+    const loginController = new LoginController({setUserLogin, alertServices, authServices});
 
-    const loginController = new LoginController(setUserLogin, setError);
+    useEffect(() => {
+        if(authenticated) props.history.push('/proyectos');
+        if(message) loginController.ShowAlert(message)
+    }, [message, authenticated, props.history]);
 
     return (
         <div className="form-usuario">
+            { alert ? (<div className={`alerta ${alert.category}`}>{alert.message}</div>) : null }
             <div className="contenedor-form sombra-dark">
                 <h1>Iniciar Sesión</h1>
 

@@ -2,6 +2,7 @@ import {OK_LOGIN, KO_LOGIN, GET_USER, OK_SIGNUP, KO_SIGNUP, CLOSE_SESSION} from 
 
 const authReducer = (state, action) => {
     switch(action.type) {
+        case OK_LOGIN:
         case OK_SIGNUP:
             localStorage.setItem('token', action.payload.token);    
             return { ...state, authenticated: true, message: null };
@@ -9,7 +10,7 @@ const authReducer = (state, action) => {
         case GET_USER:
             return { ...state, user: action.payload }        
         
-            case KO_LOGIN:
+        case KO_LOGIN:
         case KO_SIGNUP:
             localStorage.removeItem('token');
             return { ...state, token: null, message: action.payload}

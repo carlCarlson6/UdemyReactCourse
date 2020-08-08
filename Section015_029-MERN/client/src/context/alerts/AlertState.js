@@ -12,7 +12,7 @@ const AlertState = props => {
     // dispatch para ejecutar las acciones
     const [state, dispatch] = useReducer(alertReducer, initalState);
 
-    setTimeout(() => { dispatch({type: HIDE_ALERT}) }, 5000);
+    setTimeout(() => { dispatch({type: HIDE_ALERT}) }, 6000);
 
     return (
         <alertContext.Provider

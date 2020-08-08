@@ -19,22 +19,28 @@ class AuthServices {
         }
     }
 
-    LoginUser() {
-
+    async LoginUser(data) {
+        try {
+            const response = await this.httpClient.post('api/auth', data);
+            console.log(response.data)
+            this.dispatch({type: OK_LOGIN, payload: response.data});
+            this.GetAuthenticatedUser();
+        } catch(error) {
+            const alert = {message: error.response.data.message, category:'alerta-error'}
+            this.dispatch({type: KO_LOGIN, payload: alert})
+        }
     }
 
     async GetAuthenticatedUser() {
         const token = localStorage.getItem('token');
         if(token) {
             authToken(token);
-        };
+        }
 
         try {
             const response = await this.httpClient.get('/api/auth');
-            console.log(response.data);
             this.dispatch({type: GET_USER, payload: response.data});
         } catch (error) {
-            console.log(error.response);
             this.dispatch({type: KO_LOGIN, });
         }
     }

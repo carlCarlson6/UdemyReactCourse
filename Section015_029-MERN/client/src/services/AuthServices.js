@@ -11,6 +11,7 @@ class AuthServices {
         try {
             const response = await this.httpClient.post('api/users', data);
             this.dispatch({type: OK_SIGNUP, payload: response.data});
+            this.GetAuthenticatedUser();
         } catch(error) {
             const alert = {message: error.response.data.message, category:'alerta-error'}
             this.dispatch({type: KO_SIGNUP, payload: alert})
@@ -20,6 +21,22 @@ class AuthServices {
     LoginUser() {
 
     }
+
+    async GetAuthenticatedUser() {
+        const token = localStorage.getItem('token');
+        if(token){
+
+        }
+
+        try {
+            const response = await this.httpClient.get('/api/auth');
+            console.log(response.data);
+        } catch (error) {
+            this.dispatch({type: KO_LOGIN, });
+        }
+    }
+
+
 }
 
 export default AuthServices;

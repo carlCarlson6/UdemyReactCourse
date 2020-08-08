@@ -3,8 +3,9 @@ const ProjectController = require('../controllers/ProjectController');
 const {projectValidations} = require('../../common/validations');
 const AuthMiddleware = require("../middleware/AuthMiddleware");
 
-const authMiddleware = new AuthMiddleware()
+const authMiddleware = new AuthMiddleware();
 const projectController = new ProjectController();
+
 const router = express.Router();
 
 router.post('/',

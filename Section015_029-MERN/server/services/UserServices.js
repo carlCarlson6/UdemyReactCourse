@@ -31,6 +31,11 @@ class UserServices {
         const user = await User.findOne(searchObject);
         return user;
     }
+
+    async GetUserById(id) {
+        const user = await User.findById(id);
+        return user;
+    }
 }
 
 module.exports = UserServices;

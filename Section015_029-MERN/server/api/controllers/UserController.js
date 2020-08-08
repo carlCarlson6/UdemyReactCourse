@@ -43,6 +43,17 @@ class UserController {
         }
     }
 
+    async GetAuthenticatedUser(request, response) {
+        try {
+            const user = await this.userServices.GetUserById(request.user.id)
+            return userResponses.userFound(response, user);
+        }
+
+        catch (error) {
+            errorResponse(response, 'Hubo un error', error);
+        }
+    }
+
     CreateSignJwtAndResponse(user, responseCode, response) {
         const payload = {user: {id: user.id}};
         jwt.sign(payload,  process.env.SECRETWORD, {expiresIn:7200}, 

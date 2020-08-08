@@ -6,7 +6,9 @@ const authReducer = (state, action) => {
             localStorage.setItem('token', action.payload.token);    
             return { ...state, authenticated: true, message: null };
 
+        case KO_LOGIN:
         case KO_SIGNUP:
+            localStorage.removeItem('token');
             return { ...state, token: null, message: action.payload}
 
 

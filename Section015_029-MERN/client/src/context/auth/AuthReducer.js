@@ -1,6 +1,6 @@
 import {OK_LOGIN, KO_LOGIN, GET_USER, OK_SIGNUP, KO_SIGNUP, CLOSE_SESSION} from '../../types';
 
-const alertReducer = (state, action) => {
+const authReducer = (state, action) => {
     switch(action.type) {
         case OK_SIGNUP:
             localStorage.setItem('token', action.payload.token);    
@@ -14,4 +14,4 @@ const alertReducer = (state, action) => {
     }
 }
 
-export default alertReducer;
+export default authReducer;

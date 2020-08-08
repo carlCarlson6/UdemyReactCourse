@@ -10,11 +10,9 @@ class AuthServices {
     async CreateUser(data) {
         try {
             const response = await this.httpClient.post('api/users', data);
-            console.log(response);
-            this.dispatch({type: OK_SIGNUP, payload: response.token});
+            this.dispatch({type: OK_SIGNUP, payload: response.data});
         } catch(error) {
-            console.log(error);
-            this.dispatch({type: KO_SIGNUP, payload: error})
+            this.dispatch({type: KO_SIGNUP, payload: error.response.data})
         }
     }
 

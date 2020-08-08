@@ -1,13 +1,13 @@
 const userAlreadyExists = response => response.status(400).json({
-    message: 'The user already exists'
+    message: 'El usuario ya existe'
 });
 
 const userDoesNotExists = response => response.status(401).json({
-    message: 'The user does not exists'
+    message: 'EL usuario no existe'
 });
 
 const passwordDoesNotMatch = response => response.status(401).json({
-    message: 'The password does not match'
+    message: 'Las constraseñas no coinciden'
 })
 
 module.exports = {

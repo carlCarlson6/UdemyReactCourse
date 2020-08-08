@@ -1,5 +1,4 @@
 import { FORM_PROJECT, GET_PROJECTS, ADD_PROJECT, SET_PROJECT, DELETE_PROJECT } from "../types"
-import { mockProjects } from '../common/data/mocks';
 import httpClient from "../config/HttpClient";
 
 class ProjectServices {
@@ -38,7 +37,6 @@ class ProjectServices {
     async DeleteProject(id) {
         try{
             const response = await this.httpClient.delete(`/api/projects/${id}`);
-            console.log(response.data);
             this.dispatch({ type: DELETE_PROJECT, payload: id});
         } catch(error) {
             console.log(error.response);

@@ -1,11 +1,14 @@
 import { GET_PROJECT_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK, SET_TASK } from "../types";
+import httpClient from "../config/HttpClient";
 
 class TaskServices {
     constructor(dispatch) {
         this.dispatch = dispatch;
+        this.httpClient = httpClient;
     }
 
     GetProjectTasks(projectId) {
+        this.httpClient.get()
         this.dispatch({ type: GET_PROJECT_TASKS, payload: projectId })
     }
 

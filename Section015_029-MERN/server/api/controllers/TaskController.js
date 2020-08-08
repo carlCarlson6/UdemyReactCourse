@@ -16,7 +16,7 @@ class TaskController {
         try {
             validateRequest(request);
 
-            if(!(await this.serviceHelper.FindProjectAndOwnership(request, response)))
+            if(!(await this.serviceHelper.FindProjectAndOwnership(request.user, request.projectId, response)))
                 return;
 
             const task = await this.taskServices.CreateTask(request.body)
@@ -32,7 +32,7 @@ class TaskController {
         try {
             validateRequest(request);
 
-            if(!(await this.serviceHelper.FindProjectAndOwnership(request, response)))
+            if(!(await this.serviceHelper.FindProjectAndOwnership(request.user, request.projectId, response)))
                 return;
             
             const tasks = await this.taskServices.FindProjectTasks(request.body.projectId);
@@ -48,7 +48,7 @@ class TaskController {
         try {
             validateRequest(request);
 
-            if(!(await this.serviceHelper.FindProjectOwnershipAndFindTask(request, response)))
+            if(!(await this.serviceHelper.FindProjectOwnershipAndFindTask(request.user, request.projectId, request.params.id, response)))
                 return;
 
             const newTask = this.taskServices.ConstructNewTask(request.body);
@@ -65,7 +65,7 @@ class TaskController {
         try {
             validateRequest(request);
             
-            if(!(await this.serviceHelper.FindProjectOwnershipAndFindTask(request, response)))
+            if(!(await this.serviceHelper.FindProjectOwnershipAndFindTask(request.user, request.body.projectId, request.params.id, response)))
                 return;
 
             await this.taskServices.DeleteTask(request.params.id);

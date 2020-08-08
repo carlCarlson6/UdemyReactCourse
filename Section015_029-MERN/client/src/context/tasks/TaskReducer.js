@@ -3,8 +3,8 @@ import { GET_PROJECT_TASKS, ADD_TASK, DELETE_TASK, UPDATE_TASK, SET_TASK } from 
 const taskReducer = (state, action) => {
     switch(action.type) {
         case GET_PROJECT_TASKS:
-            let newProjectTasks = [...state.tasks.filter(task => task.projectId === action.payload)]
-            return {...state, projectTasks: newProjectTasks}
+            //let newProjectTasks = [...state.tasks.filter(task => task.projectId === action.payload)]
+            return {...state, projectTasks: action.payload}
 
         case ADD_TASK:
             return {...state, tasks: [action.payload, ...state.tasks]}

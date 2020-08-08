@@ -41,7 +41,7 @@ class ProjectController {
         try {
             validateRequest(request);
             
-            if(!(await this.serviceHelper.FindProjectAndOwnership(request, response)))
+            if(!(await this.serviceHelper.FindProjectAndOwnership(request.user, request.params.id, response)))
                 return;
 
             project = await this.projectServices.UpdateProject(request.params.id, {name: request.body.name})
@@ -57,9 +57,9 @@ class ProjectController {
         try {
             validateRequest(request);
             
-            if(!(await this.serviceHelper.FindProjectAndOwnership(request, response)))
+            if(!(await this.serviceHelper.FindProjectAndOwnership(request.user, request.params.id, response)))
                 return;
-
+                
             await this.projectServices.DeleteProject(request.params.id);
             projectResponses.projectDeleted(response);
         }

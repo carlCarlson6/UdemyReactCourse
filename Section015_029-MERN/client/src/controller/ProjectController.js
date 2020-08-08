@@ -37,6 +37,7 @@ class ProjectController {
     
     Delete(projectId, tasks) {
         this.projectServices.DeleteProject(projectId);
+        if(tasks.length === 0) return;
         tasks.forEach(task => this.taskServices.DeleteTask(task.id))
         this.taskServices.GetProjectTasks(projectId);
     }

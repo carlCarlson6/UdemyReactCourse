@@ -13,7 +13,7 @@ router.post('/',
     (req, res) => taskController.Create(req, res)
 );
 
-router.get('/',
+router.get('/:projectId',
     (req, res, next) => authMiddleware.ValidateLogin(req, res, next),
     taskValidations.listTasks,
     (req, res) => taskController.List(req, res)

@@ -32,7 +32,7 @@ class TaskController {
         try {
             validateRequest(request);
 
-            if(!(await this.serviceHelper.FindProjectAndOwnership(request.user, request.projectId, response)))
+            if(!(await this.serviceHelper.FindProjectAndOwnership(request.user, request.params.projectId, response)))
                 return;
             
             const tasks = await this.taskServices.FindProjectTasks(request.body.projectId);

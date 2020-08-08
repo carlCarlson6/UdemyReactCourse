@@ -45,6 +45,10 @@ class NewAccountController {
         return validationPassword6Chars * validationSamePassword;
     }
 
+    ShowAlert(message) {
+        this.alertServices.Show(message.message, message.category);
+    }
+
     HideError(time) {
         setTimeout(() => this.alertServices.Hide(), time)
     }

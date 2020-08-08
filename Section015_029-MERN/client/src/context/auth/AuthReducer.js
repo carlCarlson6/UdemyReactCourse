@@ -7,7 +7,7 @@ const authReducer = (state, action) => {
             return { ...state, authenticated: true, message: null };
 
         case KO_SIGNUP:
-            return { ...state, token: null, message: action.payload.message}
+            return { ...state, token: null, message: action.payload}
 
 
         default: return state;

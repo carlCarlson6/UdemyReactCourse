@@ -12,7 +12,8 @@ class AuthServices {
             const response = await this.httpClient.post('api/users', data);
             this.dispatch({type: OK_SIGNUP, payload: response.data});
         } catch(error) {
-            this.dispatch({type: KO_SIGNUP, payload: error.response.data})
+            const alert = {message: error.response.data.message, category:'alerta-error'}
+            this.dispatch({type: KO_SIGNUP, payload: alert})
         }
     }
 

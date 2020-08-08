@@ -1,15 +1,20 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import NewUser from '../../common/models/NewUser';
 import {Link} from 'react-router-dom';
 import NewAccountController from '../../controller/NewAccountController';
 import AlertContext from '../../context/alerts/AlertContext';
 import AuthContext from '../../context/auth/AuthContext';
 
-const NuevaCuenta = () => {
+const NuevaCuenta = (props) => {
     const [newUser, setNewUser] = useState(new NewUser('','','',''));
     const {alert, alertServices} = useContext(AlertContext);
-    const {authServices} = useContext(AuthContext);
+    const {message, authenticated, authServices} = useContext(AuthContext);
     const newAccountController = new NewAccountController({setNewUser, alertServices, authServices});
+
+    useEffect(() => {
+        if(authenticated) props.history.push('/proyectos');
+        if(message) newAccountController.ShowAlert(message)
+    }, [message, authenticated, props.history]);
 
     return (
         <div className="form-usuario">

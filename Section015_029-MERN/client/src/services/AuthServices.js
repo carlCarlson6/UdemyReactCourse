@@ -18,8 +18,8 @@ class AuthServices {
 
     async GetTokenAndAuthenticatedUser(data, route, dispatchActionOK, dispatchActionKO) {
         try {
-            this.GetToken(route, data, dispatchActionOK)
-            this.GetAuthenticatedUser();
+            await this.GetToken(route, data, dispatchActionOK)
+            await this.GetAuthenticatedUser();
         } catch(error) {
             const alert = {message: error.response.data.message, category:'alerta-error'}
             this.dispatch({type: dispatchActionKO, payload: alert})
@@ -33,7 +33,7 @@ class AuthServices {
 
     async GetAuthenticatedUser() {
         const token = localStorage.getItem('token');
-        if(token) setAuthTokenHeader(token)
+        if(token) {setAuthTokenHeader(token)}
 
         try {
             const response = await this.httpClient.get('/api/auth');

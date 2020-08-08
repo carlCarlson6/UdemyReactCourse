@@ -8,7 +8,8 @@ const AuthState = props => {
         token: localStorage.getItem('token'),
         authenticated: null,
         user: null,
-        message: null
+        message: null,
+        loading: true
     }
 
     // dispatch para ejecutar las acciones
@@ -21,7 +22,8 @@ const AuthState = props => {
                 authenticated: state.authenticated, 
                 user: state.user,
                 message: state.message,
-                authServices: new AuthServices(dispatch)
+                authServices: new AuthServices(dispatch),
+                loading: state.loading
             }}
         >
             {props.children}

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import NewUser from '../../common/models/NewUser';
 import {Link} from 'react-router-dom';
 import NewAccountController from '../../controller/NewAccountController';
@@ -10,8 +10,6 @@ const NuevaCuenta = () => {
     const {alert, alertServices} = useContext(AlertContext);
 
     const newAccountController = new NewAccountController({setNewUser, alertServices});
-
-    useEffect(() => newAccountController.HideError(2500), [newUser])
 
     return (
         <div className="form-usuario">

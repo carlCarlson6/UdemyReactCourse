@@ -1,5 +1,0 @@
-class UserServices {
-    constructor(constructorParams) {
-
-    }
-}

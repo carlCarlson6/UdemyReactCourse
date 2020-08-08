@@ -6,6 +6,7 @@ class NewAccountController {
         this.formService = new FormService(constructorParams.setError);
         this.stateUpdater = new StateUpdater(constructorParams.setNewUser);
         this.alertServices = constructorParams.alertServices;
+        this.userServices = constructorParams.userServices;
     }
 
     UpdateNewAccountData(data, event) {
@@ -22,22 +23,27 @@ class NewAccountController {
         };
 
         let passwordValidation = this.ValidatePasswords(data.password, data.confirmPassword)
-        if(!passwordValidation) {
-            this.formService.setError(!passwordValidation);
-            return;
-        }
+        if(!passwordValidation) return;
     }
 
     ValidatePasswords(password, confirmPassword) {
-        const validationSamePassword = (password === confirmPassword);
-        const validationPassword6Chars = (password.length === 6);
+        const validationPassword6Chars = (password.length >= 6);
+        if(!validationPassword6Chars){
+            this.alertServices.Show('La contraseña debe tener al menos 6 caracteres', 'alerta-error');
+            return validationPassword6Chars;
+        }
         
-        let validation = validationSamePassword * validationPassword6Chars;
-        return validation
+        const validationSamePassword = (password === confirmPassword);
+        if(!validationSamePassword){
+            this.alertServices.Show('Las contraseñas deben coincidir', 'alerta-error');
+            return validationSamePassword;
+        }
+        
+        return validationPassword6Chars * validationSamePassword;
     }
 
     HideError(time) {
-        setTimeout(() => this.alertServices.Hide(), 5000)
+        setTimeout(() => this.alertServices.Hide(), time)
     }
 
 }

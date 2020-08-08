@@ -6,20 +6,25 @@ import Proyectos from './components/projects/Proyectos';
 import ProjectState from './context/projectos/ProjectState';
 import TaskState from './context/tasks/TaskState';
 import AlertState from './context/alerts/AlertState';
-
+import AuthState from './context/auth/AuthState';
 
 const App = () => {
+
+    console.log(process.env.REACT_APP_BACKEND_URL);
+
     return (
         <ProjectState>
             <TaskState>
                 <AlertState>
-                    <BrowserRouter>
-                        <Switch>            
-                            <Route exact path="/" component={Login} />
-                            <Route exact path="/nueva-cuenta" component={NuevaCuenta} />
-                            <Route exact path="/proyectos" component={Proyectos} />
-                        </Switch>
-                    </BrowserRouter>
+                    <AuthState>
+                        <BrowserRouter>
+                            <Switch>            
+                                <Route exact path="/" component={Login} />
+                                <Route exact path="/nueva-cuenta" component={NuevaCuenta} />
+                                <Route exact path="/proyectos" component={Proyectos} />
+                            </Switch>
+                        </BrowserRouter>
+                    </AuthState>
                 </AlertState>
             </TaskState>
         </ProjectState>

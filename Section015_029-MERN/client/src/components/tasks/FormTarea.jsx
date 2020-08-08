@@ -19,10 +19,10 @@ const FormTarea = () => {
     return (
         <div className="formulario">
             <form
-                onSubmit={event => {
+                onSubmit={async event => {
                     selectedTask ? 
                         taskController.EditTask(newTask, project, event) : 
-                        taskController.CreateTask(newTask, project, event)
+                        await taskController.CreateTask(newTask, project, event)
                 }}
             >
                 <div className="contenedor-input">

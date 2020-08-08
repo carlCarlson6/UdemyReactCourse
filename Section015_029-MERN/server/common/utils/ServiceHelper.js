@@ -7,12 +7,11 @@ class ServiceHelper {
     }
 
     async FindProjectAndOwnership(user, projectId, response) {
-        const project = await this.projectServices.FindProjectById(projectId)   
+        const project = await this.projectServices.FindProjectById(projectId);
         if(!project) {
             projectResponses.projectNotFound(response);
             return false;
         }
-                
         if(!this.projectServices.ValidateUserProjectOwnership(user.id, project.creator)) {
             projectResponses.projectNotOwned(response);
             return false;

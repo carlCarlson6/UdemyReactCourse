@@ -9,7 +9,8 @@ class TaskServices {
 
     async GetProjectTasks(projectId) {
         try {
-            const response = await this.httpClient.get(`api/tasks/${projectId}`);
+            const response = await this.httpClient.get(`/api/tasks/${projectId}`);
+            console.log(response.data)
             this.dispatch({ type: GET_PROJECT_TASKS, payload: response.data })
         } catch(error) {
             console.log(error.response);
@@ -17,9 +18,15 @@ class TaskServices {
         
     }
 
-    AddTask(task) {
-        // TODO
-        this.dispatch({ type: ADD_TASK, payload: task })
+    async AddTask(requestBody) {
+        try {
+            const response = await this.httpClient.post('/api/tasks', requestBody);
+            this.dispatch({ type: ADD_TASK, payload: response.data.task })
+        } catch(error) {
+            console.log(error.response);
+        }
+        
+    
     }
 
     DeleteTask(id) {

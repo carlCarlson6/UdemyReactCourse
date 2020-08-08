@@ -1,6 +1,5 @@
 import FormService from "../services/FormService";
 import StateUpdater from "../common/utils/StateUpdater";
-import {v4 as generateId} from 'uuid';
 import Task from "../common/models/Task";
 
 class TaskController {
@@ -14,24 +13,18 @@ class TaskController {
         this.stateUpdater.UpdateObjectStateDataByEvent(data, event);
     }
 
-    CreateTask(data, project, event) {
-        data = this.__AddTaskId(data);
-        data = this.__AddProjectIdToTask(data, project._id)
+    async CreateTask(data, project, event) {
+        data = this.AddProjectIdToTask(data, project._id)
         
         let formSubmitted = this.formService.Submit(data, event);        
         if(!formSubmitted) return;
 
-        this.taskServices.AddTask(data);
+        await this.taskServices.AddTask({name: data.name, projectId: data.projectId});
         this.stateUpdater.UpdateState(new Task(''));
-        this.taskServices.GetProjectTasks(project._id);
-    }
-
-    __AddTaskId(data) {
-        let id = generateId();
-        return {...data, id}
+        await this.taskServices.GetProjectTasks(project._id);
     }
     
-    __AddProjectIdToTask(data, projectId) {
+    AddProjectIdToTask(data, projectId) {
         return {...data, projectId}
     }
 

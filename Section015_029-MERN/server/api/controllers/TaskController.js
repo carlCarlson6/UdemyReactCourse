@@ -15,8 +15,8 @@ class TaskController {
     async Create(request, response) {
         try {
             validateRequest(request);
-
-            if(!(await this.serviceHelper.FindProjectAndOwnership(request.user, request.projectId, response)))
+            const findProjectAndOwnershipResult = await this.serviceHelper.FindProjectAndOwnership(request.user, request.body.projectId, response)
+            if(!findProjectAndOwnershipResult)
                 return;
 
             const task = await this.taskServices.CreateTask(request.body)
@@ -48,7 +48,7 @@ class TaskController {
         try {
             validateRequest(request);
 
-            if(!(await this.serviceHelper.FindProjectOwnershipAndFindTask(request.user, request.projectId, request.params.id, response)))
+            if(!(await this.serviceHelper.FindProjectOwnershipAndFindTask(request.user, request.body.projectId, request.params.id, response)))
                 return;
 
             const newTask = this.taskServices.ConstructNewTask(request.body);

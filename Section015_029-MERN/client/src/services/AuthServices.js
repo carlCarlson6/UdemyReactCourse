@@ -1,12 +1,21 @@
-import {OK_LOGIN, KO_LOGIN, GET_USING, OK_SIGNUP, KO_SIGNUP, CLOSE_SESSION} from '../types';
+import {OK_LOGIN, KO_LOGIN, GET_USER, OK_SIGNUP, KO_SIGNUP, CLOSE_SESSION} from '../types';
+import axios from 'axios';
 
 class AuthServices {
     constructor(dispatch) {
         this.dispatch = dispatch;
+        this.httpClient = axios.create({baseURL: process.env.REACT_APP_BACKEND_URL});
     }
 
-    CreateUser() {
-
+    async CreateUser(data) {
+        try {
+            const response = await this.httpClient.post('api/users', data);
+            console.log(response);
+            this.dispatch({type: OK_SIGNUP, payload: response.token});
+        } catch(error) {
+            console.log(error);
+            this.dispatch({type: KO_SIGNUP, payload: error})
+        }
     }
 
     LoginUser() {

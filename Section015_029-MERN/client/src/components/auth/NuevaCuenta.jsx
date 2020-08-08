@@ -3,13 +3,13 @@ import NewUser from '../../common/models/NewUser';
 import {Link} from 'react-router-dom';
 import NewAccountController from '../../controller/NewAccountController';
 import AlertContext from '../../context/alerts/AlertContext';
+import AuthContext from '../../context/auth/AuthContext';
 
 const NuevaCuenta = () => {
-
     const [newUser, setNewUser] = useState(new NewUser('','','',''));
     const {alert, alertServices} = useContext(AlertContext);
-
-    const newAccountController = new NewAccountController({setNewUser, alertServices});
+    const {authServices} = useContext(AuthContext);
+    const newAccountController = new NewAccountController({setNewUser, alertServices, authServices});
 
     return (
         <div className="form-usuario">

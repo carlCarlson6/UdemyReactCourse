@@ -7,6 +7,7 @@ class NewAccountController {
         this.stateUpdater = new StateUpdater(constructorParams.setNewUser);
         this.alertServices = constructorParams.alertServices;
         this.userServices = constructorParams.userServices;
+        this.authServices = constructorParams.authServices;
     }
 
     UpdateNewAccountData(data, event) {
@@ -24,6 +25,8 @@ class NewAccountController {
 
         let passwordValidation = this.ValidatePasswords(data.password, data.confirmPassword)
         if(!passwordValidation) return;
+
+        this.authServices.CreateUser({name: data.name, email: data.email, password: data.password});
     }
 
     ValidatePasswords(password, confirmPassword) {

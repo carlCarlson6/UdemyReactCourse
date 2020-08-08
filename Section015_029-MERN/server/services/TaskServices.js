@@ -1,4 +1,4 @@
-const Task = require("../db/models/Task");
+const Task = require("../models/Task");
 const { userDoesNotExists } = require("../common/res/userResponses");
 
 class TaskServices {

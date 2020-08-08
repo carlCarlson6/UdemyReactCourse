@@ -11,5 +11,5 @@ module.exports = {
         message: 'Las constraseñas no coinciden'
     }),
 
-    userFound: (response, user) => response.status(200).json({user})
+    userFound: (response, user) => response.status(200).json(user)
 }

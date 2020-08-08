@@ -48,7 +48,6 @@ class UserController {
             const user = await this.userServices.GetUserById(request.user.id)
             return userResponses.userFound(response, user);
         }
-
         catch (error) {
             errorResponse(response, 'Hubo un error', error);
         }

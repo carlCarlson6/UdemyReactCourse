@@ -1,10 +1,11 @@
 import {OK_LOGIN, KO_LOGIN, GET_USER, OK_SIGNUP, KO_SIGNUP, CLOSE_SESSION} from '../types';
-import axios from 'axios';
+import httpClient from '../config/HttpClient';
+import authToken from '../config/AuthToken'
 
 class AuthServices {
     constructor(dispatch) {
         this.dispatch = dispatch;
-        this.httpClient = axios.create({baseURL: process.env.REACT_APP_BACKEND_URL});
+        this.httpClient = httpClient;
     }
 
     async CreateUser(data) {
@@ -24,14 +25,16 @@ class AuthServices {
 
     async GetAuthenticatedUser() {
         const token = localStorage.getItem('token');
-        if(token){
-
-        }
+        if(token) {
+            authToken(token);
+        };
 
         try {
             const response = await this.httpClient.get('/api/auth');
             console.log(response.data);
+            this.dispatch({type: GET_USER, payload: response.data});
         } catch (error) {
+            console.log(error.response);
             this.dispatch({type: KO_LOGIN, });
         }
     }

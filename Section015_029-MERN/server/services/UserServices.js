@@ -1,4 +1,4 @@
-const User = require('../db/models/User');
+const User = require('../models/User');
 const PasswordUtils = require('../common/utils/PasswordUtils');
 
 class UserServices {
@@ -33,7 +33,7 @@ class UserServices {
     }
 
     async GetUserById(id) {
-        const user = await User.findById(id);
+        const user = await User.findById(id).select('-password');
         return user;
     }
 }

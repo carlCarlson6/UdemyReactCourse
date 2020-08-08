@@ -43,6 +43,9 @@ class AuthServices {
         }
     }
 
+    LogOut() {
+        this.dispatch({type: CLOSE_SESSION})
+    }
 
 }
 

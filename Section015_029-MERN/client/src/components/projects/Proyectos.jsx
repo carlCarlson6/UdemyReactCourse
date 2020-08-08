@@ -8,7 +8,6 @@ import AuthContext from '../../context/auth/AuthContext';
 const Proyectos = () => {
     
     const {authServices} = useContext(AuthContext);
-    //authServices.GetAuthenticatedUser()
 
     useEffect(() => {
         authServices.GetAuthenticatedUser();

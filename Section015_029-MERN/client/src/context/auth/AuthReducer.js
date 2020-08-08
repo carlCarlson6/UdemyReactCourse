@@ -8,12 +8,13 @@ const authReducer = (state, action) => {
             return { ...state, authenticated: true, message: null };
         
         case GET_USER:
-            return { ...state, user: action.payload }        
+            return { ...state, authenticated: true, user: action.payload }        
         
+        case CLOSE_SESSION:
         case KO_LOGIN:
         case KO_SIGNUP:
             localStorage.removeItem('token');
-            return { ...state, token: null, message: action.payload}
+            return { ...state, token: null, message: action.payload, atheauthenticated: false, user: null }
 
 
         default: return state;

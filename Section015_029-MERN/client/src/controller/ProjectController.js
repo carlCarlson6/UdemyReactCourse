@@ -29,9 +29,9 @@ class ProjectController {
         this.projectServices.ShowNewProjectForm();
     }
 
-    SetProject(projectId) {
+    async SetProject(projectId) {
         this.projectServices.SetProject(projectId);
-        this.taskServices.GetProjectTasks(projectId);
+        await this.taskServices.GetProjectTasks(projectId);
         this.taskServices.SetTask(null);
     } 
     

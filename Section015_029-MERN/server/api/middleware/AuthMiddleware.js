@@ -1,12 +1,17 @@
 const jwt = require('jsonwebtoken');
-const {authResponses} = require('../../common/res')
+const {errorResponse, authResponses} = require('../../common/res')
 
 class AuthMiddleWare {
     ValidateLogin(request, response, next) {
-        const token = this.ReadToken(request, response);
-        const user = this.ValidateToken(token, response);
-        request.user = user;
-        next();
+        try {
+            const token = this.ReadToken(request, response);
+            const user = this.ValidateToken(token, response);
+            request.user = user;
+            next();
+        }
+        catch (error) {
+            errorResponse(response, error.toString(), error.toString())
+        }
     }
 
     ReadToken(request, response){

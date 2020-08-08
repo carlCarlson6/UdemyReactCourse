@@ -31,11 +31,10 @@ class TaskController {
     async List(request, response) {
         try {
             validateRequest(request);
-
             if(!(await this.serviceHelper.FindProjectAndOwnership(request.user, request.params.projectId, response)))
-                return;
+                return ;
             
-            const tasks = await this.taskServices.FindProjectTasks(request.body.projectId);
+            const tasks = await this.taskServices.FindProjectTasks(request.params.projectId);
             taskResponses.tasksFound(response, tasks);
         } 
         

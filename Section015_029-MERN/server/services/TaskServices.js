@@ -4,7 +4,6 @@ const { userDoesNotExists } = require("../common/res/userResponses");
 class TaskServices {
     async CreateTask(newTask) {
         const task = new Task(newTask)
-        console.log(task);
         await task.save();
         return task;
     }

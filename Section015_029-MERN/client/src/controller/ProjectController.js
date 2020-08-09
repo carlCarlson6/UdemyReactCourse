@@ -35,11 +35,9 @@ class ProjectController {
         this.taskServices.SetTask(null);
     } 
     
-    Delete(projectId, tasks) {
-        this.projectServices.DeleteProject(projectId);
-        if(tasks.length === 0) return;
-        tasks.forEach(task => this.taskServices.DeleteTask(task.id))
-        this.taskServices.GetProjectTasks(projectId);
+    async Delete(projectId, tasks) {
+        if(tasks.length !== 0) tasks.forEach(async task => await this.taskServices.DeleteTask(task._id, projectId));
+        await this.projectServices.DeleteProject(projectId);
     }
 }
 

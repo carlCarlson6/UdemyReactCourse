@@ -36,7 +36,7 @@ class ProjectServices {
 
     async DeleteProject(id) {
         try{
-            const response = await this.httpClient.delete(`/api/projects/${id}`);
+            await this.httpClient.delete(`/api/projects/${id}`);
             this.dispatch({ type: DELETE_PROJECT, payload: id});
         } catch(error) {
             console.log(error.response);

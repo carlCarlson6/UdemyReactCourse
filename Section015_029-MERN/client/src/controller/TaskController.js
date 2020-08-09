@@ -28,9 +28,9 @@ class TaskController {
         return {...data, projectId}
     }
 
-    Delete(id, projectId) {
-        this.taskServices.DeleteTask(id);
-        this.taskServices.GetProjectTasks(projectId);
+    async Delete(id, projectId) {
+        await this.taskServices.DeleteTask(id, projectId);
+        await this.taskServices.GetProjectTasks(projectId);
     }
 
     async MarkComplete(task, projectId) {

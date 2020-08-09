@@ -10,8 +10,7 @@ class TaskServices {
     async GetProjectTasks(projectId) {
         try {
             const response = await this.httpClient.get(`/api/tasks/${projectId}`);
-            console.log(response.data)
-            this.dispatch({ type: GET_PROJECT_TASKS, payload: response.data })
+            this.dispatch({ type: GET_PROJECT_TASKS, payload: response.data });
         } catch(error) {
             console.log(error.response);
         }
@@ -21,27 +20,33 @@ class TaskServices {
     async AddTask(requestBody) {
         try {
             const response = await this.httpClient.post('/api/tasks', requestBody);
-            this.dispatch({ type: ADD_TASK, payload: response.data.task })
+            this.dispatch({ type: ADD_TASK, payload: response.data.task });
+        } catch(error) {
+            console.log(error.response);
+        }
+    }
+
+    async DeleteTask(taskId, projectId) {
+        try{
+            const response = await this.httpClient.delete(`/api/tasks/${taskId}`, {data: {projectId}});
+            console.log(response.data);
+            this.dispatch({ type: DELETE_TASK, payload: taskId });
         } catch(error) {
             console.log(error.response);
         }
         
-    
     }
 
-    DeleteTask(id) {
-        // TODO
-        this.dispatch({ type: DELETE_TASK, payload: id })
-    }
-
-    UpdateTask(task) {
-        // TODO
-        this.dispatch({type: UPDATE_TASK, payload: task})
+    async UpdateTask(task) {
+        try {
+            this.dispatch({type: UPDATE_TASK, payload: task});
+        } catch(error) {
+            console.log(error.response);
+        }
     }
 
     SetTask(task) {
-        // TODO
-        this.dispatch({type: SET_TASK, payload: task})
+        this.dispatch({type: SET_TASK, payload: task});
     }
 
 }

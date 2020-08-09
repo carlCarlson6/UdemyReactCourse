@@ -15,13 +15,12 @@ class ProjectController {
         this.stateUpdater.UpdateObjectStateDataByEvent(data, event);
     }
 
-    Create(data, event) {
+    async Create(data, event) {
         let formSubmitted = this.formService.Submit(data, event);
         if(!formSubmitted) return;
 
-        this.projectServices.AddProject(data.name)
-
-        this.stateUpdater.UpdateState(new Project())
+        await this.projectServices.AddProject(data.name);
+        this.stateUpdater.UpdateState(new Project());
     }
 
 

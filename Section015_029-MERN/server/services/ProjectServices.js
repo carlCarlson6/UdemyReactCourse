@@ -1,11 +1,8 @@
 const Project = require("../models/Project");
-const {projectResponses} = require ('../common/res');
-const { response } = require("express");
-const { find } = require("../models/Project");
-const { set } = require("mongoose");
 
 class ProjectServices {
     async AddProject(requestBody) {
+        requestBody.createdAt = Date.now();
         const project = new Project(requestBody);
         await project.save();
         return project;

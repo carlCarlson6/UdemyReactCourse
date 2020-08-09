@@ -7,6 +7,7 @@ class UserServices {
     }
 
     async AddUser(userRequest) {
+        userRequest.createdAt = Date.now();
         let user = new User(userRequest);
         user.password = await this.passwordUtils.HashPassword(user.password);
         await user.save();

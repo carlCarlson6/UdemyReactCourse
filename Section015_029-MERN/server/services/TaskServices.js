@@ -3,6 +3,7 @@ const { userDoesNotExists } = require("../common/res/userResponses");
 
 class TaskServices {
     async CreateTask(newTask) {
+        newTask.createdAt = Date.now();
         const task = new Task(newTask)
         await task.save();
         return task;

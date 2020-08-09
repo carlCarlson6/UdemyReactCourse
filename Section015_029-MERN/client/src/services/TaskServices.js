@@ -37,10 +37,8 @@ class TaskServices {
     }
 
     async UpdateTask(taskId, request) {
-        console.log(request);
         try {
             const response = await this.httpClient.put(`/api/tasks/${taskId}`, request);
-            console.log(response.data.task);
             this.dispatch({type: UPDATE_TASK, payload: response.data.task});
         } catch(error) {
             console.log(error.response);

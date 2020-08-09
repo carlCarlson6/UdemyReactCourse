@@ -49,12 +49,11 @@ class TaskController {
         this.taskServices.SetTask(task);
     }
 
-    async EditTask(data, project, event) {
-        // TODO
-        let formSubmitted = this.formService.Submit(data, event);        
+    async EditTask(task, project, event) {
+        let formSubmitted = this.formService.Submit(task, event);        
         if(!formSubmitted) return;
 
-        await this.taskServices.UpdateTask(data);
+        await this.taskServices.UpdateTask(task._id, {name: task.name, projectId: project._id});
         this.stateUpdater.UpdateState(new Task(''));
         await this.taskServices.GetProjectTasks(project._id);
         this.SelectTask(null);

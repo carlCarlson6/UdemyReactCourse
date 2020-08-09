@@ -29,7 +29,6 @@ class TaskServices {
     async DeleteTask(taskId, projectId) {
         try{
             const response = await this.httpClient.delete(`/api/tasks/${taskId}`, {data: {projectId}});
-            console.log(response.data);
             this.dispatch({ type: DELETE_TASK, payload: taskId });
         } catch(error) {
             console.log(error.response);
@@ -37,9 +36,12 @@ class TaskServices {
         
     }
 
-    async UpdateTask(task) {
+    async UpdateTask(taskId, request) {
+        console.log(request);
         try {
-            this.dispatch({type: UPDATE_TASK, payload: task});
+            const response = await this.httpClient.put(`/api/tasks/${taskId}`, request);
+            console.log(response.data.task);
+            this.dispatch({type: UPDATE_TASK, payload: response.data.task});
         } catch(error) {
             console.log(error.response);
         }

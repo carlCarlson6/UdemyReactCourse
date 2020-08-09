@@ -34,14 +34,14 @@ class TaskController {
     }
 
     async MarkComplete(task, projectId) {
-        task.state = true;
-        await this.taskServices.UpdateTask(task);
+        const request = {state: "true", projectId}
+        await this.taskServices.UpdateTask(task._id, request);
         await this.taskServices.GetProjectTasks(projectId);
     }
 
     async MarkIncomplete(task, projectId) {
-        task.state = false;
-        await this.taskServices.UpdateTask(task);
+        const request = {state: "false", projectId}
+        await this.taskServices.UpdateTask(task._id, request);
         await this.taskServices.GetProjectTasks(projectId);
     }
 
@@ -50,6 +50,7 @@ class TaskController {
     }
 
     async EditTask(data, project, event) {
+        // TODO
         let formSubmitted = this.formService.Submit(data, event);        
         if(!formSubmitted) return;
 

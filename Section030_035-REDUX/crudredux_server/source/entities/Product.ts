@@ -10,7 +10,7 @@ class Product extends BaseEntity {
 
     @Field()
     @Column()
-    firstName: string;
+    name: string;
 
     @Field()
     @Column()

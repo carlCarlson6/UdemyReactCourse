@@ -30,7 +30,7 @@ const productsReducer = (state=initialState, action) => {
         case actionTypes.PRODUCT_EDIT_GET:
             return {}
         
-        case actionTypes.PRODUCT_EDIT_GET:
+        case actionTypes.PRODUCT_EDIT_SUCCESS:
             return {}
             
 

@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import ProductModel from '../common/models/ProductModel';
 import handleOnChange from '../common/utils/HandleOnChange';
+import { useSelector } from 'react-redux';
 
 const EditProduct = () => {
     const [newProduct, setNewProduct] = useState(new ProductModel('', 0))
+    const {productEdit, loading, error} = useSelector((state) => state.productsState);
 
+    if(!productEdit) {return null };
     return (
         <div className="row justify-content-center">
             <div className="col-md-8">
@@ -22,6 +25,7 @@ const EditProduct = () => {
                                     className="form-control"
                                     placeholder="Nombre Producto"
                                     name="name"
+                                    value={productEdit.name}
                                     onChange={(event) => {handleOnChange(event, newProduct, setNewProduct)}}
                                 />
                             </div>
@@ -32,7 +36,8 @@ const EditProduct = () => {
                                     type="number"
                                     className="form-control"
                                     placeholder="Precio Producto"
-                                    value="price"
+                                    name="price"
+                                    value={productEdit.price}
                                     onChange={(event) => {handleOnChange(event, newProduct, setNewProduct)}}
                                 />
                             </div>

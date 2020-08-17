@@ -35,17 +35,32 @@ class ProductResolver {
     }
 
     @Mutation(() => Product)
-    async editProduct(@Arg('id') id: number, @Arg('name') name: string, @Arg('value') value: number ): Promise<void> {
-        const product = await Product.findOne(id);
-        
+    async editProduct(@Arg('id') id: number, @Arg('name') name: string, @Arg('value') value: number ): Promise<Product> {
+        let product = await Product.findOne(id);
         if(!product) { throw new Error('product not found') }
+
+        await Product.update({id}, {name, value});
+        
+        product = await Product.findOne(id);
+        if(!product) { throw new Error('product not found') }
+        
+        return product;
     }
 
     @Mutation(() => Boolean)
-    async deleteProduct(@Arg('id') id: number, @Arg('name') name: string, @Arg('value') value: number ): Promise<void> {
-        const product = await Product.findOne(id);
-        
+    async deleteProduct(@Arg('id') id: number): Promise<Boolean> {
+        let product = await Product.findOne(id);
         if(!product) { throw new Error('product not found') }
+        
+        await Product.delete({id});
+
+        product = await Product.findOne(id);
+        if(!product) {
+            return true;
+        } else {
+            throw new Error('error deleting the product');
+        }
+        
     }
 }
 

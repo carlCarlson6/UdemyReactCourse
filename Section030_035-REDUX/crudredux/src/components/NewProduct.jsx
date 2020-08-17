@@ -1,6 +1,10 @@
 import React from 'react';
+import NewProductController from '../controllers/NewProductController';
+import { useDispatch } from 'react-redux';
 
 const NewProduct = () => {
+    const controller = new NewProductController(useDispatch());
+
     return (
         <div className="row justify-content-center">
             <div className="col-md-8">
@@ -10,7 +14,9 @@ const NewProduct = () => {
                             Agregar Nuevo Producto
                         </h2>
 
-                        <form>
+                        <form
+                            onSubmit={(event) => controller.SubmitNewProduct(event)}
+                        >
                             <div className="form-group">
                                 <label>Nombre Producto</label>
                                 <input 

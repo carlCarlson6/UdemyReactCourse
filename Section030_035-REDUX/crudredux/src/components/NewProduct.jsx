@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import NewProductController from '../controllers/NewProductController';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Product from '../common/models/Product';
 import handleOnChange from '../common/utils/HandleOnChange';
 
 const NewProduct = () => {
     const [newProduct, setNewProduct] = useState(new Product('', 0))
     const controller = new NewProductController(useDispatch());
+    const {loading, error} = useSelector((state) => state.productsState);
 
     return (
         <div className="row justify-content-center">
@@ -48,8 +49,10 @@ const NewProduct = () => {
                                 type="submit"
                                 className="btn btn-primary font-weight-bold text-uppercase d-block w-100"
                             >Agregar</button>
-
                         </form>
+
+                        {loading? <p>Cargando...</p> : null}
+                        {error? <p className="alert alert-danger p2 mt-4 text-center">Hubo un error</p> : null}
 
                     </div>
                 </div>

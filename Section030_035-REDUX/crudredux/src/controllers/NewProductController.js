@@ -1,4 +1,5 @@
 import { createNewProductAction } from "../actions/ProductActions";
+import { validateFormNoEmptyFields } from "../common/utils/ValidateForm";
 
 class NewProductController {
     constructor(dispatch) {
@@ -6,14 +7,17 @@ class NewProductController {
     }
     
 
-    SubmitNewProduct(event) {
+    SubmitNewProduct(event, newProduct) {
         event.preventDefault();
 
-        this.AddProduct();
+        const validation = validateFormNoEmptyFields(newProduct)
+        if(!validation) { return };
+
+        this.AddProduct(newProduct);
     }
 
-    AddProduct() {
-        this.dispatch(createNewProductAction)
+    AddProduct(product) {
+        this.dispatch(createNewProductAction(product))
     }
 
 }

@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import NewProductController from '../controllers/NewProductController';
 import { useDispatch } from 'react-redux';
+import Product from '../common/models/Product';
+import handleOnChange from '../common/utils/HandleOnChange';
 
 const NewProduct = () => {
+    const [newProduct, setNewProduct] = useState(new Product('', 0))
     const controller = new NewProductController(useDispatch());
 
     return (
@@ -15,7 +18,7 @@ const NewProduct = () => {
                         </h2>
 
                         <form
-                            onSubmit={(event) => controller.SubmitNewProduct(event)}
+                            onSubmit={(event) => controller.SubmitNewProduct(event, newProduct)}
                         >
                             <div className="form-group">
                                 <label>Nombre Producto</label>
@@ -24,6 +27,8 @@ const NewProduct = () => {
                                     className="form-control"
                                     placeholder="Nombre Producto"
                                     name="name"
+                                    value={newProduct.name}
+                                    onChange={(event) => {handleOnChange(event, newProduct, setNewProduct)}}
                                 />
                             </div>
 
@@ -33,7 +38,9 @@ const NewProduct = () => {
                                     type="number"
                                     className="form-control"
                                     placeholder="Precio Producto"
-                                    value="price"
+                                    name="price"
+                                    value={newProduct.price}
+                                    onChange={(event) => {handleOnChange(event, newProduct, setNewProduct)}}
                                 />
                             </div>
 

@@ -1,10 +1,13 @@
-import {ADD_PRODUCT, ADD_PRODUCT_FAILURE, ADD_PRODUCT_SUCCESS, PRODUCTS_DOWNLOAD_START, PRODUCTS_DOWNLOAD_SUCCESS, PRODUCTS_DOWNLOAD_FAILURE} from '../types';
+import {actionTypes} from '../types';
 
 const initialState = {
     products: [],
     error: false,
-    loading: false
+    loading: false,
+    productDelete: null
 }
+
+const {ADD_PRODUCT, ADD_PRODUCT_FAILURE, ADD_PRODUCT_SUCCESS, PRODUCTS_DOWNLOAD_START, PRODUCTS_DOWNLOAD_SUCCESS, PRODUCTS_DOWNLOAD_FAILURE, PRODUCT_DELETE_GET, PRODUCT_DELETE_SUCCESS, PRODUCT_DELETE_FAILURE} = actionTypes;
 
 const productsReducer = (state=initialState, action) => {
     switch(action.type) {
@@ -22,6 +25,15 @@ const productsReducer = (state=initialState, action) => {
         case PRODUCTS_DOWNLOAD_SUCCESS:
             return {...state, loading: false, products: action.payload};
         
+        case PRODUCT_DELETE_GET:
+            return {...state, productDelete: action.payload};
+
+        case PRODUCT_DELETE_SUCCESS:
+            return {...state, productDelete: null, products: state.products.filter(product => product.id !== state.productDelete)};
+        
+        case PRODUCT_DELETE_FAILURE:
+            return {...state, productDelete: null, error: true};
+
         default:
             return state;
     }

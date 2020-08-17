@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import ProductFormController from '../controllers/ProductFormController';
 import { useDispatch, useSelector } from 'react-redux';
 import ProductModel from '../common/models/ProductModel';
 import handleOnChange from '../common/utils/HandleOnChange';
+import ProductsController from '../controllers/ProductsController';
 
 const NewProduct = ({history}) => {
     const [newProduct, setNewProduct] = useState(new ProductModel('', 0))
-    const controller = new ProductFormController(useDispatch());
+    const controller = new ProductsController(useDispatch());
     const {loading, error} = useSelector((state) => state.productsState);
 
     return (

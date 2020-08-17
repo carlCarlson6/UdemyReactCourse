@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import ProductsController from '../controllers/ProductsController';
+import { useDispatch } from 'react-redux';
 
 const Product = ({product}) => {
     const {name, price, id} = product;
-    
+    const controller = new ProductsController(useDispatch());
+
     return (
-        <tr>
-            <td>{name}</td>
-            <td><span className="font-weight-bold">{price} €</span></td>
-            <td className="acciones">
+        <Fragment>
+            <td><p>{name}</p></td>
+            <td><p><span className="font-weight-bold">{price}€</span></p></td>
+            <td className="acciones"><p>
                 <Link 
                     to={`productos/editar/${id}`}
                     className="btn btn-primary mr-2"
@@ -16,9 +19,10 @@ const Product = ({product}) => {
                 <button
                     type="button"
                     className="btn btn-danger"
+                    onClick={() => controller.DeleteProduct(id)}
                 >Eliminar</button>
-            </td>
-        </tr>
+            </p></td>
+        </Fragment>
     );
 }
  

@@ -5,9 +5,8 @@ import Product from './Product';
 
 const Products = () => {
     const controller = new ProductsController(useDispatch());
-    useEffect(() => controller.GetProducts(), []);
     const {products, loading, error} = useSelector((state) => state.productsState);
-
+    useEffect(() => controller.GetProducts(), []);
     return (
         <Fragment>
             <h2 className="text-center my-5">
@@ -28,7 +27,9 @@ const Products = () => {
                 <tbody>
                     {products.length===0? 'No hay productos': (
                         products.map(product => (
-                            <Product key={product.id} product={product}/>
+                            <tr key={product.id}>
+                                <Product product={product}/>
+                            </tr>
                         ))
                     )}
                 </tbody>

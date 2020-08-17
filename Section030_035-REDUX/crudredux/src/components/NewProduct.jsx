@@ -20,7 +20,7 @@ const NewProduct = ({history}) => {
 
                         <form
                             onSubmit={(event) => {
-                                controller.SubmitNewProduct(event, newProduct);
+                                controller.AddProduct(event, newProduct);
                                 history.push('/');
                             }}
                         >

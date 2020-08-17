@@ -11,17 +11,13 @@ class ProductsController {
         this.dispatch(getProductsAction());
     }
 
-    SubmitNewProduct(event, newProduct) {
+    AddProduct(event, newProduct) {
         event.preventDefault();
 
         const validation = validateFormNoEmptyFields(newProduct);
         if(!validation) { return };
 
-        this.AddProduct(newProduct);
-    }
-
-    AddProduct(product) {
-        this.dispatch(createNewProductAction(product));
+        this.dispatch(createNewProductAction(newProduct));
     }
 
     DeleteProduct(id) {
@@ -39,6 +35,19 @@ class ProductsController {
                 this.dispatch(deleteProductAction(id));
             }
         })
+    }
+
+    RedirectProductToEdit(product, history) {
+        history.push(`productos/editar/${product.id}`);
+    }
+
+    SubmitEditProduct(event, editProduct) {
+        event.preventDefault();
+
+        const validation = validateFormNoEmptyFields(editProduct);
+        if(!validation) { return };
+
+        //this.<>(newProduct);
     }
 
 }

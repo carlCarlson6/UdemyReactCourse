@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Product from '../common/models/Product';
 import handleOnChange from '../common/utils/HandleOnChange';
 
-const NewProduct = () => {
+const NewProduct = ({history}) => {
     const [newProduct, setNewProduct] = useState(new Product('', 0))
     const controller = new NewProductController(useDispatch());
     const {loading, error} = useSelector((state) => state.productsState);
@@ -19,7 +19,10 @@ const NewProduct = () => {
                         </h2>
 
                         <form
-                            onSubmit={(event) => controller.SubmitNewProduct(event, newProduct)}
+                            onSubmit={(event) => {
+                                controller.SubmitNewProduct(event, newProduct);
+                                history.push('/');
+                            }}
                         >
                             <div className="form-group">
                                 <label>Nombre Producto</label>

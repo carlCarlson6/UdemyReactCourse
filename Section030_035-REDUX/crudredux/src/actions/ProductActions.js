@@ -1,5 +1,6 @@
 import {ADD_PRODUCT, ADD_PRODUCT_FAILURE, ADD_PRODUCT_SUCCESS} from '../types';
 import axiosClient from '../config/HttpClient';
+import Swal from 'sweetalert2';
 
 
 const addProduct = () => ({type: ADD_PRODUCT})
@@ -12,10 +13,12 @@ export const createNewProductAction = (product) => {
         dispatch(addProduct());
 
         try {
-            await axiosClient.post('/produtcs', product);
+            await axiosClient.post('/products', product);
             dispatch(addProductSuccess(product));
+            Swal.fire('Correcto', 'El producto se agregó correctamente', 'success')
         } catch(error) {
             dispatch(addProductFailure());
+            Swal.fire({icon: 'error', title: 'Oops...', text: 'Parece que hubo un error, itentalo de nuevo'})
         }
     }
 }

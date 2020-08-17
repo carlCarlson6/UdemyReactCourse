@@ -5,7 +5,7 @@ import Product from "../../entities/Product";
 class ProductResolver {
 
     @Query(() => Product)
-    async Product(@Arg('id') id: number): Promise<Product> {
+    async product(@Arg('id') id: number): Promise<Product> {
         const product = await Product.findOne(id);
         
         if(!product) { throw new Error('product not found') }
@@ -14,8 +14,8 @@ class ProductResolver {
     }
 
     @Query(() => [Product])
-    async Products(@Arg('top') top: number | null = null): Promise<Array<Product>> {
-        let products: Array<Product>;
+    async products(@Arg('top', {defaultValue:null} ) top: number): Promise<Array<Product>> {
+        let products: Array<Product>; //= await Product.find();
 
         if(top === null){
             products = await Product.find();

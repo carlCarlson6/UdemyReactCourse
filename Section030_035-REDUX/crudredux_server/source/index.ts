@@ -4,8 +4,11 @@ import {ApolloServer} from 'apollo-server-express';
 import Express from 'express';
 import cors from 'cors';
 import ProductResolver from './resolvers/product/ProducResolver';
+import { createConnection } from 'typeorm';
 
 const main = async(): Promise<void> => {
+    await createConnection();
+    
     const schema: GraphQLSchema = await buildSchema({
         resolvers: [ProductResolver]
     });

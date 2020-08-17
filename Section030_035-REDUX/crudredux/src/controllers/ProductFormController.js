@@ -1,7 +1,7 @@
 import { createNewProductAction } from "../actions/ProductActions";
 import { validateFormNoEmptyFields } from "../common/utils/ValidateForm";
 
-class NewProductController {
+class ProductFormController {
     constructor(dispatch) {
         this.dispatch = dispatch;
     }
@@ -22,4 +22,4 @@ class NewProductController {
 
 }
 
-export default NewProductController;
+export default ProductFormController;

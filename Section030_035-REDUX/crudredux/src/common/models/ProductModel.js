@@ -1,6 +1,6 @@
 import {v4 as generateId} from 'uuid';
 
-class Product {
+class ProductModel {
     constructor(name, price) {
         this.id = generateId();
         this.name = name;
@@ -8,4 +8,4 @@ class Product {
     }
 }
 
-export default Product;
+export default ProductModel;

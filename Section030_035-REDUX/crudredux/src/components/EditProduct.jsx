@@ -1,6 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
+import ProductModel from '../common/models/ProductModel';
+import handleOnChange from '../common/utils/HandleOnChange';
 
 const EditProduct = () => {
+    const [newProduct, setNewProduct] = useState(new ProductModel('', 0))
+
     return (
         <div className="row justify-content-center">
             <div className="col-md-8">
@@ -18,6 +22,7 @@ const EditProduct = () => {
                                     className="form-control"
                                     placeholder="Nombre Producto"
                                     name="name"
+                                    onChange={(event) => {handleOnChange(event, newProduct, setNewProduct)}}
                                 />
                             </div>
 
@@ -28,6 +33,7 @@ const EditProduct = () => {
                                     className="form-control"
                                     placeholder="Precio Producto"
                                     value="price"
+                                    onChange={(event) => {handleOnChange(event, newProduct, setNewProduct)}}
                                 />
                             </div>
 

@@ -1,28 +1,30 @@
 import {validateFormNoEmptyFields} from '../common/utils/ValidateForm';
 import Swal from 'sweetalert2';
-import {createNewProductAction} from '../actions/product/CreateNewProductAction'
+import {addProductAction} from '../actions/product/AddProductAction'
 import {deleteProductAction} from '../actions/product/DeleteProductAction'
 import {getProductsAction} from '../actions/product/GetProductsAction'
+import { getProductToEditAction, editProductAction } from '../actions/product/EditProductAction';
 
 class ProductsController {
     constructor(dispatch) {
         this.dispatch = dispatch;
     }
     
-    GetProducts() {
-        this.dispatch(getProductsAction());
+    async GetProducts() {
+        await this.dispatch(await getProductsAction());
     }
 
-    AddProduct(event, newProduct) {
+    async AddProduct(event, newProduct, history) {
         event.preventDefault();
 
         const validation = validateFormNoEmptyFields(newProduct);
         if(!validation) { return };
 
-        this.dispatch(createNewProductAction(newProduct));
+        await this.dispatch(await addProductAction(newProduct));
+        history.push('/');
     }
 
-    DeleteProduct(id) {
+    async DeleteProduct(id) {
         Swal.fire({
             title: '¿Estas seguro?',
             text: "¿Desea eliminar este producto del listado?",
@@ -32,24 +34,26 @@ class ProductsController {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si',
             cancelButtonText: "No"
-        }).then((result) => {
+        }).then(async (result) => {
             if(result.value) {
-                this.dispatch(deleteProductAction(id));
+                await this.dispatch(await deleteProductAction(id));
             }
         })
     }
 
     RedirectProductToEdit(product, history) {
+        this.dispatch(getProductToEditAction(product));
         history.push(`productos/editar/${product.id}`);
     }
 
-    SubmitEditProduct(event, editProduct) {
+    async EditProduct(event, editedProduct, history) {
         event.preventDefault();
 
-        const validation = validateFormNoEmptyFields(editProduct);
+        const validation = validateFormNoEmptyFields(editedProduct);
         if(!validation) { return };
 
-        //this.dispatch(<action>(editProduct));
+        await this.dispatch(await editProductAction(editedProduct));
+        history.push('/');
     }
 
 }

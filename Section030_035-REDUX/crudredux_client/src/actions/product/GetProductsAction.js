@@ -6,7 +6,7 @@ const downloadProducts = () => ({type: actionTypes.PRODUCTS_DOWNLOAD_START})
 const downloadProductsSuccess = products => ({type: actionTypes.PRODUCTS_DOWNLOAD_SUCCESS, payload: products})
 const downloadProductsFailure = () => ({type: actionTypes.PRODUCTS_DOWNLOAD_FAILURE})
 
-export const getProductsAction = () => {
+export const getProductsAction = async () => {
     return async dispatch => {
         dispatch(downloadProducts());
         try {
@@ -14,7 +14,6 @@ export const getProductsAction = () => {
             const products = queryResult.data.products;
             dispatch(downloadProductsSuccess(products));
         } catch(error) {
-            console.log(error);
             dispatch(downloadProductsFailure());
         }
     }

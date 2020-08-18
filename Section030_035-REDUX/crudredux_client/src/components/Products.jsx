@@ -2,11 +2,25 @@ import React, { Fragment, useEffect } from 'react';
 import ProductsController from '../controllers/ProductsController';
 import { useSelector, useDispatch } from 'react-redux';
 import Product from './Product';
+import Spinner from './Spinner';
 
 const Products = () => {
     const controller = new ProductsController(useDispatch());
+
+    useEffect(() => {
+        const downloadProducts = async () => await controller.GetProducts()
+        downloadProducts()
+        // eslint-disable-next-line
+    }, []);
+
     const {products, loading, error} = useSelector((state) => state.productsState);
-    useEffect(() => controller.GetProducts(), []);
+    
+    if(loading) {return (
+        <Fragment>
+            <Spinner />
+        </Fragment>
+    );}
+
     return (
         <Fragment>
             <h2 className="text-center my-5">

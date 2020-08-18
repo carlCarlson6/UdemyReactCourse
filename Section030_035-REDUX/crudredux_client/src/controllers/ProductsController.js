@@ -1,6 +1,8 @@
-import { getProductsAction, createNewProductAction, deleteProductAction } from "../actions/ProductActions";
 import {validateFormNoEmptyFields} from '../common/utils/ValidateForm';
 import Swal from 'sweetalert2';
+import {createNewProductAction} from '../actions/product/CreateNewProductAction'
+import {deleteProductAction} from '../actions/product/DeleteProductAction'
+import {getProductsAction} from '../actions/product/GetProductsAction'
 
 class ProductsController {
     constructor(dispatch) {
@@ -47,7 +49,7 @@ class ProductsController {
         const validation = validateFormNoEmptyFields(editProduct);
         if(!validation) { return };
 
-        //this.<>(newProduct);
+        //this.dispatch(<action>(editProduct));
     }
 
 }

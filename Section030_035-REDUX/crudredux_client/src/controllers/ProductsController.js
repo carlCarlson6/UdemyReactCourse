@@ -4,6 +4,8 @@ import {addProductAction} from '../actions/product/AddProductAction'
 import {deleteProductAction} from '../actions/product/DeleteProductAction'
 import {getProductsAction} from '../actions/product/GetProductsAction'
 import { getProductToEditAction, editProductAction } from '../actions/product/EditProductAction';
+import { showAlertAction } from '../actions/alert/ShowAlertAction';
+import { hideAlertAction } from '../actions/alert/HideAlertAction';
 
 class ProductsController {
     constructor(dispatch) {
@@ -18,7 +20,13 @@ class ProductsController {
         event.preventDefault();
 
         const validation = validateFormNoEmptyFields(newProduct);
-        if(!validation) { return };
+        if(!validation) { 
+            const alert = {message: 'Ambos campos son obligatorios', classes: 'alert alert-danger text-center text-uppercase p3'}
+            this.dispatch(showAlertAction(alert));
+            return;
+        }
+        
+        this.dispatch(hideAlertAction());
 
         await this.dispatch(await addProductAction(newProduct));
         history.push('/');
@@ -50,7 +58,13 @@ class ProductsController {
         event.preventDefault();
 
         const validation = validateFormNoEmptyFields(editedProduct);
-        if(!validation) { return };
+        if(!validation) { 
+            const alert = {message: 'Ambos campos son obligatorios', classes: 'alert alert-danger text-center text-uppercase p3'}
+            this.dispatch(showAlertAction(alert));
+            return;
+        }
+
+        this.dispatch(hideAlertAction());
 
         await this.dispatch(await editProductAction(editedProduct));
         history.push('/');

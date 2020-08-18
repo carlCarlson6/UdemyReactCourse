@@ -1,7 +1,7 @@
 import {actionTypes} from '../types';
-import { initialState } from '../common/InitialState';
+import { productInitialState } from '../common/InitialStates';
 
-const productsReducer = (state=initialState, action) => {
+const productsReducer = (state=productInitialState, action) => {
     switch(action.type) {
         case actionTypes.ADD_PRODUCT:
         case actionTypes.PRODUCTS_DOWNLOAD_START:

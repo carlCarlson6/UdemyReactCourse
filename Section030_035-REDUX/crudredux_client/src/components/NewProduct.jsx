@@ -9,7 +9,8 @@ import Spinner from './Spinner';
 const NewProduct = () => {
     const [newProduct, setNewProduct] = useState(new ProductModel('', 0))
     const controller = new ProductsController(useDispatch());
-    const {loading, error} = useSelector((state) => state.productsState);
+    const {loading, error} = useSelector((state) => state.products);
+    const {alert} = useSelector((state) => state.alert);
     const history = useHistory();
 
     const newProductForm = (
@@ -53,6 +54,8 @@ const NewProduct = () => {
                         <h2 className="text-center mb-4 font-weight-bold">
                             Agregar Nuevo Producto
                         </h2>
+
+                        {alert? <p className={alert.classes}>{alert.message}</p> : null}
 
                         {loading ? <Spinner /> : newProductForm }
                         

@@ -30,3 +30,11 @@ export const actionTypes = {
     PRODUCT_EDIT_SUCCESS,
     PRODUCT_EDIT_FAILURE
 }
+
+const SHOW_ALERT = "SHOW_ALERT";
+const HIDE_ALERT = "HIDE_ALERT";
+
+export const alertTypes = {
+    SHOW_ALERT,
+    HIDE_ALERT
+}

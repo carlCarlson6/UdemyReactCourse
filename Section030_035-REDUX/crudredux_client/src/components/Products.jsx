@@ -6,7 +6,7 @@ import Spinner from './Spinner';
 
 const Products = () => {
     const controller = new ProductsController(useDispatch());
-    const {products, loading, error} = useSelector(state => state.productsState);
+    const {products, loading, error} = useSelector(state => state.products);
     //controller.GetProducts();
     useEffect(() => {
         const downloadProducts = async () => await controller.GetProducts()

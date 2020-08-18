@@ -7,7 +7,7 @@ const Header = () => {
             <div className="container">
                 <h1><Link
                     to={'/'} className="text-light"
-                >CRUD - React, Redux, REST API & Axios</Link></h1>
+                >CRUD - React, Redux, GraphQL & ApolloClient</Link></h1>
             </div>
 
             <Link 

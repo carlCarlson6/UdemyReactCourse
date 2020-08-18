@@ -6,7 +6,8 @@ import { useHistory } from 'react-router-dom';
 import Spinner from './Spinner';
 
 const EditProduct = () => {
-    const {productEdit, loading, error} = useSelector((state) => state.productsState);
+    const {productEdit, loading, error} = useSelector((state) => state.products);
+    const {alert} = useSelector((state) => state.alert);
     const [productToEdit, setProductToEdit] = useState(productEdit);
     const controller = new ProductsController(useDispatch());
     const history = useHistory();
@@ -57,6 +58,7 @@ const EditProduct = () => {
                             Editar Producto
                         </h2>
 
+                        {alert? <p className={alert.classes}>{alert.message}</p> : null}
                         {loading ? <Spinner /> : editProductForm }
                         {error? <p className="alert alert-danger p2 mt-4 text-center">Hubo un error</p> : null}
 

@@ -8,7 +8,7 @@ import { createConnection } from 'typeorm';
 
 const main = async(): Promise<void> => {
     await createConnection();
-    
+
     const schema: GraphQLSchema = await buildSchema({
         resolvers: [ProductResolver]
     });

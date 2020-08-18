@@ -1,0 +1,1 @@
+export const productsQuery = "{products { id name value} }";

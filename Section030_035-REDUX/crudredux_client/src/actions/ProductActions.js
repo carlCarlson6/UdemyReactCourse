@@ -1,5 +1,6 @@
 import {actionTypes} from '../types';
-import axiosClient from '../config/HttpClient';
+import {axiosClient, apolloClient} from '../common/HttpClient';
+import {gql} from '@apollo/client'
 import Swal from 'sweetalert2';
 
 const addProduct = () => ({type: actionTypes.ADD_PRODUCT})
@@ -9,12 +10,15 @@ const addProductFailure = () => ({type: actionTypes.ADD_PRODUCT_FAILURE})
 export const createNewProductAction = product => {
     return async dispatch => {
         dispatch(addProduct());
-
         try {
-            await axiosClient.post('/products', product);
+            const queryResult = await apolloClient.mutate({
+                mutation: gql`mutation AddProduct($name: String! $price: Float!) {addProduct(name: $name, price: $price) {id name price}}`, 
+                variables: {name: product.name, price: parseFloat(product.price)}
+            });
             dispatch(addProductSuccess(product));
             Swal.fire('Correcto', 'El producto se agregó correctamente', 'success')
         } catch(error) {
+            console.log(error)
             dispatch(addProductFailure());
             Swal.fire({icon: 'error', title: 'Oops...', text: 'Parece que hubo un error, itentalo de nuevo'})
         }
@@ -29,9 +33,11 @@ export const getProductsAction = () => {
     return async dispatch => {
         dispatch(downloadProducts());
         try {
-            const products = (await axiosClient.get('/products')).data;
+            const queryResult = await apolloClient.query({query: gql`query {products {id name price}}`})
+            const products = queryResult.data.products;
             dispatch(downloadProductsSuccess(products));
         } catch(error) {
+            console.log(error);
             dispatch(downloadProductsFailure());
         }
     }

@@ -1,8 +1,8 @@
 import {Entity, PrimaryGeneratedColumn, Column, BaseEntity} from "typeorm";
-import { ObjectType, Field, ID, Root } from "type-graphql";
+import { ObjectType, Field, ID } from "type-graphql";
 
 @ObjectType()
-@Entity("crudredux_product")
+@Entity("crudredux-product")
 class Product extends BaseEntity {
     @Field(() => ID)
     @PrimaryGeneratedColumn()
@@ -13,8 +13,8 @@ class Product extends BaseEntity {
     name: string;
 
     @Field()
-    @Column()
-    value: number;
+    @Column({type:'float'})
+    price: number;
 }
 
 export default Product;

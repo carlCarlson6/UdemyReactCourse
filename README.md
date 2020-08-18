@@ -15,3 +15,4 @@ My code from the course https://www.udemy.com/course/react-de-principiante-a-exp
 * [Buscador Letras](https://boring-bhabha-c99e6c.netlify.app/) the free artist info api is not available on production
 * [Buscador Bebidas](https://gracious-bohr-70918c.netlify.app/)
 * [Gestor de Tareas](https://flamboyant-kowalevski-0855a5.netlify.app/) Using the MERN stack (Mongo, Express, React, Nodejs)
+* [CRUD](https://amazing-darwin-aae681.netlify.app/) Using Redux, Typescript, GraphQL and PostgreSQL

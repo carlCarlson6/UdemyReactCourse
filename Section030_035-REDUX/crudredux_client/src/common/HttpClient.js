@@ -6,6 +6,10 @@ export const axiosClient = axios.create({
 });
 
 export const apolloClient = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
-  cache: new InMemoryCache()
+    uri: 'http://localhost:4000/graphql',
+    cache: new InMemoryCache(),
+    defaultOptions: {
+      query: {fetchPolicy: 'no-cache'},
+      mutate: {fetchPolicy: 'no-cache'},
+    }
 });

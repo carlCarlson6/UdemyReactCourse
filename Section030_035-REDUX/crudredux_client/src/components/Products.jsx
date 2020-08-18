@@ -6,14 +6,15 @@ import Spinner from './Spinner';
 
 const Products = () => {
     const controller = new ProductsController(useDispatch());
-
+    const {products, loading, error} = useSelector(state => state.productsState);
+    //controller.GetProducts();
     useEffect(() => {
         const downloadProducts = async () => await controller.GetProducts()
         downloadProducts()
         // eslint-disable-next-line
     }, []);
 
-    const {products, loading, error} = useSelector((state) => state.productsState);
+    
     
     if(loading) {return (
         <Fragment>

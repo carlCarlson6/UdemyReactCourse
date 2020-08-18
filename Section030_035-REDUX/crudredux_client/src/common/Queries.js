@@ -22,6 +22,6 @@ export const deleteProductMutation = gql`
 export const editProductMutation = gql`
     mutation EditProduct($id: Float! $name: String! $price: Float!) {
         editProduct(id: $id, name: $name, price: $price) {
-            id
+            id name price
         }
     }`

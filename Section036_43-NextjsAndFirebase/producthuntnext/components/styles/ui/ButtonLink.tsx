@@ -18,4 +18,4 @@ export const ButtonLink = styled.a<IButtonLink>`
     &:hover {
         cursor: pointer;
     }
-`
+`;

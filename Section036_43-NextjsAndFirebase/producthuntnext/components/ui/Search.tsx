@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputText, SearchForm, InputSubmit } from '../styles/ui/SearchStyles';
+import { InputText, SearchForm, SearchButton } from '../styles/ui/SearchStyles';
  
 const Search: React.FC = () => {
     return (
@@ -10,9 +10,9 @@ const Search: React.FC = () => {
                 placeholder="Buscar productos"
             />
             
-            <InputSubmit
+            <SearchButton
                 type="submit"
-            >Buscar</InputSubmit>
+            >Buscar</SearchButton>
         
         </SearchForm>
     );

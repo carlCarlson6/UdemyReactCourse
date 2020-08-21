@@ -6,7 +6,7 @@ export const InputText = styled.input`
     min-width: 300px;
 `;
 
-export const InputSubmit = styled.button`
+export const SearchButton = styled.button`
     height: 3rem;
     width: 3rem;
     display: block;

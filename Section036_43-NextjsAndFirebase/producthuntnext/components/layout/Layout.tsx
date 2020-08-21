@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { ILayout } from '../../models/interfaces/ILayout';
+import { ILayout } from '../../common/models/ILayout';
 import Header from './Header';
 import {Global, css} from '@emotion/core'
 import Head from 'next/head';

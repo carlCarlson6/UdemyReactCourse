@@ -8,9 +8,10 @@ import Link from 'next/link';
 import { HeaderStyled } from '../styles/layout/HeaderStyles';
 import { AdministrationContainer } from '../styles/layout/AdministrationContainer';
 import { HeaderControlContainer } from '../styles/layout/HeaderStyles';
- 
+import {FireBaseContext} from '../../firebase' 
+
 const Header: React.FC = (): JSX.Element => {
-    const user:boolean = false;
+    const {user, firebase} = React.useContext(FireBaseContext);
 
     return (
         <HeaderStyled>
@@ -22,11 +23,11 @@ const Header: React.FC = (): JSX.Element => {
                     </Link>
         
                     <Search />
-                    <Navigation />
+                    <Navigation user={user}/>
                 </HeaderControlContainer>
 
                 <AdministrationContainer>
-                    <Administration  user={user}/>
+                    <Administration  user={user} firebase={firebase}/>
                 </AdministrationContainer>
             
             </HeaderContainer>

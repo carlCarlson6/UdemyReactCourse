@@ -5,7 +5,7 @@ import useValidation from '../hooks/useValidation';
 import { IFormValue } from '../common/models/IFormValue';
 import { IError } from '../common/models/IError';
 import { FormTitle, Form, Field, FormError, InputSubmitForm } from '../components/styles/ui/FormStyles';
-import loginInitialState from '../common/LoginInitialState';
+import { loginInitialState } from '../common/InitialStates';
 import { validateLogin } from '../validations/LoginValidation';
 import { AccountServices } from '../services/AccountServices';
 

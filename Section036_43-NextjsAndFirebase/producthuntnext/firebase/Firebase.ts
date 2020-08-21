@@ -2,7 +2,7 @@ import app, {auth, User} from 'firebase/app';
 import config from './Config'
 import 'firebase/auth';
 
-class Firebase {
+export class Firebase {
     auth: auth.Auth;
     
     constructor() {
@@ -23,6 +23,9 @@ class Firebase {
         return userCreadential.user;
     }
 
+    async SignOut(): Promise<void> {
+        await this.auth.signOut();
+    }
 }
 
 export const firebase = new Firebase();

@@ -3,7 +3,7 @@ import Layout from '../components/layout/Layout';
 import { Form, Field, InputSubmitForm, FormTitle, FormError } from '../components/styles/ui/FormStyles';
 import useValidation from '../hooks/useValidation';
 import { IFormController } from '../controllers/IFormController';
-import createAccountInitialState from '../common/CreateAccountInitialState';
+import { createAccountInitialState } from '../common/InitialStates';
 import { validateNewAccount } from '../validations/CreateAccountValidation';
 import { AccountServices } from '../services/AccountServices';
 import { IFormValue } from '../common/models/IFormValue';

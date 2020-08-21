@@ -3,15 +3,17 @@ import Link from 'next/link';
 import { ButtonLink } from '../styles/ui/ButtonLink';
 import { IAdministration } from '../../common/models/IAdministration';
  
-const Administration: React.FC<IAdministration> = ({user}): JSX.Element => {
+const Administration: React.FC<IAdministration> = ({user, firebase}): JSX.Element => {
     return (
         <Fragment>
             { user? (
                 <Fragment>
 
-                    <p>Hola: usuario</p>    
+                    <p>Hola: {user.displayName}</p>    
             
-                    <ButtonLink bgColor={true}
+                    <ButtonLink 
+                        bgColor={true}
+                        onClick={()=>firebase.SignOut()}
                     >Cerrar Sesión</ButtonLink>
 
                 </Fragment>       

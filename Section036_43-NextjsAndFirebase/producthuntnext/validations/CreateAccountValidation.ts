@@ -20,7 +20,7 @@ export const validateNewAccount = (formValues: Array<IFormValue>): Array<IError>
 
     if(!password.value) {
         errors.push({name:password.name, message: 'La contraseña es obligatiorio'});
-    } else if (email.value.length < 6) {
+    } else if (password.value.length < 6) {
         errors.push({name:password.name, message: 'La contraseña debe ser de al menos 6 caracteres'})
     }
 

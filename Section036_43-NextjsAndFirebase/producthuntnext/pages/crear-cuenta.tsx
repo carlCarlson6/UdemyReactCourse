@@ -10,16 +10,16 @@ import { IFormValue } from '../common/models/IFormValue';
 import { IError } from '../common/models/IError';
 
 const CreateAccount: React.FC = (): JSX.Element => {
-
     const formController: IFormController = useValidation(createAccountInitialState, validateNewAccount, new AccountServices().CreateAccount)
     
     const name: IFormValue = formController.values.find(formValue => formValue.name === 'name');
     const password: IFormValue = formController.values.find(formValue => formValue.name === 'password');
     const email: IFormValue = formController.values.find(formValue => formValue.name === 'email');
-
+    
     const nameError: IError = formController.errors.find(error => error.name === 'name');
     const passwordError: IError = formController.errors.find(error => error.name === 'password');
     const emailError: IError = formController.errors.find(error => error.name === 'email');
+    const formExecutionError: IError = formController.errors.find(error => error.name === 'formExecutionFn');
 
     return (
         <Fragment>
@@ -75,6 +75,8 @@ const CreateAccount: React.FC = (): JSX.Element => {
                         type="submit"
                         value="Crear cuenta"
                     >CREAR CUENTA</ InputSubmitForm>
+
+                    {formExecutionError && <FormError>{formExecutionError.message}</FormError>}
 
                 </Form>
 

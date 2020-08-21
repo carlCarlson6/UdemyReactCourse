@@ -1,3 +1,21 @@
+add the following code:
+
+const firebaseConfig = {
+    apiKey: "<-apiKey->",
+    authDomain: "<-authDomain->",
+    databaseURL: "<-databaseURL->",
+    projectId: "<-projectId->",
+    storageBucket: "<-storageBucket->",
+    messagingSenderId: "<-messagingSenderId->",
+    appId: "<-appId->"
+};
+
+export default firebaseConfig;
+
+to the file ./firebase/Config.ts
+
+=========================================
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

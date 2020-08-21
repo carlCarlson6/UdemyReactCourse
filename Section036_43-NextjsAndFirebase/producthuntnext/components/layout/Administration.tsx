@@ -1,20 +1,33 @@
 import React, { Fragment } from 'react';
 import Link from 'next/link';
+import { ButtonLink } from '../styles/layout/ButtonLink';
+import { IAdministration } from '../../models/interfaces/IAdministration';
  
-const Administration: React.FC = (): JSX.Element => {
+const Administration: React.FC<IAdministration> = ({user}): JSX.Element => {
     return (
         <Fragment>
-        
-            <p>Hola: usuario</p>
+            { user? (
+                <Fragment>
+
+                    <p>Hola: usuario</p>    
             
-            <button 
-                type="button"
-            >Cerrar Sesión</button>
+                    <ButtonLink bgColor={true}
+                    >Cerrar Sesión</ButtonLink>
+
+                </Fragment>       
+            ) : (
+                <Fragment>
+
+                    <Link href="/login"><ButtonLink bgColor={true}>
+                        Iniciar Sesion
+                    </ButtonLink></Link>
             
-            <Link href="/"><a>Iniciar Sesion</a></Link>
-            
-            <Link href="/"><a>Nueva Cuenta</a></Link>
-        
+                    <Link href="/crear-cuenta"><ButtonLink>
+                        Nueva Cuenta
+                    </ButtonLink></Link>
+                    
+                </Fragment>
+            ) }
         </Fragment>
     );
 }

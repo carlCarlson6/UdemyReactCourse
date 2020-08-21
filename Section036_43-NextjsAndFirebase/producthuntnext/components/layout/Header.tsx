@@ -2,24 +2,35 @@ import React from 'react';
 import Search from '../ui/Search';
 import Navigation from './Navigation';
 import Administration from './Administration';
+import { HeaderContainer } from '../styles/layout/HeaderStyles';
+import { Logo } from '../styles/layout/Logo';
+import Link from 'next/link';
+import { HeaderStyled } from '../styles/layout/HeaderStyles';
+import { AdministrationContainer } from '../styles/layout/AdministrationContainer';
+import { HeaderControlContainer } from '../styles/layout/HeaderStyles';
  
 const Header: React.FC = (): JSX.Element => {
-    return (
-        <header>
-            <div>
+    const user:boolean = false;
 
-                <div>
-                    <p>P</p>
+    return (
+        <HeaderStyled>
+            <HeaderContainer>
+
+                <HeaderControlContainer>
+                    <Link href="/">
+                        <a><Logo>P</Logo></a>
+                    </Link>
+        
                     <Search />
                     <Navigation />
-                </div>
+                </HeaderControlContainer>
 
-                <div>
-                    <Administration />
-                </div>
+                <AdministrationContainer>
+                    <Administration  user={user}/>
+                </AdministrationContainer>
             
-            </div>
-        </header>
+            </HeaderContainer>
+        </HeaderStyled>
     );
 }
  

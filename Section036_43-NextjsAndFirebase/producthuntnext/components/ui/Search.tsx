@@ -1,13 +1,20 @@
 import React from 'react';
+import { InputText, SearchForm, InputSubmit } from '../styles/ui/SearchStyles';
  
 const Search: React.FC = () => {
     return (
-        <form>
-            <input type="text"/>
-            <button
+        <SearchForm>
+
+            <InputText 
+                type="text"
+                placeholder="Buscar productos"
+            />
+            
+            <InputSubmit
                 type="submit"
-            >Buscar</button>
-        </form>
+            >Buscar</InputSubmit>
+        
+        </SearchForm>
     );
 }
  

@@ -1,14 +1,13 @@
 import React, { Fragment } from 'react';
-import { Heading } from '../styles/Heading';
 import Layout from '../components/layout/Layout';
 
-const Nosotros: React.FC = (): JSX.Element => {
+const NewProduct: React.FC = (): JSX.Element => {
 
     return (
         <Fragment>
             <div>
                 <Layout>
-                    <h1>Nosotros</h1>
+                    <h1>Nuevo Producto</h1>
                 </Layout>
             </div>
         </Fragment>
@@ -16,4 +15,4 @@ const Nosotros: React.FC = (): JSX.Element => {
 }
 
 
-export default Nosotros;
+export default NewProduct;

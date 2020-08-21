@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react';
 import Layout from '../components/layout/Layout';
 
-const Home: React.FC = (): JSX.Element => {
+const Populars: React.FC = (): JSX.Element => {
 
     return (
         <Fragment>
             <div>
                 <Layout>
-                    <h1>INICIO</h1>
+                    <h1>Populares</h1>
                 </Layout>
             </div>
         </Fragment>
@@ -15,4 +15,4 @@ const Home: React.FC = (): JSX.Element => {
 }
 
 
-export default Home;
+export default Populars;

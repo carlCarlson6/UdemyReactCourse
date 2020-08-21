@@ -33,6 +33,7 @@ const useValidation = (initialState: Array<IFormValue>, validate: (formValues: A
     const handleBlur = (event: ChangeEvent<HTMLInputElement>): void => {
         event.preventDefault();
         const validationErrors = validate(values);
+        setErrors(validationErrors);
     }
 
     return { values, errors, submitForm, handleSubmit, handleChange, handleBlur }

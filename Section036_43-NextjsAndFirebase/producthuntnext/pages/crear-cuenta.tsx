@@ -52,6 +52,7 @@ const CreateAccount: React.FC = (): JSX.Element => {
                             name="email"
                             onChange={formController.handleChange}
                             value={email.value}
+                            onBlur={formController.handleBlur}
                         />
                     </Field>
                     {emailError && <FormError>{emailError.message}</FormError>}
@@ -65,6 +66,7 @@ const CreateAccount: React.FC = (): JSX.Element => {
                             name="password"
                             onChange={formController.handleChange}
                             value={password.value}
+                            onBlur={formController.handleBlur}
                         />
                     </Field>
                     {passwordError && <FormError>{passwordError.message}</FormError>}

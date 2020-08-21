@@ -7,5 +7,6 @@ export interface IFormController {
     errors: Array<IError>,
     submitForm: boolean,
     handleSubmit: (event: FormEvent<HTMLFormElement>) => void,
-    handleChange: (event: ChangeEvent<HTMLInputElement>) => void 
+    handleChange: (event: ChangeEvent<HTMLInputElement>) => void
+    handleBlur: (event: ChangeEvent<HTMLInputElement>) => void
 }

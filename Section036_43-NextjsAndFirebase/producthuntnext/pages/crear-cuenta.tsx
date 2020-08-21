@@ -5,13 +5,13 @@ import useValidation from '../hooks/useValidation';
 import { IFormController } from '../controllers/IFormController';
 import createAccountInitialState from '../common/CreateAccountInitialState';
 import { validateNewAccount } from '../validations/CreateAccountValidation';
-import { AccountController } from '../controllers/AccountController';
+import { AccountServices } from '../services/AccountServices';
 import { IFormValue } from '../common/models/IFormValue';
 import { IError } from '../common/models/IError';
 
 const CreateAccount: React.FC = (): JSX.Element => {
 
-    const formController: IFormController = useValidation(createAccountInitialState, validateNewAccount, new AccountController().CreateAccount)
+    const formController: IFormController = useValidation(createAccountInitialState, validateNewAccount, new AccountServices().CreateAccount)
     
     const name: IFormValue = formController.values.find(formValue => formValue.name === 'name');
     const password: IFormValue = formController.values.find(formValue => formValue.name === 'password');
@@ -38,7 +38,7 @@ const CreateAccount: React.FC = (): JSX.Element => {
                             name="name"
                             onChange={formController.handleChange}
                             value={name.value}
-                            onBlur={}
+                            onBlur={formController.handleBlur}
                         />
                     </Field>
                     {nameError && <FormError>{nameError.message}</FormError>}

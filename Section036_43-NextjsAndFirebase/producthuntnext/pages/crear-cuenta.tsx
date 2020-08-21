@@ -10,7 +10,7 @@ import { IFormValue } from '../common/models/IFormValue';
 import { IError } from '../common/models/IError';
 
 const CreateAccount: React.FC = (): JSX.Element => {
-    const formController: IFormController = useValidation(createAccountInitialState, validateNewAccount, new AccountServices().CreateAccount)
+    const formController: IFormController = useValidation(createAccountInitialState, validateNewAccount, AccountServices.CreateAccount)
     
     const name: IFormValue = formController.values.find(formValue => formValue.name === 'name');
     const password: IFormValue = formController.values.find(formValue => formValue.name === 'password');

@@ -18,6 +18,11 @@ class Firebase {
         return newUser.user;
     }
 
+    async AutheticateUser(email: string, password: string): Promise<User> {
+        const userCreadential: auth.UserCredential = await this.auth.signInWithEmailAndPassword(email, password)
+        return userCreadential.user;
+    }
+
 }
 
 export const firebase = new Firebase();

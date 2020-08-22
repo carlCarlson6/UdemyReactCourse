@@ -1,12 +1,11 @@
 import { IFormValue } from "../common/models/IFormValue"
 import { IError } from "../common/models/IError"
+import { unpackCreateAccountFormValues } from "../common/unpackCreateAccount";
 
 export const validateNewAccount = (formValues: Array<IFormValue>): Array<IError> =>  {
     let errors: Array<IError> = []
 
-    const name: IFormValue = formValues.find(formValue => formValue.name === 'name');
-    const password: IFormValue = formValues.find(formValue => formValue.name === 'password');
-    const email: IFormValue = formValues.find(formValue => formValue.name === 'email');
+    const {name, password, email} = unpackCreateAccountFormValues(formValues);
     
     if(!name.value) {
         errors.push({name:name.name, message: 'El nombre es obligatiorio'});

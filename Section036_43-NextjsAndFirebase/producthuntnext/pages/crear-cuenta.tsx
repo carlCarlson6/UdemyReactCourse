@@ -6,16 +6,13 @@ import { IFormController } from '../controllers/IFormController';
 import { createAccountInitialState } from '../common/InitialStates';
 import { validateNewAccount } from '../validations/CreateAccountValidation';
 import { AccountServices } from '../services/AccountServices';
-import { IFormValue } from '../common/models/IFormValue';
-import { IError } from '../common/models/IError';
-import { FireBaseContext } from '../firebase';
 import { unpackCreateAccountFormValues, unpackCreateAccountFormErrors } from '../common/unpackCreateAccount';
 
 const CreateAccount: React.FC = (): JSX.Element => {
     const formController: IFormController = useValidation(createAccountInitialState, validateNewAccount, AccountServices.CreateAccount)
 
     const {name, password, email} = unpackCreateAccountFormValues(formController.values);
-    const {nameError, passwordError, emailError, formExecutionError} = unpackCreateAccountFormErrors(formController.errors),
+    const {nameError, passwordError, emailError, formExecutionError} = unpackCreateAccountFormErrors(formController.errors);
 
     return (
         <Fragment>

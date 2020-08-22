@@ -2,8 +2,6 @@ import React, { Fragment } from 'react';
 import Layout from '../components/layout/Layout';
 import { IFormController } from '../controllers/IFormController';
 import useValidation from '../hooks/useValidation';
-import { IFormValue } from '../common/models/IFormValue';
-import { IError } from '../common/models/IError';
 import { FormTitle, Form, Field, FormError, InputSubmitForm } from '../components/styles/ui/FormStyles';
 import { loginInitialState } from '../common/InitialStates';
 import { validateLogin } from '../validations/LoginValidation';

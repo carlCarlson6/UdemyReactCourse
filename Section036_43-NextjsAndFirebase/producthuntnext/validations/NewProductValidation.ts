@@ -1,14 +1,11 @@
 import { IFormValue } from "../common/models/IFormValue"
 import { IError } from "../common/models/IError"
+import { unpackNewProductFormValues } from "../common/unpackNewProduct";
 
 export const validateNewProduct = (formValues: Array<IFormValue>): Array<IError> =>  {
     let errors: Array<IError> = []
 
-    const name: IFormValue = formValues.find(formValue => formValue.name === 'name');
-    const company: IFormValue = formValues.find(formValue => formValue.name === 'company');
-    const url: IFormValue = formValues.find(formValue => formValue.name === 'url');
-    const description: IFormValue = formValues.find(formValue => formValue.name === 'description');
-    const image: IFormValue = formValues.find(formValue => formValue.name === 'image');
+    const {name, company, url, description, image} = unpackNewProductFormValues(formValues);
     
     if(!name.value) {
         errors.push({name:name.name, message: 'El nombre es obligatiorio'});

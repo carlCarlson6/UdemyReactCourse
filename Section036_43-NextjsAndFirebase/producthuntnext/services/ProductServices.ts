@@ -1,5 +1,4 @@
 import { IFormValue } from "../common/models/IFormValue";
-import {firebase} from "../firebase";
 import Router from "next/router";
 import { User } from "firebase";
 import { IProduct } from "../common/models/IProduct";

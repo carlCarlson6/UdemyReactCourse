@@ -4,8 +4,6 @@ import { IFormController } from '../controllers/IFormController';
 import useValidation from '../hooks/useValidation';
 import { newProductInitialState } from '../common/InitialStates';
 import { validateNewProduct } from '../validations/NewProductValidation';
-import { IFormValue } from '../common/models/IFormValue';
-import { IError } from '../common/models/IError';
 import { ProductServices } from '../services/ProductServices';
 import { FormTitle, Form, Field, FormError, InputSubmitForm } from '../components/styles/ui/FormStyles';
 import { FireBaseContext } from '../firebase';
@@ -16,8 +14,8 @@ const NewProduct: React.FC = (): JSX.Element => {
     const {user, firebase} = React.useContext(FireBaseContext);
     const formController: IFormController = useValidation(newProductInitialState, validateNewProduct, ProductServices.CreateAddProductFn(user, firebase));
 
-    const {name, company, url, description, image} = unpackNewProductFormValues(formController.values)
-    const {nameError, companyError, urlError, descriptionError, imageError, formExecutionError} = unpackNewProductFormErrors(formController.errors)
+    const {name, company, url, description, image} = unpackNewProductFormValues(formController.values);
+    const {nameError, companyError, urlError, descriptionError, imageError, formExecutionError} = unpackNewProductFormErrors(formController.errors);
 
     return (
         <Fragment>

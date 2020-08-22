@@ -1,11 +1,11 @@
 import { IFormValue } from "../common/models/IFormValue"
 import { IError } from "../common/models/IError"
+import { unpackLoginFormValues } from "../common/unpackLogin";
 
 export const validateLogin = (formValues: Array<IFormValue>): Array<IError> =>  {
     let errors: Array<IError> = []
 
-    const password: IFormValue = formValues.find(formValue => formValue.name === 'password');
-    const email: IFormValue = formValues.find(formValue => formValue.name === 'email');
+    const {email, password} = unpackLoginFormValues(formValues);
     
     if(!email.value) {
         errors.push({name:email.name, message: 'El email es obligatiorio'});

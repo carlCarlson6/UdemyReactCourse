@@ -1,4 +1,5 @@
 import { IComment } from "./IComment";
+import { IUser } from "./IUser";
 
 export interface IProduct {
     id?: string
@@ -9,6 +10,6 @@ export interface IProduct {
     imageUrl: string
     votes: number
     comments: Array<IComment>
-    createdBy: string
+    createdBy: IUser
     createdAt: number
 }

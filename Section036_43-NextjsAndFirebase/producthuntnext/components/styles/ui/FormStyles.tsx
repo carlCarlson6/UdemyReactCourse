@@ -11,6 +11,10 @@ export const Form = styled.form`
         font-size: 2rem;
         padding: 2rem;
     }
+
+    p {
+        text-align: center;
+    }
 `;
 
 export const FormTitle = styled.h1`

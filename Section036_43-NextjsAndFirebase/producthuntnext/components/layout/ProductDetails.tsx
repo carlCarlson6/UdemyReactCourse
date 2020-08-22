@@ -3,6 +3,8 @@ import { IProductDetails } from '../../common/models/components/IProductDetails'
 import { Image, Product, Description, Comments, Votes, Title, DescriptionText } from '../styles/layout/ProductStyles'
 import formatDistanteToNow from 'date-fns/formatDistanceToNow';
 import { es } from 'date-fns/locale'
+import Link from 'next/link';
+
  
 const ProductDetails: React.FC<IProductDetails> = ({product}): JSX.Element => {
 
@@ -13,7 +15,13 @@ const ProductDetails: React.FC<IProductDetails> = ({product}): JSX.Element => {
                     <Image src={product.imageUrl}/>
                 </div>
                 <div>
-                    <Title>{product.name}</Title>
+                    <Link
+                        href="/products/[id]"
+                        as={`/products/${product.id}`}
+                    >
+                        <Title>{product.name}</Title>
+                    </Link>
+                    
                     <DescriptionText>{product.description}</DescriptionText>
                 
                     <Comments>

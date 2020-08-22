@@ -10,10 +10,11 @@ import { FireBaseContext } from '../database/firebase';
 import FileUploader from 'react-firebase-file-uploader';
 import { unpackNewProductFormValues, unpackNewProductFormErrors } from '../common/utils/unpackValues/unpackNewProduct';
 import { getHandleUploadStart, getHandleUploadError, getHandleUploadSuccess, getHandleProgress } from '../common/utils/handlers/ImageUploadHandlers';
+import Spinner from '../components/Spinner';
 
 const NewProduct: React.FC = (): JSX.Element => {
     const [, setImageName] = React.useState<string>('');
-    const [, setUploading] = React.useState<any>(false);
+    const [uplaoding, setUploading] = React.useState<any>(false);
     const [, setProgress] = React.useState<number>(0);
     const [imageUrl, setImageUrl] = React.useState<string>('');
 
@@ -109,11 +110,19 @@ const NewProduct: React.FC = (): JSX.Element => {
                             />
                         </Field>
 
+                        
                     </ fieldset>
-                        <InputSubmitForm 
+                        { uplaoding? (
+                            <Fragment>
+                                <p>Subiendo imagen</p>
+                                <Spinner />
+                            </Fragment>
+                        ): (
+                            <InputSubmitForm 
                             type="submit"
                             value="Añadir producto"
-                        >CREAR PRODUCTO</ InputSubmitForm>
+                            >CREAR PRODUCTO</ InputSubmitForm>
+                        ) }
 
                         {formExecutionError && <FormError>{formExecutionError.message}</FormError>}
 

@@ -49,6 +49,9 @@ const Layout: React.FC<ILayout> = (props) => {
                     a {
                         text-decoration: none;
                     }
+                    img {
+                        max-width: 100%
+                    }
                 `}
             />
 

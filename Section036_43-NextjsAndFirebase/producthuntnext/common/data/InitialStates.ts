@@ -17,3 +17,7 @@ export const newProductInitialState: Array<IFormValue> = [
     {name: 'url', value: ''},
     {name: 'description', value: ''},
 ]
+
+export const commnetInitialState: Array<IFormValue> = [
+    {name: 'comment', value: ''},
+]

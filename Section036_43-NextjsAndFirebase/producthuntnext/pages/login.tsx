@@ -1,15 +1,15 @@
 import React, { Fragment } from 'react';
 import Layout from '../components/layout/Layout';
 import { IFormController } from '../controllers/IFormController';
-import useValidation from '../hooks/useValidation';
+import useForm from '../hooks/useForm';
 import { FormTitle, Form, Field, FormError, InputSubmitForm } from '../components/styles/ui/FormStyles';
-import { loginInitialState } from '../common/InitialStates';
+import { loginInitialState } from '../common/data/InitialStates';
 import { validateLogin } from '../validations/LoginValidation';
 import { AccountServices } from '../services/AccountServices';
-import { unpackLoginFormValues, unpackLoginFormErrors } from '../common/unpackLogin';
+import { unpackLoginFormValues, unpackLoginFormErrors } from '../common/utils/unpackValues/unpackLogin';
 
 const Login: React.FC = (): JSX.Element => {
-    const formController: IFormController = useValidation(loginInitialState, validateLogin, AccountServices.LoginUser)
+    const formController: IFormController = useForm(loginInitialState, validateLogin, AccountServices.LoginUser)
     
     const {email, password} = unpackLoginFormValues(formController.values);
     const {passwordError, emailError, formExecutionError} = unpackLoginFormErrors(formController.errors);

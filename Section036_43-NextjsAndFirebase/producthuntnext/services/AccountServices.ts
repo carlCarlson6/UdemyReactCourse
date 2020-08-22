@@ -1,8 +1,8 @@
 import { IFormValue } from "../common/models/IFormValue";
 import {firebase} from "../firebase";
 import Router from "next/router";
-import { unpackCreateAccountFormValues } from "../common/unpackCreateAccount";
-import { unpackLoginFormValues } from "../common/unpackLogin";
+import { unpackCreateAccountFormValues } from "../common/utils/unpackValues/unpackCreateAccount";
+import { unpackLoginFormValues } from "../common/utils/unpackValues/unpackLogin";
 
 export class AccountServices {
     static async CreateAccount(userInfo: Array<IFormValue>): Promise<void> {

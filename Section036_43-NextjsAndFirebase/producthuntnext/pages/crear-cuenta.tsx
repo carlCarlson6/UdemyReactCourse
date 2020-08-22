@@ -1,15 +1,15 @@
 import React, { Fragment } from 'react';
 import Layout from '../components/layout/Layout';
 import { Form, Field, InputSubmitForm, FormTitle, FormError } from '../components/styles/ui/FormStyles';
-import useValidation from '../hooks/useValidation';
+import useForm from '../hooks/useForm';
 import { IFormController } from '../controllers/IFormController';
-import { createAccountInitialState } from '../common/InitialStates';
+import { createAccountInitialState } from '../common/data/InitialStates';
 import { validateNewAccount } from '../validations/CreateAccountValidation';
 import { AccountServices } from '../services/AccountServices';
-import { unpackCreateAccountFormValues, unpackCreateAccountFormErrors } from '../common/unpackCreateAccount';
+import { unpackCreateAccountFormValues, unpackCreateAccountFormErrors } from '../common/utils/unpackValues/unpackCreateAccount';
 
 const CreateAccount: React.FC = (): JSX.Element => {
-    const formController: IFormController = useValidation(createAccountInitialState, validateNewAccount, AccountServices.CreateAccount)
+    const formController: IFormController = useForm(createAccountInitialState, validateNewAccount, AccountServices.CreateAccount)
 
     const {name, password, email} = unpackCreateAccountFormValues(formController.values);
     const {nameError, passwordError, emailError, formExecutionError} = unpackCreateAccountFormErrors(formController.errors);

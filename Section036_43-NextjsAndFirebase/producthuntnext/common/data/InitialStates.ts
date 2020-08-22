@@ -1,4 +1,4 @@
-import { IFormValue } from "./models/IFormValue";
+import { IFormValue } from "../models/IFormValue";
 
 export const createAccountInitialState: Array<IFormValue> = [
     {name: 'name', value: ''},
@@ -16,5 +16,4 @@ export const newProductInitialState: Array<IFormValue> = [
     {name: 'company', value: ''},
     {name: 'url', value: ''},
     {name: 'description', value: ''},
-    {name: 'image', value: ''}
 ]

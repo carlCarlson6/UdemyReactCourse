@@ -1,21 +1,27 @@
 import React, { Fragment } from 'react';
 import Layout from '../components/layout/Layout';
 import { IFormController } from '../controllers/IFormController';
-import useValidation from '../hooks/useValidation';
-import { newProductInitialState } from '../common/InitialStates';
+import useForm from '../hooks/useForm';
+import { newProductInitialState } from '../common/data/InitialStates';
 import { validateNewProduct } from '../validations/NewProductValidation';
 import { ProductServices } from '../services/ProductServices';
 import { FormTitle, Form, Field, FormError, InputSubmitForm } from '../components/styles/ui/FormStyles';
 import { FireBaseContext } from '../firebase';
 import FileUploader from 'react-firebase-file-uploader';
-import { unpackNewProductFormValues, unpackNewProductFormErrors } from '../common/unpackNewProduct';
+import { unpackNewProductFormValues, unpackNewProductFormErrors } from '../common/utils/unpackValues/unpackNewProduct';
+import { getHandleUploadStart, getHandleUploadError, getHandleUploadSuccess, getHandleProgress } from '../common/utils/handlers/ImageUploadHandlers';
 
 const NewProduct: React.FC = (): JSX.Element => {
-    const {user, firebase} = React.useContext(FireBaseContext);
-    const formController: IFormController = useValidation(newProductInitialState, validateNewProduct, ProductServices.CreateAddProductFn(user, firebase));
+    const [, setImageName] = React.useState<string>('');
+    const [, setUploading] = React.useState<any>(false);
+    const [, setProgress] = React.useState<number>(0);
+    const [imageUrl, setImageUrl] = React.useState<string>('');
 
-    const {name, company, url, description, image} = unpackNewProductFormValues(formController.values);
-    const {nameError, companyError, urlError, descriptionError, imageError, formExecutionError} = unpackNewProductFormErrors(formController.errors);
+    const {user, firebase} = React.useContext(FireBaseContext);
+    const formController: IFormController = useForm(newProductInitialState, validateNewProduct, ProductServices.CreateAddProductFn(user, firebase, imageUrl));
+
+    const {name, company, url, description} = unpackNewProductFormValues(formController.values);
+    const {nameError, companyError, urlError, descriptionError, formExecutionError} = unpackNewProductFormErrors(formController.errors);
 
     return (
         <Fragment>
@@ -93,19 +99,15 @@ const NewProduct: React.FC = (): JSX.Element => {
                             <FileUploader 
                                 accept="image/*"
                                 id="image"
-                                name={image.name}
-                                onChange={formController.handleChange}
-                                value={image.value}
-                                onBlur={formController.handleBlur}
+                                name="image"
                                 randomizeFilename
-                                storageRef={firebase.storage().ref("images")}
-                                onUploadStart={handleUploadStart}
-                                onUploadError={handleUploadError}
-                                onUploadSuccess={handleUploadSuccess}
-                                onProgress={handleProgress}
+                                storageRef={firebase.storage.ref("products")}
+                                onUploadStart={getHandleUploadStart(setProgress, setUploading)}
+                                onUploadError={getHandleUploadError(setUploading)}
+                                onUploadSuccess={getHandleUploadSuccess(setProgress, setUploading, setImageName, firebase, setImageUrl)}
+                                onProgress={getHandleProgress(setProgress)}
                             />
                         </Field>
-                        {imageError && <FormError>{imageError.message}</FormError>}
 
                     </ fieldset>
                         <InputSubmitForm 

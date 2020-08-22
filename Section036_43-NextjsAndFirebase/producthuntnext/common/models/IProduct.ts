@@ -5,7 +5,7 @@ export interface IProduct {
     company: string
     url: string
     description: string
-    image: string
+    imageUrl: string
     votes: number
     comments: Array<IComment>
     createdBy: string

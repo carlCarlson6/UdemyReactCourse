@@ -10,5 +10,5 @@ export interface IProduct {
     votes: number
     comments: Array<IComment>
     createdBy: string
-    createdAt: Date
+    createdAt: number
 }

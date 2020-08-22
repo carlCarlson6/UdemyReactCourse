@@ -20,12 +20,14 @@ const Home: React.FC = (): JSX.Element => {
                     <div className="listado-productos">
                         <div className="contenedor">
                             <div className="bg-white">
-                                {products.map(product => (
-                                    <ProductDetails 
-                                        key={product.id}
-                                        product={product}
-                                    />
-                                ))}
+                                <ul>
+                                    {products.map(product => (
+                                        <ProductDetails 
+                                            key={product.id}
+                                            product={product}
+                                        />
+                                    ))}
+                                </ul>
                             </div>
                         </div>
                     </div>

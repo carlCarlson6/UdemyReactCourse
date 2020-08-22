@@ -15,7 +15,7 @@ export class ProductServices {
             }
 
             const {name, company, url, description} = unpackNewProductFormValues(productInfo)
-            const product: IProduct = {name: name.value, company: company.value, url: url.value, description: description.value, imageUrl, votes: 0, createdAt: new Date(), createdBy: user.email, comments: []};
+            const product: IProduct = {name: name.value, company: company.value, url: url.value, description: description.value, imageUrl, votes: 0, createdAt: Date.now(), createdBy: user.email, comments: []};
             firebase.db.collection('products').add(product);
 
             Router.push('/');

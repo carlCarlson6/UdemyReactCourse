@@ -8,16 +8,13 @@ import { FormTitle, Form, Field, FormError, InputSubmitForm } from '../component
 import { loginInitialState } from '../common/InitialStates';
 import { validateLogin } from '../validations/LoginValidation';
 import { AccountServices } from '../services/AccountServices';
+import { unpackLoginFormValues, unpackLoginFormErrors } from '../common/unpackLogin';
 
 const Login: React.FC = (): JSX.Element => {
     const formController: IFormController = useValidation(loginInitialState, validateLogin, AccountServices.LoginUser)
     
-    const password: IFormValue = formController.values.find(formValue => formValue.name === 'password');
-    const email: IFormValue = formController.values.find(formValue => formValue.name === 'email');
-    
-    const passwordError: IError = formController.errors.find(error => error.name === 'password');
-    const emailError: IError = formController.errors.find(error => error.name === 'email');
-    const formExecutionError: IError = formController.errors.find(error => error.name === 'formExecutionFn');
+    const {email, password} = unpackLoginFormValues(formController.values);
+    const {passwordError, emailError, formExecutionError} = unpackLoginFormErrors(formController.errors);
 
     return (
         <Fragment>
@@ -34,7 +31,7 @@ const Login: React.FC = (): JSX.Element => {
                             type="email"
                             id="email"
                             placeholder="Tu Email"
-                            name="email"
+                            name={email.name}
                             onChange={formController.handleChange}
                             value={email.value}
                             onBlur={formController.handleBlur}
@@ -48,7 +45,7 @@ const Login: React.FC = (): JSX.Element => {
                             type="password"
                             id="password"
                             placeholder="Tu Contraseña"
-                            name="password"
+                            name={password.name}
                             onChange={formController.handleChange}
                             value={password.value}
                             onBlur={formController.handleBlur}

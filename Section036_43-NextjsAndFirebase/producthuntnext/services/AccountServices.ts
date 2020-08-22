@@ -1,22 +1,21 @@
 import { IFormValue } from "../common/models/IFormValue";
 import {firebase} from "../firebase";
 import Router from "next/router";
+import { unpackCreateAccountFormValues } from "../common/unpackCreateAccount";
+import { unpackLoginFormValues } from "../common/unpackLogin";
 
 export class AccountServices {
     static async CreateAccount(userInfo: Array<IFormValue>): Promise<void> {
-        const name: string = userInfo.find(info => info.name === 'name').value;
-        const password: string = userInfo.find(info => info.name === 'password').value;
-        const email: string = userInfo.find(info => info.name === 'email').value;
+        const {name, password, email} = unpackCreateAccountFormValues(userInfo);
         
-        await firebase.AddUser(name, email, password);
+        await firebase.AddUser(name.value, email.value, password.value);
         Router.push('/');
     }
 
     static async LoginUser(userInfo: Array<IFormValue>): Promise<void> {
-        const password: string = userInfo.find(info => info.name === 'password').value;
-        const email: string = userInfo.find(info => info.name === 'email').value;
+        const {email, password} = unpackLoginFormValues(userInfo);
         
-        await firebase.AutheticateUser(email, password);
+        await firebase.AutheticateUser(email.value, password.value);
         Router.push('/');
     }
 

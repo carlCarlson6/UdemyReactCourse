@@ -32,6 +32,7 @@ const useValidation = (initialState: Array<IFormValue>, validate: (formValues: A
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
         const {name, value} = event.target;
+        console.log({name, value})
         setValues(values.map(formValue => formValue.name === name ? {name, value}: formValue ))
     }
 

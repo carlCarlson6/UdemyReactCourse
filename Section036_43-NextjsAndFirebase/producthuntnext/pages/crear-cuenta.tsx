@@ -8,18 +8,14 @@ import { validateNewAccount } from '../validations/CreateAccountValidation';
 import { AccountServices } from '../services/AccountServices';
 import { IFormValue } from '../common/models/IFormValue';
 import { IError } from '../common/models/IError';
+import { FireBaseContext } from '../firebase';
+import { unpackCreateAccountFormValues, unpackCreateAccountFormErrors } from '../common/unpackCreateAccount';
 
 const CreateAccount: React.FC = (): JSX.Element => {
     const formController: IFormController = useValidation(createAccountInitialState, validateNewAccount, AccountServices.CreateAccount)
-    
-    const name: IFormValue = formController.values.find(formValue => formValue.name === 'name');
-    const password: IFormValue = formController.values.find(formValue => formValue.name === 'password');
-    const email: IFormValue = formController.values.find(formValue => formValue.name === 'email');
-    
-    const nameError: IError = formController.errors.find(error => error.name === 'name');
-    const passwordError: IError = formController.errors.find(error => error.name === 'password');
-    const emailError: IError = formController.errors.find(error => error.name === 'email');
-    const formExecutionError: IError = formController.errors.find(error => error.name === 'formExecutionFn');
+
+    const {name, password, email} = unpackCreateAccountFormValues(formController.values);
+    const {nameError, passwordError, emailError, formExecutionError} = unpackCreateAccountFormErrors(formController.errors),
 
     return (
         <Fragment>
@@ -35,7 +31,7 @@ const CreateAccount: React.FC = (): JSX.Element => {
                             type="text"
                             id="name"
                             placeholder="Tu Nombre"
-                            name="name"
+                            name={name.name}
                             onChange={formController.handleChange}
                             value={name.value}
                             onBlur={formController.handleBlur}
@@ -49,7 +45,7 @@ const CreateAccount: React.FC = (): JSX.Element => {
                             type="email"
                             id="email"
                             placeholder="Tu Email"
-                            name="email"
+                            name={email.name}
                             onChange={formController.handleChange}
                             value={email.value}
                             onBlur={formController.handleBlur}
@@ -63,7 +59,7 @@ const CreateAccount: React.FC = (): JSX.Element => {
                             type="password"
                             id="password"
                             placeholder="Tu Contraseña"
-                            name="password"
+                            name={password.name}
                             onChange={formController.handleChange}
                             value={password.value}
                             onBlur={formController.handleBlur}

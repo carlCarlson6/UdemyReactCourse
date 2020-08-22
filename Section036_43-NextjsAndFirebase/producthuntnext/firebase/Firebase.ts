@@ -1,15 +1,18 @@
-import app, {auth, User} from 'firebase/app';
+import app, {auth, User, firestore} from 'firebase/app';
 import config from './Config'
 import 'firebase/auth';
+import 'firebase/firestore';
 
 export class Firebase {
-    auth: auth.Auth;
-    
+    auth: app.auth.Auth;
+    db: firestore.Firestore;
+
     constructor() {
         if(!app.apps.length){
             app.initializeApp(config);
         }
-        this.auth = auth();
+        this.auth = app.auth();
+        this.db = app.firestore();
     }
 
     async AddUser(name: string, email: string, password: string): Promise<User> {

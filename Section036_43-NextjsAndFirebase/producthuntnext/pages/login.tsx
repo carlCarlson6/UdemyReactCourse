@@ -7,13 +7,25 @@ import { loginInitialState } from '../common/data/InitialStates';
 import { validateLogin } from '../logic/validations/LoginValidation';
 import { AccountServices } from '../logic/services/AccountServices';
 import { unpackLoginFormValues, unpackLoginFormErrors } from '../common/utils/unpackValues/unpackLogin';
+import Spinner from '../components/Spinner';
 
 const Login: React.FC = (): JSX.Element => {
     const formController: IFormController = useForm(loginInitialState, validateLogin, AccountServices.LoginUser)
     
     const {email, password} = unpackLoginFormValues(formController.values);
     const {passwordError, emailError, formExecutionError} = unpackLoginFormErrors(formController.errors);
-
+    
+    if(formController.submitForm) {
+        return (
+            <Fragment>
+                <Layout>
+                    <p>Iniciado sesion</p>
+                    <Spinner />
+                </Layout>
+            </Fragment>
+        );
+    }
+    
     return (
         <Fragment>
             <Layout>

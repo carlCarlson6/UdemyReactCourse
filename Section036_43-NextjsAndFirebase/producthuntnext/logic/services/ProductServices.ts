@@ -58,7 +58,7 @@ export class ProductServices {
     }
 
     static async AddCommentToProduct(productInfo: Array<IFormValue>): Promise<void> {
-        
+        console.log('adding product');
     }
 
 }

@@ -18,6 +18,7 @@ const useForm = (initialState: Array<IFormValue>, validate: (formValues: Array<I
             const noErrors = Object.keys(errors).length === 0;
             if(noErrors) {
                 try {
+                    console.log('before creating comment')
                     await formExecutionFn(values);
                 }
                 catch (error) {

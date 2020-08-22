@@ -73,6 +73,11 @@ const Layout: React.FC<ILayout> = (props) => {
                     rel="stylesheet" 
                     href="/static/css/app.css"
                 />
+
+                <link
+                    rel="stylesheet" 
+                    href="/static/css/SpinnerStyles.css"
+                />
                 
 
             </Head>

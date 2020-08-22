@@ -2,6 +2,9 @@ import styled from '@emotion/styled';
 
 export const Image = styled.img`
     width: 200px;
+    :hover {
+        cursor: pointer;
+    }
 `;
 
 export const Product = styled.li`

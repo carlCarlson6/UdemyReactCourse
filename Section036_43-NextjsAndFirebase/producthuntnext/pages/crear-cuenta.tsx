@@ -7,12 +7,24 @@ import { createAccountInitialState } from '../common/data/InitialStates';
 import { validateNewAccount } from '../logic/validations/CreateAccountValidation';
 import { AccountServices } from '../logic/services/AccountServices';
 import { unpackCreateAccountFormValues, unpackCreateAccountFormErrors } from '../common/utils/unpackValues/unpackCreateAccount';
+import Spinner from '../components/Spinner';
 
 const CreateAccount: React.FC = (): JSX.Element => {
     const formController: IFormController = useForm(createAccountInitialState, validateNewAccount, AccountServices.CreateAccount)
 
     const {name, password, email} = unpackCreateAccountFormValues(formController.values);
     const {nameError, passwordError, emailError, formExecutionError} = unpackCreateAccountFormErrors(formController.errors);
+
+    if(formController.submitForm) {
+        return (
+            <Fragment>
+                <Layout>
+                    <p>Creando cuenta</p>
+                    <Spinner />
+                </Layout>
+            </Fragment>
+        );
+    }
 
     return (
         <Fragment>

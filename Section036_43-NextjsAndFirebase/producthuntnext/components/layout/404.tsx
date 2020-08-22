@@ -2,10 +2,10 @@ import React from 'react';
 import { ErrorTitle } from '../styles/layout/404Styles';
 
  
-const Error404: React.SFC = () => {
+const Error404: React.FC<{message:string}> = ({message}) => {
     return ( 
         <ErrorTitle>
-            404 - Producto no existente
+            404 - {message}
         </ErrorTitle>
      );
 }

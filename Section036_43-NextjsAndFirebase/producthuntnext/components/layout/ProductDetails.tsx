@@ -12,7 +12,12 @@ const ProductDetails: React.FC<IProductDetails> = ({product}): JSX.Element => {
         <Product>    
             <Description>
                 <div>
-                    <Image src={product.imageUrl}/>
+                    <Link
+                        href="/products/[id]"
+                        as={`/products/${product.id}`}
+                    >
+                        <Image src={product.imageUrl}/>
+                    </ Link>
                 </div>
                 <div>
                     <Link

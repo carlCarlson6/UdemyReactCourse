@@ -11,6 +11,7 @@ import FileUploader from 'react-firebase-file-uploader';
 import { unpackNewProductFormValues, unpackNewProductFormErrors } from '../common/utils/unpackValues/unpackNewProduct';
 import { getHandleUploadStart, getHandleUploadError, getHandleUploadSuccess, getHandleProgress } from '../common/utils/handlers/ImageUploadHandlers';
 import Spinner from '../components/Spinner';
+import Error404 from '../components/layout/404';
 
 const NewProduct: React.FC = (): JSX.Element => {
     const [, setImageName] = React.useState<string>('');
@@ -24,6 +25,25 @@ const NewProduct: React.FC = (): JSX.Element => {
     const {name, company, url, description} = unpackNewProductFormValues(formController.values);
     const {nameError, companyError, urlError, descriptionError, formExecutionError} = unpackNewProductFormErrors(formController.errors);
 
+    if(formController.submitForm) {
+        return (
+            <Fragment>
+                <Layout>
+                    <p>Creando producto</p>
+                    <Spinner />
+                </Layout>
+            </Fragment>
+        );
+    }
+    
+    if(!user) {
+        return (
+            <Layout>
+                <Error404 message='No dispones de acceso'/>
+            </Layout>
+        )
+    }
+
     return (
         <Fragment>
             <Layout>
@@ -34,7 +54,7 @@ const NewProduct: React.FC = (): JSX.Element => {
                 >
                     <fieldset>
                         <legend>Informacion general</legend>
-                    
+
                         <Field>
                             <label htmlFor="name">Nombre</label>
                             <input 
@@ -78,10 +98,10 @@ const NewProduct: React.FC = (): JSX.Element => {
                         {urlError && <FormError>{urlError.message}</FormError>}
 
                     </fieldset>
-  
+        
                     <fieldset>
                         <legend>Sobre tu producto</legend>
-  
+        
                         <Field>
                             <label htmlFor="">Descripcion</label>
                             <textarea
@@ -110,29 +130,28 @@ const NewProduct: React.FC = (): JSX.Element => {
                             />
                         </Field>
 
-                        
+
                     </ fieldset>
-                        { uplaoding? (
-                            <Fragment>
-                                <p>Subiendo imagen</p>
-                                <Spinner />
-                            </Fragment>
-                        ): (
-                            <InputSubmitForm 
-                            type="submit"
-                            value="Añadir producto"
-                            >CREAR PRODUCTO</ InputSubmitForm>
-                        ) }
+                    { uplaoding? (
+                        <Fragment>
+                            <p>Subiendo imagen</p>
+                            <Spinner />
+                        </Fragment>
+                    ): (
+                        <InputSubmitForm 
+                        type="submit"
+                        value="Añadir producto"
+                        >CREAR PRODUCTO</ InputSubmitForm>
+                    ) }
 
-                        {formExecutionError && <FormError>{formExecutionError.message}</FormError>}
-
-                   
+                    {formExecutionError && <FormError>{formExecutionError.message}</FormError>}
 
                 </Form>
 
             </Layout>
         </Fragment>
     );
+
 }
 
 

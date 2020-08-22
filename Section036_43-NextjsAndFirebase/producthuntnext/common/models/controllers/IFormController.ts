@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent } from "react";
-import { IFormValue } from "../common/models/IFormValue";
-import { IError } from "../common/models/IError";
+import { IFormValue } from "../IFormValue";
+import { IError } from "../IError";
 
 export interface IFormController {
     values: Array<IFormValue>,

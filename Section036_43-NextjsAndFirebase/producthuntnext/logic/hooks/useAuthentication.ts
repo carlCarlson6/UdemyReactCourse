@@ -1,5 +1,5 @@
 import React from 'react';
-import {firebase} from '../firebase';
+import {firebase} from '../../database/firebase';
 import { User } from 'firebase';
 
 export const useAuthentication = () => {

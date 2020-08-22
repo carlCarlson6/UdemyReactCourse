@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import Link from 'next/link';
 import { ButtonLink } from '../styles/ui/ButtonLink';
-import { IAdministration } from '../../common/models/IAdministration';
+import { IAdministration } from '../../common/models/components/IAdministration';
  
 const Administration: React.FC<IAdministration> = ({user, firebase}): JSX.Element => {
     return (

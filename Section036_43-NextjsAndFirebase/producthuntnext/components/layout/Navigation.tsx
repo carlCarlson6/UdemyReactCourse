@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Nav } from '../styles/layout/NavigationStyles';
-import { INavigation } from '../../common/models/INavigation';
+import { INavigation } from '../../common/models/components/INavigation';
 
 const Navigation: React.FC<INavigation> = ({user}) => {
     return (    

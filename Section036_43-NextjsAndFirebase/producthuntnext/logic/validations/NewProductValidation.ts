@@ -1,6 +1,6 @@
-import { IFormValue } from "../common/models/IFormValue"
-import { IError } from "../common/models/IError"
-import { unpackNewProductFormValues } from "../common/utils/unpackValues/unpackNewProduct";
+import { IFormValue } from "../../common/models/IFormValue"
+import { IError } from "../../common/models/IError"
+import { unpackNewProductFormValues } from "../../common/utils/unpackValues/unpackNewProduct";
 
 export const validateNewProduct = (formValues: Array<IFormValue>): Array<IError> =>  {
     let errors: Array<IError> = []

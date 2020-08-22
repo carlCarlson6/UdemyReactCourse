@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { HeaderStyled } from '../styles/layout/HeaderStyles';
 import { AdministrationContainer } from '../styles/layout/AdministrationContainer';
 import { HeaderControlContainer } from '../styles/layout/HeaderStyles';
-import {FireBaseContext} from '../../firebase' 
+import {FireBaseContext} from '../../database/firebase' 
 
 const Header: React.FC = (): JSX.Element => {
     const {user, firebase} = React.useContext(FireBaseContext);

@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import Layout from '../components/layout/Layout';
-import { IFormController } from '../controllers/IFormController';
-import useForm from '../hooks/useForm';
+import { IFormController } from '../common/models/controllers/IFormController';
+import useForm from '../logic/hooks/useForm';
 import { FormTitle, Form, Field, FormError, InputSubmitForm } from '../components/styles/ui/FormStyles';
 import { loginInitialState } from '../common/data/InitialStates';
-import { validateLogin } from '../validations/LoginValidation';
-import { AccountServices } from '../services/AccountServices';
+import { validateLogin } from '../logic/validations/LoginValidation';
+import { AccountServices } from '../logic/services/AccountServices';
 import { unpackLoginFormValues, unpackLoginFormErrors } from '../common/utils/unpackValues/unpackLogin';
 
 const Login: React.FC = (): JSX.Element => {

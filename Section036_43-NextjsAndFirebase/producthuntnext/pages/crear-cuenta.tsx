@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import Layout from '../components/layout/Layout';
 import { Form, Field, InputSubmitForm, FormTitle, FormError } from '../components/styles/ui/FormStyles';
-import useForm from '../hooks/useForm';
-import { IFormController } from '../controllers/IFormController';
+import useForm from '../logic/hooks/useForm';
+import { IFormController } from '../common/models/controllers/IFormController';
 import { createAccountInitialState } from '../common/data/InitialStates';
-import { validateNewAccount } from '../validations/CreateAccountValidation';
-import { AccountServices } from '../services/AccountServices';
+import { validateNewAccount } from '../logic/validations/CreateAccountValidation';
+import { AccountServices } from '../logic/services/AccountServices';
 import { unpackCreateAccountFormValues, unpackCreateAccountFormErrors } from '../common/utils/unpackValues/unpackCreateAccount';
 
 const CreateAccount: React.FC = (): JSX.Element => {

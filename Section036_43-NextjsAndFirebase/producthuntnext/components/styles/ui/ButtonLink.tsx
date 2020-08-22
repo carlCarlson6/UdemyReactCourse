@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { IButtonLink } from '../../../common/models/IButtonLink';
+import { IButtonLink } from '../../../common/models/components/IButtonLink';
 
 export const ButtonLink = styled.a<IButtonLink>`
     font-weight: 700;

@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
 import Layout from '../components/layout/Layout';
-import { IFormController } from '../controllers/IFormController';
-import useForm from '../hooks/useForm';
+import { IFormController } from '../common/models/controllers/IFormController';
+import useForm from '../logic/hooks/useForm';
 import { newProductInitialState } from '../common/data/InitialStates';
-import { validateNewProduct } from '../validations/NewProductValidation';
-import { ProductServices } from '../services/ProductServices';
+import { validateNewProduct } from '../logic/validations/NewProductValidation';
+import { ProductServices } from '../logic/services/ProductServices';
 import { FormTitle, Form, Field, FormError, InputSubmitForm } from '../components/styles/ui/FormStyles';
-import { FireBaseContext } from '../firebase';
+import { FireBaseContext } from '../database/firebase';
 import FileUploader from 'react-firebase-file-uploader';
 import { unpackNewProductFormValues, unpackNewProductFormErrors } from '../common/utils/unpackValues/unpackNewProduct';
 import { getHandleUploadStart, getHandleUploadError, getHandleUploadSuccess, getHandleProgress } from '../common/utils/handlers/ImageUploadHandlers';

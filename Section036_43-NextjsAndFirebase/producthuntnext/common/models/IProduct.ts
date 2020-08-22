@@ -1,6 +1,7 @@
 import { IComment } from "./IComment";
 
 export interface IProduct {
+    id?: string
     name: string
     company: string
     url: string

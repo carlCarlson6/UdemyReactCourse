@@ -1,8 +1,8 @@
-import React, { ChangeEvent, FormEvent } from 'react';
-import { IFormController } from '../controllers/IFormController';
-import { IFormValue } from '../common/models/IFormValue';
-import { IError } from '../common/models/IError';
-import { getHandleSubmit, getHandleChange, getHandleBlur } from '../common/utils/handlers/UseFormHandlers';
+import React from 'react';
+import { IFormController } from '../../common/models/controllers/IFormController';
+import { IFormValue } from '../../common/models/IFormValue';
+import { IError } from '../../common/models/IError';
+import { getHandleSubmit, getHandleChange, getHandleBlur } from '../../common/utils/handlers/UseFormHandlers';
 
 const useForm = (initialState: Array<IFormValue>, validate: (formValues: Array<IFormValue>) => Array<IError>, formExecutionFn: (formValues: Array<IFormValue>) => Promise<void>): IFormController => {
     const [values, setValues] = React.useState<Array<IFormValue>>(initialState);
@@ -14,7 +14,7 @@ const useForm = (initialState: Array<IFormValue>, validate: (formValues: Array<I
     const handleBlur = getHandleBlur(values, validate, setErrors);
 
     React.useEffect(() => {const executeUseEffect = async () => {
-        if(submitForm){
+        if(submitForm) {
             const noErrors = Object.keys(errors).length === 0;
             if(noErrors) {
                 try {
@@ -28,8 +28,7 @@ const useForm = (initialState: Array<IFormValue>, validate: (formValues: Array<I
                 
             }
             setSubmitForm(false);
-        }}
-        executeUseEffect();
+        }}; executeUseEffect();
     }, [errors])
 
     

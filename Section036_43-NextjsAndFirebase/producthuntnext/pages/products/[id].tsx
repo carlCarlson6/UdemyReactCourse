@@ -5,7 +5,7 @@ import { IProduct } from '../../common/models/entities/IProduct';
 import { ProductServices } from '../../logic/services/ProductServices';
 import Error404 from '../../components/layout/404';
 import Layout from '../../components/layout/Layout';
-import { H1, ProductContainer, CommentsListTitle, VotesContainer } from '../../components/styles/layout/ProductViewStyles';
+import { H1, ProductContainer, CommentsListTitle, VotesContainer, CommentListElemente } from '../../components/styles/layout/ProductViewStyles';
 import { es } from 'date-fns/locale';
 import formatDistanteToNow from 'date-fns/formatDistanceToNow';
 import {Field, InputSubmitForm, FormError} from '../../components/styles/ui/FormStyles';
@@ -24,7 +24,7 @@ const Product: React.SFC = () => {
     const [product, setProduct] = React.useState<IProduct>();
     const [error, setError] = React.useState<boolean>(false);
     const { firebase, user }= React.useContext(FireBaseContext);
-    const formController: IFormController = useForm(commnetInitialState, validateComment, ProductServices.AddCommentToProduct)
+    const formController: IFormController = useForm(commnetInitialState, validateComment, ProductServices.GetAddCommentToProductFn(user, product, firebase, setProduct))
     const comment: IFormValue = formController.values.find(formValue => formValue.name === 'comment');
     const commentError: IError = formController.errors.find(error => error.name === 'comment');
 
@@ -94,13 +94,18 @@ const Product: React.SFC = () => {
                                     ) }
 
                                     <CommentsListTitle>Comentarios</CommentsListTitle>
-                                    {product.comments.map(comment => (
-                                        <li>
-                                            <p>{comment.message}</p>
-                                            <p>Escrito por: {comment.createdBy.name}</p>
-                                        </li>
-                                    ))}
-
+                                    { product.comments.length === 0 ? 'No hay comentarios' : null }
+                                    <ul>
+                                        {product.comments.map((comment, index) => (
+                                            <CommentListElemente
+                                                key={`${product.id}${comment.createdBy.id}${index}`}
+                                            >
+                                                <p>{comment.message}</p>
+                                                <p>Escrito por: {''}<span>{comment.createdBy.name}</span></p>
+                                                <p>Hace: {formatDistanteToNow(new Date(comment.createdAt), {locale:es})}</p>
+                                            </ CommentListElemente>
+                                        ))}
+                                    </ul>
                                 </div>
 
                                 <aside>
@@ -111,9 +116,15 @@ const Product: React.SFC = () => {
                                     >Visituar URL</ButtonLink>
 
                                     <VotesContainer>
-                                        <p>{product.votes} votos</p>
+                                        <p>{product.votes.length} votos</p>
                                         { user? (
-                                            <ButtonLink>Votar</ButtonLink>
+                                            <Fragment>
+                                                { !product.votes.includes(user.uid) ? (
+                                                    <ButtonLink
+                                                        onClick={() => ProductServices.VoteProduct(user, product, setProduct, firebase)}
+                                                    >Votar</ButtonLink>
+                                                ) : null }
+                                            </Fragment>
                                         ) : (
                                             null
                                         ) }

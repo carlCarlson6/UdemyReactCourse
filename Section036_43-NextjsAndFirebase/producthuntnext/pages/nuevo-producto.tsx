@@ -20,7 +20,7 @@ const NewProduct: React.FC = (): JSX.Element => {
     const [imageUrl, setImageUrl] = React.useState<string>('');
 
     const {user, firebase} = React.useContext(FireBaseContext);
-    const formController: IFormController = useForm(newProductInitialState, validateNewProduct, ProductServices.CreateAddProductFn(user, firebase, imageUrl));
+    const formController: IFormController = useForm(newProductInitialState, validateNewProduct, ProductServices.GetCreateProductFn(user, firebase, imageUrl));
 
     const {name, company, url, description} = unpackNewProductFormValues(formController.values);
     const {nameError, companyError, urlError, descriptionError, formExecutionError} = unpackNewProductFormErrors(formController.errors);

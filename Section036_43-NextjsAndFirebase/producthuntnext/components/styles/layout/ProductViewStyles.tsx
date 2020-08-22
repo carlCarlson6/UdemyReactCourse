@@ -21,3 +21,11 @@ export const VotesContainer = styled.div`
     margin-top: 5rem;
     text-align: center; 
 `;
+
+export const CommentListElemente = styled.li`
+    border: 1px solid var(--grey3);
+    padding: 2rem;
+    span {
+        font-weight: bold;
+    }
+`;

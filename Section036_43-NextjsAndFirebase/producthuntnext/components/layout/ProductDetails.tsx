@@ -42,7 +42,7 @@ const ProductDetails: React.FC<IProductDetails> = ({product}): JSX.Element => {
 
             <Votes>
                 <div>&#9650;</div>
-                <p>{product.votes}</p>
+                <p>{product.votes.length}</p>
             </Votes>
         </Product>
     );

@@ -8,7 +8,7 @@ export interface IProduct {
     url: string
     description: string
     imageUrl: string
-    votes: number
+    votes: Array<string>
     comments: Array<IComment>
     createdBy: IUser
     createdAt: number

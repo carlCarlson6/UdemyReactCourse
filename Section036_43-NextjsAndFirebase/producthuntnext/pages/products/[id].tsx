@@ -5,7 +5,7 @@ import { IProduct } from '../../common/models/entities/IProduct';
 import { ProductServices } from '../../logic/services/ProductServices';
 import Error404 from '../../components/layout/404';
 import Layout from '../../components/layout/Layout';
-import { H1, ProductContainer, CommentsListTitle, VotesContainer, CommentListElemente } from '../../components/styles/layout/ProductViewStyles';
+import { H1, ProductContainer, CommentsListTitle, VotesContainer, CommentListElemente, ProductCreator } from '../../components/styles/layout/ProductViewStyles';
 import { es } from 'date-fns/locale';
 import formatDistanteToNow from 'date-fns/formatDistanceToNow';
 import {Field, InputSubmitForm, FormError} from '../../components/styles/ui/FormStyles';
@@ -17,8 +17,10 @@ import { IFormValue } from '../../common/models/entities/IFormValue';
 import { IError } from '../../common/models/entities/IError';
 import {ButtonLink} from '../../components/styles/ui/ButtonLink';
 import Spinner from '../../components/Spinner';
+import { canDelete } from '../../common/utils/canDelete';
 
 const Product: React.SFC = () => {
+    const [loadingInfo, setLoadingInfo] = React.useState<boolean>(true);
     const router = useRouter();
     const {query: {id}} = router;
     const [product, setProduct] = React.useState<IProduct>();
@@ -30,23 +32,28 @@ const Product: React.SFC = () => {
 
     React.useEffect(() => {
         const getProduct = async () => {
-        if(id) { 
+        if(id && loadingInfo) { 
             try {
                 const retrivedProduct = await ProductServices.GetProductById(id, firebase);
                 setProduct(retrivedProduct);
+                setLoadingInfo(false);
             } catch(error) {
                 setError(true);
+                setLoadingInfo(false);
             }
         }}
         getProduct();
     },[id]);
 
-    if(!product && !error) {
+    if(loadingInfo) {
         return (
-        <Fragment>
-            <p>Cargando ...</p>
-            <Spinner />
-        </Fragment>)
+            <Fragment>
+                <Layout>
+                    <p>Cargando ...</p>
+                    <Spinner />
+                </Layout>
+            </Fragment>
+        )
     };
 
     return (
@@ -102,6 +109,7 @@ const Product: React.SFC = () => {
                                             >
                                                 <p>{comment.message}</p>
                                                 <p>Escrito por: {''}<span>{comment.createdBy.name}</span></p>
+                                                {comment.createdBy.id === product.createdBy.id ? <ProductCreator>Es Creador</ProductCreator> : null}
                                                 <p>Hace: {formatDistanteToNow(new Date(comment.createdAt), {locale:es})}</p>
                                             </ CommentListElemente>
                                         ))}
@@ -130,9 +138,15 @@ const Product: React.SFC = () => {
                                         ) }
 
                                     </VotesContainer>
-                                        
+                                    
                                 </aside>
                             </ProductContainer>
+
+                            { canDelete(user, product.createdBy) && 
+                                <ButtonLink
+                                    onClick={() => ProductServices.DeleteProduct(product.id, firebase)}
+                                >Delete Product</ButtonLink>
+                            }
 
                         </div>
                     ) 

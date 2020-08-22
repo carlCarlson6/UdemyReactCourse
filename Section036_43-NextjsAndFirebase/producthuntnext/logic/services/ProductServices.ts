@@ -12,7 +12,6 @@ export class ProductServices {
     static GetCreateProductFn(user: User, firebase: Firebase, imageUrl:string): (productInfo: Array<IFormValue>) => Promise<void> {    
         return async (productInfo: Array<IFormValue>) => {
             if(!user) { 
-                console.log('no user');
                 Router.push('/')
             }
 
@@ -63,8 +62,6 @@ export class ProductServices {
             const commentUser: IUser = { id: user.uid, email: user.email, name: user.displayName };
             const message: string = formCommentInfo.find(formValue => formValue.name === 'comment').value;
             const comment: IComment = { message, createdBy: commentUser, createdAt: Date.now() };
-
-            console.log(comment)
 
             const comments: Array<IComment> = [...product.comments];
             comments.push(comment);

@@ -22,7 +22,6 @@ export const getHandleUploadSuccess = (setProgress: Dispatch<SetStateAction<numb
         setUploading(false);
         setName(name);
         firebase.storage.ref("products").child(name).getDownloadURL().then(url => {
-            console.log(url)
             setImageUrl(url);
         });
     }

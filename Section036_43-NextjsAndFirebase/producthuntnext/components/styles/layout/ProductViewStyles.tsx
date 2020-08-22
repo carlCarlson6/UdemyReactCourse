@@ -29,3 +29,13 @@ export const CommentListElemente = styled.li`
         font-weight: bold;
     }
 `;
+
+export const ProductCreator = styled.p`
+    padding: .5rem 2rem;
+    background-color: var(--orange);
+    color: #fff;
+    text-transform: uppercase;
+    display: inline-block;
+    font-weight: bold;
+    text-align: center
+`;

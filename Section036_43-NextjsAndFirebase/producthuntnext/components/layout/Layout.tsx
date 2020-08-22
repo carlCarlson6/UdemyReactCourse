@@ -56,7 +56,6 @@ const Layout: React.FC<ILayout> = (props) => {
             />
 
             <Head>
-                <html lang="es"/>
                 <title>ProductHunt-Firebase-Next.ts</title>
                 
                 <link rel="stylesheet" 

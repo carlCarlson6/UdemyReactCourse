@@ -1,5 +1,5 @@
-import { IFormValue } from "../../models/IFormValue"
-import { IError } from "../../models/IError"
+import { IFormValue } from "../../models/entities/IFormValue"
+import { IError } from "../../models/entities/IError"
 
 export const unpackNewProductFormValues = (formValues: Array<IFormValue>) => {
     const name: IFormValue = formValues.find(formValue => formValue.name === 'name');

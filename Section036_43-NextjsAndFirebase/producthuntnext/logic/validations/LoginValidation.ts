@@ -1,5 +1,5 @@
-import { IFormValue } from "../../common/models/IFormValue"
-import { IError } from "../../common/models/IError"
+import { IFormValue } from "../../common/models/entities/IFormValue"
+import { IError } from "../../common/models/entities/IError"
 import { unpackLoginFormValues } from "../../common/utils/unpackValues/unpackLogin";
 
 export const validateLogin = (formValues: Array<IFormValue>): Array<IError> =>  {

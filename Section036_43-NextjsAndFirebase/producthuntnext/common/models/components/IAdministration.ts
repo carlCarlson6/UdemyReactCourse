@@ -1,5 +1,5 @@
 import { User } from "firebase";
-import {Firebase} from '../../firebase/Firebase'
+import {Firebase} from '../../../database/firebase/Firebase'
 
 export interface IAdministration {
     user: User;

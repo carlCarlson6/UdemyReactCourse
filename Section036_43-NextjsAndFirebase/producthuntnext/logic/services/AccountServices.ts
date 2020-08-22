@@ -1,4 +1,4 @@
-import { IFormValue } from "../../common/models/IFormValue";
+import { IFormValue } from "../../common/models/entities/IFormValue";
 import {firebase} from "../../database/firebase";
 import Router from "next/router";
 import { unpackCreateAccountFormValues } from "../../common/utils/unpackValues/unpackCreateAccount";

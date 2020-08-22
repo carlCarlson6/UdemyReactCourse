@@ -1,33 +1,37 @@
 import React from 'react';
 import { IProductDetails } from '../../common/models/components/IProductDetails';
-import { Image } from '../styles/layout/ProductStyles'
+import { Image, Product, Description, Comments, Votes, Title, DescriptionText } from '../styles/layout/ProductStyles'
 import formatDistanteToNow from 'date-fns/formatDistanceToNow';
 import { es } from 'date-fns/locale'
  
 const ProductDetails: React.FC<IProductDetails> = ({product}): JSX.Element => {
 
     return (
-        <li>    
-            <div>
+        <Product>    
+            <Description>
                 <div>
                     <Image src={product.imageUrl}/>
                 </div>
                 <div>
-                    <h1>{product.name}</h1>
-                    <p>{product.description}</p>
-                </div>
-                <div>
-                    <img src="/static/img/comentario.png" />
-                    <p>{product.comments.length} Comentarios</p>
-                </div>
+                    <Title>{product.name}</Title>
+                    <DescriptionText>{product.description}</DescriptionText>
+                
+                    <Comments>
+                        <div>
+                            <img src="/static/img/comentario.png" />
+                            <p>{product.comments.length} Comentarios</p>
+                        </div>
+                    </Comments>
 
-                <p>Publicado hace: {formatDistanteToNow(new Date(product.createdAt), {locale:es})}</p>
-            </div>
+                    <p>Publicado hace: {formatDistanteToNow(new Date(product.createdAt), {locale:es})}</p>
+                </div>
+            </Description>
 
-            <div>
+            <Votes>
                 <div>&#9650;</div>
-            </div>
-        </li>
+                <p>{product.votes}</p>
+            </Votes>
+        </Product>
     );
 }
  

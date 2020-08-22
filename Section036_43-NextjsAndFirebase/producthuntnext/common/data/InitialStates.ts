@@ -1,4 +1,4 @@
-import { IFormValue } from "../models/IFormValue";
+import { IFormValue } from "../models/entities/IFormValue";
 
 export const createAccountInitialState: Array<IFormValue> = [
     {name: 'name', value: ''},

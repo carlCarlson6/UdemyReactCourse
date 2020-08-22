@@ -1,5 +1,5 @@
-import { IFormValue } from "../../common/models/IFormValue"
-import { IError } from "../../common/models/IError"
+import { IFormValue } from "../../common/models/entities/IFormValue"
+import { IError } from "../../common/models/entities/IError"
 import { unpackNewProductFormValues } from "../../common/utils/unpackValues/unpackNewProduct";
 
 export const validateNewProduct = (formValues: Array<IFormValue>): Array<IError> =>  {

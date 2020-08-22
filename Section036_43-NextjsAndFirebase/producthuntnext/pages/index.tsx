@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import Layout from '../components/layout/Layout';
 import {FireBaseContext} from '../database/firebase';
-import { IProduct } from '../common/models/IProduct';
+import { IProduct } from '../common/models/entities/IProduct';
 import { ProductServices } from '../logic/services/ProductServices';
 import ProductDetails from '../components/layout/ProductDetails';
 

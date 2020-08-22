@@ -1,7 +1,7 @@
-import { IFormValue } from '../../common/models/IFormValue';
+import { IFormValue } from '../../common/models/entities/IFormValue';
 import Router from "next/router";
 import { User } from "firebase";
-import { IProduct } from '../../common/models/IProduct';
+import { IProduct } from '../../common/models/entities/IProduct';
 import { Firebase } from '../../database/firebase/Firebase';
 import { unpackNewProductFormValues } from '../../common/utils/unpackValues/unpackNewProduct';
 import { Dispatch, SetStateAction } from "react";

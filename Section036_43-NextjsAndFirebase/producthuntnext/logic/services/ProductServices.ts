@@ -4,7 +4,7 @@ import { User } from "firebase";
 import { IProduct } from '../../common/models/entities/IProduct';
 import { Firebase } from '../../database/firebase/Firebase';
 import { unpackNewProductFormValues } from '../../common/utils/unpackValues/unpackNewProduct';
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, FormEvent } from "react";
 import { IUser } from '../../common/models/entities/IUser';
 import { IComment } from '../../common/models/entities/IComment';
 
@@ -85,6 +85,9 @@ export class ProductServices {
     static async DeleteProduct(productId: string, firebase: Firebase): Promise<void> {
         await firebase.db.collection('products').doc(productId).delete();
         Router.push('/');
+    }
+
+    static async SearchProduct(event: FormEvent<HTMLFormElement>, searchTerm: string): Promise<void> {
     }
 
 }

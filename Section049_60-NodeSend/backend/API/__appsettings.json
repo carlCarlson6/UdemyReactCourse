@@ -1,0 +1,18 @@
+{
+    "__DatabaseSetting": {
+      "BooksCollectionName": "",
+      "ConnectionString": "<mongo db connection string>",
+      "DatabaseName": "NodeSend"
+    },
+  
+    "Logging": {
+      "LogLevel": {
+        "Default": "Information",
+        "Microsoft": "Warning",
+        "Microsoft.Hosting.Lifetime": "Information"
+      }
+    },
+  
+    "AllowedHosts": "*"
+  }
+  

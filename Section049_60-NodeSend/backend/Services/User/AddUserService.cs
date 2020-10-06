@@ -11,7 +11,6 @@ namespace Services.User
     {
         private readonly IRepository<IUser> userRepo;
         private readonly PasswordUtils passwordUtils;
-
         public AddUserService(IRepository<IUser> userRepository, PasswordUtils passwordUtils) 
         {
             this.userRepo = userRepository;

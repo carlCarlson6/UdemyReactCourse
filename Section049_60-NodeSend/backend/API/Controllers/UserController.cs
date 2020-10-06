@@ -12,10 +12,12 @@ namespace API.Controllers
     public class UserController : ControllerBase
     {
         private readonly AddUserService addUserService;
+        private readonly AuthenticateUserService authenticateUserService;
 
-        public UserController(AddUserService addUserService)
+        public UserController(AddUserService addUserService, AuthenticateUserService authenticateUserService)
         {
             this.addUserService = addUserService;
+            this.authenticateUserService = authenticateUserService;
         }
 
         [HttpPost]
@@ -32,6 +34,20 @@ namespace API.Controllers
                 return BadRequest(except.Message);
             }
 
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<AuthenticateUserResponse>> Authenticate([FromBody] AuthenticateUserRequest request)
+        {
+            try
+            {
+                await this.authenticateUserService.ExecuteService(request.UserName, request.Password);
+                throw new NotImplementedException();
+            }
+            catch (Exception)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

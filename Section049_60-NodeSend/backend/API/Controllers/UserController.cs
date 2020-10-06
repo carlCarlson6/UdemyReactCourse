@@ -21,10 +21,17 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<AddUserResponse>> AddUser([FromBody] AddUserRequest request) 
         {
-            IUser createdUser = await this.addUserService.ExecuteService(request.Name, request.Password);
-            
-            AddUserResponse response = new AddUserResponse() { UserId=createdUser.Id };
-            return response;
+            try
+            {
+                IUser createdUser = await this.addUserService.ExecuteService(request.Name, request.Password);
+                AddUserResponse response = new AddUserResponse() { UserId=createdUser.Id };
+                return response;
+            }
+            catch(Exception except)
+            {
+                return BadRequest(except.Message);
+            }
+
         }
     }
 }

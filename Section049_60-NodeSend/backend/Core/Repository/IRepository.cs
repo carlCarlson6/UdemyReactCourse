@@ -8,7 +8,7 @@ namespace Core.Repository
     {
         Task<T> Create(T entity);
         Task<List<T>> Read();
-        Task<T> Read(String id);
+        Task<T> Read(String name);
         Task<T> Update(T entityToUpdate);
         Task Remove(String id);
     }

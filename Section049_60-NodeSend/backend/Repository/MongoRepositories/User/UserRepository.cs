@@ -5,6 +5,7 @@ using Core.IMongoDatabaseSettings;
 using Core.Models;
 using Core.Repository;
 using MongoDB.Driver;
+using System.Linq;
 
 namespace Repository.MongoRepositories.User
 {
@@ -20,17 +21,21 @@ namespace Repository.MongoRepositories.User
             return entity;
         }
 
-        public Task<List<IUser>> Read()
+        public async Task<List<IUser>> Read()
         {
-            throw new NotImplementedException();
+            IAsyncCursor<UserModel> usersAsyncCursor = await this.mongoCollection.FindAsync(user => true);
+            List<IUser> users = await usersAsyncCursor.ToListAsync<IUser>();
+            return users;
         }
 
-        public Task<IUser> Read(string id)
+        public async Task<IUser> Read(String name)
         {
-            throw new NotImplementedException();
+            IAsyncCursor<UserModel> userFoundedAsyncCursor = await this.mongoCollection.FindAsync<UserModel>(user => user.Name == name);
+            IUser userFounded = await userFoundedAsyncCursor.FirstOrDefaultAsync();
+            return userFounded;
         }
 
-        public Task Remove(string id)
+        public Task Remove(String id)
         {
             throw new NotImplementedException();
         }

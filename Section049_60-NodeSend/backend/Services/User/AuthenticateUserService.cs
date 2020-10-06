@@ -10,10 +10,12 @@ namespace Services.User
     {
         private readonly IRepository<IUser> userRepo;
         private readonly PasswordUtils passwordUtils;
-        public AuthenticateUserService(IRepository<IUser> userRepository, PasswordUtils passwordUtils) 
+        private readonly JwtUtils jwtUtils;
+        public AuthenticateUserService(IRepository<IUser> userRepository, PasswordUtils passwordUtils, JwtUtils jwtUtils) 
         {
             this.userRepo = userRepository;
             this.passwordUtils = passwordUtils;
+            this.jwtUtils = jwtUtils;
         }
 
         public async Task ExecuteService(String userName, String password)
@@ -29,7 +31,7 @@ namespace Services.User
             }
         }
 
-        public async Task<IUser> GetUser(String userName)
+        private async Task<IUser> GetUser(String userName)
         {
             IUser user = await this.userRepo.Read(userName);
 
@@ -41,7 +43,7 @@ namespace Services.User
             return user;
         }
 
-        public void VerifyPassword(String password, String storedPassword)
+        private void VerifyPassword(String password, String storedPassword)
         {
             if(!this.passwordUtils.VerifyPassword(password, storedPassword))
             {

@@ -36,17 +36,17 @@ namespace API.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("auth")]
         public async Task<ActionResult<AuthenticateUserResponse>> Authenticate([FromBody] AuthenticateUserRequest request)
         {
             try
             {
-                await this.authenticateUserService.ExecuteService(request.UserName, request.Password);
+                await this.authenticateUserService.ExecuteService(request.Name, request.Password);
                 throw new NotImplementedException();
             }
-            catch (Exception)
+            catch (Exception except)
             {
-                throw new NotImplementedException();
+                throw new Exception(except.Message);
             }
         }
     }

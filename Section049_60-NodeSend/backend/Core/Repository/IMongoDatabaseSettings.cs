@@ -1,4 +1,6 @@
-namespace 
+using System;
+
+namespace Core.IMongoDatabaseSettings
 {
     public interface IMongoDatabaseSettings<T>
     {

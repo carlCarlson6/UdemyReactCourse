@@ -10,13 +10,14 @@ namespace Repository.MongoRepositories.User
 {
     public class UserRepository : MongoRepository<UserModel, IUser>, IRepository<IUser>
     {
-        private readonly IMongoCollection<UserModel> userCollection;
-
         public UserRepository(IMongoDatabaseSettings<IUser> settings) : base(settings) { }
 
-        public Task<IUser> Create(IUser entity)
+        public IMongoDatabaseSettings<IUser> Settings { get; }
+
+        public async Task<IUser> Create(IUser entity)
         {
-            throw new NotImplementedException();
+            await this.mongoCollection.InsertOneAsync((UserModel)entity);
+            return entity;
         }
 
         public Task<List<IUser>> Read()

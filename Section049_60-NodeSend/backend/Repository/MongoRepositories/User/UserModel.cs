@@ -13,6 +13,8 @@ namespace Repository.MongoRepositories.User
         public String Name { get; set; }
         public String Password { get; set; }
 
+        public UserModel() { }
+
         public String GenerateID()
         {
             String id = ObjectId.GenerateNewId().ToString();

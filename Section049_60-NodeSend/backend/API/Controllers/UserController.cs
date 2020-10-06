@@ -1,10 +1,14 @@
 using System;
 using System.Threading.Tasks;
+using API.Messages;
+using API.Messages.User;
+using Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using Services.User;
 
 namespace API.Controllers
 {
+    [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
         private readonly AddUserService addUserService;
@@ -15,9 +19,12 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public Task<ActionResult> AddUser() 
+        public async Task<ActionResult<AddUserResponse>> AddUser([FromBody] AddUserRequest request) 
         {
-            throw new NotImplementedException();
+            IUser createdUser = await this.addUserService.ExecuteService(request.Name, request.Password);
+            
+            AddUserResponse response = new AddUserResponse() { UserId=createdUser.Id };
+            return response;
         }
     }
 }

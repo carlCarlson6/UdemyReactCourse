@@ -1,3 +1,4 @@
+using Common.Utils;
 using Core.IMongoDatabaseSettings;
 using Core.Models;
 using Core.Repository;
@@ -24,7 +25,11 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IMongoDatabaseSettings<IUser>, UserRepositorySettings>(serviceProvider => serviceProvider.GetRequiredService<IOptions<UsersDatabaseSettings>>().Value);
+            services.Configure<UserRepositorySettings>(Configuration.GetSection("MongoRepositoriesSettings").GetSection(nameof(UserRepositorySettings)));
+
+            services.AddSingleton<PasswordUtils>();
+
+            services.AddSingleton<IMongoDatabaseSettings<IUser>, UserRepositorySettings>(serviceProvider => serviceProvider.GetRequiredService<IOptions<UserRepositorySettings>>().Value);
             services.AddSingleton<IRepository<IUser>, UserRepository>();
             services.AddSingleton<AddUserService>();
 

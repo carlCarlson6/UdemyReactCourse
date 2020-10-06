@@ -7,9 +7,9 @@ namespace Repository.MongoRepositories
 {
     public abstract class MongoRepository<T, J> where T:J
     {
-        private readonly IMongoCollection<T> mongoCollection;
+        protected readonly IMongoCollection<T> mongoCollection;
 
-        public MongoRepository(IMongoDatabaseSettings<J> settings) 
+        protected MongoRepository(IMongoDatabaseSettings<J> settings) 
         {
             MongoClient client = new MongoClient(settings.ConnectionString);
             IMongoDatabase database = client.GetDatabase(settings.DatabaseName);

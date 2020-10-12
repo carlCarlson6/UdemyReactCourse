@@ -78,7 +78,7 @@ namespace API
                         IssuerSigningKey = new SymmetricSecurityKey(bytesKey),
                         ValidateIssuer = false,
                         ValidateAudience = false
-                    }
+                    };
                 }
             );
         }

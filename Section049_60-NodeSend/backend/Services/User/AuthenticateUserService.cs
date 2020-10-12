@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Common.JWT;
 using Common.Utils;
 using Core.Models;
 using Core.Repository;
@@ -10,20 +11,22 @@ namespace Services.User
     {
         private readonly IRepository<IUser> userRepo;
         private readonly PasswordUtils passwordUtils;
-        private readonly JwtUtils jwtUtils;
-        public AuthenticateUserService(IRepository<IUser> userRepository, PasswordUtils passwordUtils, JwtUtils jwtUtils) 
+        private readonly TokenCreator tokenCreator;
+        public AuthenticateUserService(IRepository<IUser> userRepository, PasswordUtils passwordUtils, TokenCreator tokenCreator) 
         {
             this.userRepo = userRepository;
             this.passwordUtils = passwordUtils;
-            this.jwtUtils = jwtUtils;
+            this.tokenCreator = tokenCreator;
         }
 
-        public async Task ExecuteService(String userName, String password)
+        public async Task<Tuple<String, String>> ExecuteService(String userName, String password)
         {
             try
             {
                 IUser user = await this.GetUser(userName);
                 this.VerifyPassword(password, user.Password);
+                String token = this.tokenCreator.Create(user);
+                return new Tuple<string, string>(user.Id, token);
             }
             catch(Exception except) 
             {

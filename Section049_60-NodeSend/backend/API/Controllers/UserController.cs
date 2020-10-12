@@ -26,8 +26,8 @@ namespace API.Controllers
             try
             {
                 IUser createdUser = await this.addUserService.ExecuteService(request.Name, request.Password);
-                AddUserResponse response = new AddUserResponse() { UserId=createdUser.Id };
-                return response;
+                
+                return new AddUserResponse(createdUser.Id);
             }
             catch(Exception except)
             {
@@ -41,8 +41,9 @@ namespace API.Controllers
         {
             try
             {
-                await this.authenticateUserService.ExecuteService(request.Name, request.Password);
-                throw new NotImplementedException();
+                Tuple<String, String> result = await this.authenticateUserService.ExecuteService(request.Name, request.Password);
+                
+                return new AuthenticateUserResponse(result.Item1, result.Item2);
             }
             catch (Exception except)
             {

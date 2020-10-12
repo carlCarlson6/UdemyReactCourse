@@ -15,11 +15,5 @@ namespace Repository.MongoRepositories.User
 
         public UserModel() { }
 
-        public String GenerateID()
-        {
-            String id = ObjectId.GenerateNewId().ToString();
-            return id;
-        }
-
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Common.Mongo;
 using Common.Utils;
 using Core.Models;
 using Core.Repository;
@@ -25,7 +26,7 @@ namespace Services.User
 
                 UserModel user = new UserModel();
 
-                user.Id = user.GenerateID();
+                user.Id = MongoDbIdGenerator.Generate();
                 user.Name = userName;
                 user.Password = passwordUtils.EncryptPassword(password);
 

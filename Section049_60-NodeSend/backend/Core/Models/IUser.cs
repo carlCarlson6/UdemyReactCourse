@@ -7,7 +7,5 @@ namespace Core.Models
         String Id { get; set; }
         String Name { get; set; }
         String Password { get; set; }
-
-        String GenerateID();
     }
 }

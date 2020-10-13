@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Common.ExceptionTypes;
 using Core.Models;
 using Core.Repository;
 
@@ -21,7 +22,7 @@ namespace Services.User
 
                 if(user == null)
                 {
-                    throw new Exception("user does not exist");
+                    throw new Exception(ExceptionTypes.UserDoesNotExist);
                 }            
 
                 return user;

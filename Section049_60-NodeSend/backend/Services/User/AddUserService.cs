@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Common.ExceptionTypes;
 using Common.Mongo;
 using Common.Utils;
 using Core.Models;
@@ -22,14 +23,13 @@ namespace Services.User
         {
             try 
             {
-                await this.ExecuteValidations(userName, password);
-
-                UserModel user = new UserModel();
-
-                user.Id = MongoDbIdGenerator.Generate();
-                user.Name = userName;
-                user.Password = passwordUtils.EncryptPassword(password);
-
+                UserModel user = new UserModel
+                {
+                    Id = MongoDbIdGenerator.Generate(),
+                    Name = userName,
+                    Password = passwordUtils.EncryptPassword(password)
+                };
+                
                 IUser createdUser = await this.userRepo.Create(user);
 
                 return createdUser;
@@ -39,41 +39,6 @@ namespace Services.User
                 throw new Exception(except.Message);
             }
         }
-
-        private async Task ExecuteValidations(String userName, String password)
-        {
-            if(!await this.CheckUserAlreadyExists(userName))
-            {
-                throw new Exception("user already exists");
-            }
-
-            if(!this.PasswordValidations(password))
-            {
-                throw new Exception("password is not valid");
-            }
-        }
-
-        private async Task<Boolean> CheckUserAlreadyExists(String userName)
-        {
-            IUser user = await this.userRepo.Read(userName);
-            
-            if(user != null) 
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        private Boolean PasswordValidations(String password)
-        {
-            if(password.Length < 6)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
+        
     }
 }

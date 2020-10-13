@@ -1,5 +1,5 @@
 using System;
-using System.Threading.Tasks;
+using Common.ExceptionTypes;
 using Common.JWT;
 using Common.Utils;
 using Core.Models;
@@ -37,7 +37,7 @@ namespace Services.User
         {
             if(!this.passwordUtils.VerifyPassword(inputPassword, storedPassword))
             {
-                throw new Exception("incorrect password");
+                throw new Exception(ExceptionTypes.IncorrectPassword);
             }
         }
     }

@@ -11,9 +11,10 @@ namespace Repository.MongoRepositories.Link
     {
         public LinkRepository(IMongoDatabaseSettings<ILink> settings) : base(settings) { }
         
-        public Task<ILink> Create(ILink entity)
+        public async Task<ILink> Create(ILink entity)
         {
-            throw new NotImplementedException();
+            await this.mongoCollection.InsertOneAsync((LinkModel)entity);
+            return entity;
         }
 
         public Task<List<ILink>> Read()

@@ -4,7 +4,7 @@ using Common.ExceptionTypes;
 using Core.Models;
 using Services.User;
 
-namespace UseCases
+namespace UseCases.User
 {
     public class CreateNewUserUseCase
     {

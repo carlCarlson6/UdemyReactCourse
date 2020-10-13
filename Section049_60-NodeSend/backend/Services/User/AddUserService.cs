@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using Common.ExceptionTypes;
 using Common.Mongo;
 using Common.Utils;
 using Core.Models;

@@ -4,7 +4,7 @@ using Services.User;
 using System.Threading.Tasks;
 using Core.Models;
 
-namespace UseCases
+namespace UseCases.User
 {
     public class AuthenticateUserUseCase
     {

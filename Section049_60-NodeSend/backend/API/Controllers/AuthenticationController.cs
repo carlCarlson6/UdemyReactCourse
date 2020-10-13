@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Messages.User;
 using Microsoft.AspNetCore.Mvc;
-using Services.User;
-using UseCases;
+using UseCases.User;
 
 namespace API.Controllers
 {

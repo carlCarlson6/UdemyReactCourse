@@ -4,8 +4,7 @@ using API.Messages;
 using API.Messages.User;
 using Core.Models;
 using Microsoft.AspNetCore.Mvc;
-using Services.User;
-using UseCases;
+using UseCases.User;
 
 namespace API.Controllers
 {

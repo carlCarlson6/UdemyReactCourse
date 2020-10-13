@@ -13,9 +13,12 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Repository.MongoRepositories.User;
 using Services.User;
+using Services.Link;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using UseCases;
+using UseCases.User;
+using Repository.MongoRepositories.Link;
+using UseCases.Link;
 
 namespace API
 {
@@ -45,6 +48,10 @@ namespace API
             services.Configure<UserRepositorySettings>(Configuration.GetSection("MongoRepositoriesSettings").GetSection(nameof(UserRepositorySettings)));
             services.AddSingleton<IMongoDatabaseSettings<IUser>, UserRepositorySettings>(serviceProvider => serviceProvider.GetRequiredService<IOptions<UserRepositorySettings>>().Value);
             services.AddSingleton<IRepository<IUser>, UserRepository>();
+
+            services.Configure<LinkRepositorySettings>(Configuration.GetSection("MongoRepositoriesSettings").GetSection(nameof(UserRepositorySettings)));
+            services.AddSingleton<IMongoDatabaseSettings<ILink>, LinkRepositorySettings>(serviceProvider => serviceProvider.GetRequiredService<IOptions<LinkRepositorySettings>>().Value);
+            services.AddSingleton<IRepository<ILink>, LinkRepository>();
         }
         public void AddJwtSettings(IServiceCollection services)
         {
@@ -60,11 +67,15 @@ namespace API
         {
             services.AddSingleton<AddUserService>();
             services.AddSingleton<AuthenticateUserService>();
+            
+            services.AddSingleton<AddLinkService>();
         }
         public void AddUseCases(IServiceCollection services)
         {
             services.AddSingleton<CreateNewUserUseCase>();
             services.AddSingleton<AuthenticateUserUseCase>();
+            
+            services.AddSingleton<CreateNewLinkUseCase>();
         }
         public void AddAuthentication(IServiceCollection services)
         {

@@ -19,14 +19,13 @@ namespace Services.User
             this.tokenCreator = tokenCreator;
         }
 
-        public async Task<Tuple<String, String>> ExecuteService(String userName, String password)
+        public String ExecuteService(IUser user, String inputPassword)
         {
             try
             {
-                IUser user = await this.GetUser(userName);
-                this.VerifyPassword(password, user.Password);
+                this.VerifyPassword(inputPassword, user.Password);
                 String token = this.tokenCreator.Create(user);
-                return new Tuple<string, string>(user.Id, token);
+                return token;
             }
             catch(Exception except) 
             {
@@ -34,21 +33,9 @@ namespace Services.User
             }
         }
 
-        private async Task<IUser> GetUser(String userName)
+        private void VerifyPassword(String inputPassword, String storedPassword)
         {
-            IUser user = await this.userRepo.Read(userName);
-
-            if(user == null)
-            {
-                throw new Exception("user does not exist");
-            }            
-
-            return user;
-        }
-
-        private void VerifyPassword(String password, String storedPassword)
-        {
-            if(!this.passwordUtils.VerifyPassword(password, storedPassword))
+            if(!this.passwordUtils.VerifyPassword(inputPassword, storedPassword))
             {
                 throw new Exception("incorrect password");
             }

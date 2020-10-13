@@ -1,19 +1,21 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Messages.User;
 using Microsoft.AspNetCore.Mvc;
 using Services.User;
+using UseCases;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     public class AuthenticationController : ControllerBase
     {
-        private readonly AuthenticateUserService authenticateUserService;
+        private readonly AuthenticateUserUseCase authenticateUser;
     
-        public AuthenticationController(AuthenticateUserService authenticateUserService)
+        public AuthenticationController(AuthenticateUserUseCase authenticateUserUseCase)
         {
-            this.authenticateUserService = authenticateUserService;
+            this.authenticateUser = authenticateUserUseCase;
         }
 
         [HttpPost]
@@ -21,9 +23,8 @@ namespace API.Controllers
         {
             try
             {
-                Tuple<String, String> result = await this.authenticateUserService.ExecuteService(request.Name, request.Password);
-                
-                return new AuthenticateUserResponse(result.Item1, result.Item2);
+                Dictionary<String, String> result = await this.authenticateUser.ExecuteUseCase(request.Name, request.Password);            
+                return new AuthenticateUserResponse(result["UserId"], result["Token"]);
             }
             catch (Exception except)
             {

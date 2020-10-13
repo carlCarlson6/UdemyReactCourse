@@ -5,17 +5,18 @@ using API.Messages.User;
 using Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using Services.User;
+using UseCases;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly AddUserService addUserService;
+        private readonly CreateNewUserUseCase createNewUser;
         
-        public UserController(AddUserService addUserService)
+        public UserController(CreateNewUserUseCase createNewUserUseCase)
         {
-            this.addUserService = addUserService;
+            this.createNewUser = createNewUserUseCase;
         }
 
         [HttpPost]
@@ -23,7 +24,7 @@ namespace API.Controllers
         {
             try
             {
-                IUser createdUser = await this.addUserService.ExecuteService(request.Name, request.Password);
+                IUser createdUser = await this.createNewUser.ExecuteUseCase(request.Name, request.Password);
                 
                 return new AddUserResponse(createdUser.Id);
             }

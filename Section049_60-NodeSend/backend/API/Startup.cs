@@ -15,6 +15,7 @@ using Repository.MongoRepositories.User;
 using Services.User;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using UseCases;
 
 namespace API
 {
@@ -34,6 +35,7 @@ namespace API
             this.AddUtils(services);
             this.AddMongoRepositories(services);
             this.AddServices(services);
+            this.AddUseCases(services);
             services.AddControllers();
             this.AddAuthentication(services);
         }
@@ -58,6 +60,11 @@ namespace API
         {
             services.AddSingleton<AddUserService>();
             services.AddSingleton<AuthenticateUserService>();
+        }
+        public void AddUseCases(IServiceCollection services)
+        {
+            services.AddSingleton<CreateNewUserUseCase>();
+            services.AddSingleton<AuthenticateUserUseCase>();
         }
         public void AddAuthentication(IServiceCollection services)
         {
